@@ -1,2 +1,2 @@
 # Quizza
-Trivia quiz.
+Trivia quiz game.
