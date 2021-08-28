@@ -1,12 +1,18 @@
 <article class="card" >
   <div class="card-body">
     <div class="card-title bi bi-question-circle-fill display-1 text-primary"></div>
-    <p class="pregunta card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi perferendis dolorum dicta quidem corporis, laudantium voluptas consequatur modi similique, fugit eos aut reiciendis iste rerum harum, rem saepe facilis blanditiis!</p>
+    <p class="pregunta card-text">{{question.question}}</p>
   </div>
   <ul class="respuestas list-group list-group-flush">
-    <li class="respuesta list-group-item list-group-item-action active">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, dolores doloribus nihil modi quisquam minima.</li>
-    <li class="respuesta list-group-item list-group-item-action">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quo, laudantium pariatur explicabo quasi optio!</li>
-    <li class="respuesta list-group-item list-group-item-action">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, blanditiis.</li>
-    <li class="respuesta list-group-item list-group-item-action">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, sunt.</li>
+    <li class="respuesta list-group-item list-group-item-action active">
+      {{question.answerOK}}
+    </li>
+    <li class="respuesta list-group-item list-group-item-action">
+      {{question.answerKO1}}
+    </li>
+    <li class="respuesta list-group-item list-group-item-action">      {{question.answerKO2}}
+    </li>
+    <li class="respuesta list-group-item list-group-item-action">      {{question.answerKO3}}
+    </li>
   </ul>
 </article>
