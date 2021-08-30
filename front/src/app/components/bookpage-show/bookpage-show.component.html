@@ -1,0 +1,15 @@
+<article class="card" >
+  <div class="card-body">
+    <div class="card-title bi bi-question-circle-fill display-1 text-primary">
+    </div>
+    <div class="card-title">
+      {{bookpage.id}} - {{bookpage.text}}
+    </div>
+    <p class="pregunta card-text">{{bookpage.question}}</p>
+  </div>
+  <ul class="respuestas list-group list-group-flush">
+    <li class="respuesta list-group-item list-group-item-action" (click)="onSelect(item)" *ngFor="let item of bookpage.answers">
+      <span class="badge text-primary">{{item.id}}</span>{{item.answer}} --> {{item.goPage}}
+    </li>
+  </ul>
+</article>
