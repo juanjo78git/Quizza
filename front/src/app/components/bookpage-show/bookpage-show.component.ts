@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {BOOKPAGE} from '../../mocks/mock-bookpage';
 import { BookPage, Answer } from '../../models/bookpage';
 import {BOOK} from '../../mocks/mock-book';
@@ -12,14 +12,17 @@ export class BookpageShowComponent implements OnInit {
 
   @Input()
   bookpage = BOOKPAGE;
+  @Output()
+  bookpageid = new EventEmitter<number>();
 
-  constructor() { }
+  constructor() {
+    this.bookpageid = new EventEmitter();
+   }
 
   ngOnInit(): void {
   }
 
-  onSelect(answer: Answer): void {
-
-    this.bookpage = BOOK[answer.goPage -1];
+  onSelectAnswer(answer: Answer): void {
+    this.bookpageid.emit(answer.goPage -1);
   }
 }

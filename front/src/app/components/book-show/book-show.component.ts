@@ -10,10 +10,14 @@ export class BookShowComponent implements OnInit {
 
   @Input()
   book = BOOK;
+  @Input()
+  bookpageid: number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  receiveMessage($event: number) {
+    this.bookpageid = $event
+  }
 }

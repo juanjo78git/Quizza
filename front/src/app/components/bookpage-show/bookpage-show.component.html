@@ -8,8 +8,8 @@
     <p class="pregunta card-text">{{bookpage.question}}</p>
   </div>
   <ul class="respuestas list-group list-group-flush">
-    <li class="respuesta list-group-item list-group-item-action" (click)="onSelect(item)" *ngFor="let item of bookpage.answers">
-      <span class="badge text-primary">{{item.id}}</span>{{item.answer}} --> {{item.goPage}}
+    <li class="respuesta list-group-item list-group-item-action"  (click)="onSelectAnswer(item)" *ngFor="let item of bookpage.answers">
+      <span class="badge">{{item.id}}</span>{{item.answer}} --> {{item.goPage}}
     </li>
   </ul>
 </article>
