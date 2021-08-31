@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {BOOKPAGE} from '../mocks/mock-bookpage';
 import { BookPage, Answer } from '../models/model-book';
 
 @Component({
@@ -10,7 +9,7 @@ import { BookPage, Answer } from '../models/model-book';
 export class BookpageShowComponent implements OnInit {
 
   @Input()
-  bookpage: BookPage = BOOKPAGE;
+  bookpage: BookPage | null = null;
   @Output()
   bookpageid = new EventEmitter<number>();
 
