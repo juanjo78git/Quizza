@@ -1,6 +1,6 @@
-import { BookPage } from '../models/bookpage';
+import { Book } from '../models/model-book';
 
-export const BOOK =
+export const BOOK: Book =
  {
 id: 1,
 version: '0.0.1',

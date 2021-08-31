@@ -1,5 +1,5 @@
 import { isLoweredSymbol } from '@angular/compiler';
-import { BookPage } from '../models/bookpage';
+import { BookPage } from '../models/model-book';
 
 export const BOOKPAGE: BookPage =
   {
