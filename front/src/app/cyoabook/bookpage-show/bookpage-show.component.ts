@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {BOOKPAGE} from '../../mocks/mock-bookpage';
-import { BookPage, Answer } from '../../models/bookpage';
-import {BOOK} from '../../mocks/mock-book';
+import {BOOKPAGE} from '../mocks/mock-bookpage';
+import { BookPage, Answer } from '../models/bookpage';
 
 @Component({
   selector: 'app-bookpage-show',

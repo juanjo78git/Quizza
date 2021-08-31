@@ -4,6 +4,7 @@ export const BOOK: BookPage[] = [
   {
     id: 1,
     bookId: 1,
+    type: 'choose',
     text: 'Bla bla bla',
     question: 'Pregunta 1',
     answers: [
@@ -32,6 +33,7 @@ export const BOOK: BookPage[] = [
   {
     id: 2,
     bookId: 1,
+    type: 'choose',
     text: 'Bla bla bla',
     question: 'Pregunta 2',
     answers: [
@@ -50,6 +52,7 @@ export const BOOK: BookPage[] = [
   {
     id: 3,
     bookId: 1,
+    type: 'choose',
     text: 'Bla bla bla',
     question: 'Pregunta 3',
     answers: [
@@ -73,6 +76,7 @@ export const BOOK: BookPage[] = [
   {
     id: 4,
     bookId: 1,
+    type: 'choose',
     text: 'Bla bla bla',
     question: 'Pregunta 4',
     answers: [

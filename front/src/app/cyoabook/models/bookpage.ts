@@ -8,7 +8,16 @@ export interface Answer {
 export interface BookPage {
   id: number;
   bookId: number;
+  type: string;
   text: string;
   question: string;
   answers: Answer[];
+}
+
+export interface Book {
+  id: number;
+  version: string;
+  description: string;
+  author: string;
+  pages: BookPage[];
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {BOOK} from '../../mocks/mock-book';
+import {BOOK} from '../mocks/mock-book';
 
 @Component({
   selector: 'app-book-show',

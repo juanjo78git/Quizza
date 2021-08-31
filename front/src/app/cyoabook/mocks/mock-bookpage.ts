@@ -5,6 +5,7 @@ export const BOOKPAGE: BookPage =
   {
     id: 1,
     bookId: 1,
+    type: 'choose',
     text: 'Mock de Página',
     question: 'Pregunta 1',
     answers: [
