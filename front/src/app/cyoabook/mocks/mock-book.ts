@@ -12,8 +12,8 @@ pages:   [
     id: 1,
     bookId: 1,
     type: 'choose',
-    text: 'Bla bla bla',
-    question: 'Pregunta 1',
+    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat ipsam at natus ad? Consequatur dolores deleniti quia, maiores dolore adipisci harum. Molestias itaque delectus deleniti officiis corporis quos amet deserunt.',
+    question: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat ipsam at natus ad',
     answers: [
       {
         id: 1,
