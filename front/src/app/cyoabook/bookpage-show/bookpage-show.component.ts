@@ -22,6 +22,6 @@ export class BookpageShowComponent implements OnInit {
   }
 
   onSelectAnswer(answer: Answer): void {
-    this.bookpageid.emit(answer.goPage -1);
+    this.bookpageid.emit(answer.goPage);
   }
 }

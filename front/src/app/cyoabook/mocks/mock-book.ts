@@ -1,6 +1,13 @@
 import { BookPage } from '../models/bookpage';
 
-export const BOOK: BookPage[] = [
+export const BOOK =
+ {
+id: 1,
+version: '0.0.1',
+description: 'Descripción del libro',
+author: 'Nadie',
+pages:   [
+
   {
     id: 1,
     bookId: 1,
@@ -87,4 +94,5 @@ export const BOOK: BookPage[] = [
       }
     ]
   }
-];
+]
+ };

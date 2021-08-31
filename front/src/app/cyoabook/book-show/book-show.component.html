@@ -1,5 +1,5 @@
 <main class="container  text-center mt-5 mb-5" >
   <section class="bookquiz" >
-    <app-bookpage-show (bookpageid)="receiveMessage($event)" [bookpage]="book[bookpageid]"></app-bookpage-show>
+    <app-bookpage-show (bookpageid)="receiveMessage($event)" [bookpage]="this.currentPage()"></app-bookpage-show>
   </section>
 </main>

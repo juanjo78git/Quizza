@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {BOOK} from '../mocks/mock-book';
+import { BookService } from '../book.service';
+import { Book } from '../models/bookpage';
 
 @Component({
   selector: 'app-book-show',
@@ -9,15 +10,20 @@ import {BOOK} from '../mocks/mock-book';
 export class BookShowComponent implements OnInit {
 
   @Input()
-  book = BOOK;
-  @Input()
-  bookpageid: number = 0;
+  book: Book;
 
-  constructor() { }
+  bookpageid: number = 1;
+
+  constructor(private bookService: BookService) {
+    this.book = this.bookService.getBook();
+  }
 
   ngOnInit(): void {
   }
   receiveMessage($event: number) {
-    this.bookpageid = $event
+    this.bookpageid = $event;
+  }
+  currentPage()  {
+    return this.bookService.getPage(this.bookpageid);
   }
 }
