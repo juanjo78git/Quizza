@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BookService } from '../book.service';
-import { Book } from '../models/model-book';
+import { BookService } from '../services/book.service';
+//import { BookService } from '../cyoabook.module';
+import { Book } from '../models/book.model';
 
 @Component({
   selector: 'app-book-show',

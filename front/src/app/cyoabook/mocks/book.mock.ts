@@ -1,4 +1,4 @@
-import { Book } from '../models/model-book';
+import { Book } from '../models/book.model';
 
 export const BOOK: Book =
  {

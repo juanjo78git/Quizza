@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BookPage, Answer } from '../models/model-book';
+import { BookPage, Answer } from '../models/book.model';
 
 @Component({
   selector: 'app-bookpage-show',
