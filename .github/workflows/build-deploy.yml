@@ -25,11 +25,7 @@ jobs:
         cd front
         npm install
         npm run deploy
-    - name: Deployghpages
-      run: angular-cli-ghpages --dir front/dist/Quizza --repo=https://github.com/juanjo78git/Quizza-deploy.git
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
+      env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: front/dist/Quizza
+      run: angular-cli-ghpages --dir dist/Quizza --repo=https://github.com/juanjo78git/Quizza-deploy.git
