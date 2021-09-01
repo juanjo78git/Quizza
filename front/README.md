@@ -14,7 +14,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ### Run
 `npm start`
 
-### CI/CD deploy
+### CI/CD manual deploy
 
 `npm run deploy`
 
