@@ -1,2 +1,2 @@
 # Quizza
-Trivia quiz game.
+CYOA Book
