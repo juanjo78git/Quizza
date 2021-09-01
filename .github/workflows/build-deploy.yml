@@ -20,7 +20,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - run: npm install -g angular-cli-ghpages    
-    - run: npm audit fix
+    - run: |
+        cd front
+        npm audit fix
     - name: Build
       run: |
         cd front
