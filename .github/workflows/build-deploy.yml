@@ -1,0 +1,47 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - uses: actions/setup-node@v2 #this installs node and npm for us
+      with:
+        node-version: '12.x'
+    - uses: actions/cache@v1 # this allows for re-using node_modules caching, making builds a bit faster.
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Install angular-cli-ghpages
+      run: npm install -g angular-cli-ghpages    
+    - name: Audit packages
+      run: |
+        cd front
+        npm audit fix
+    - name: Build
+      run: |
+        cd front
+        npm install
+        npm run deploy
+    #- name: Deploy
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  run: angular-cli-ghpages --dir dist/Quizza --repo=https://github.com/juanjo78git/Quizza-deploy.git
+    - name: GitHubPages
+      # You may pin to the exact commit or the version.
+       # uses: crazy-max/ghaction-github-pages@db4476a01402e1a7ce05f41832040eef16d14925
+      uses: crazy-max/ghaction-github-pages@v2.5.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+       # GitHub repository where assets will be deployed (default $GITHUB_REPOSITORY)
+       repo: juanjo78git/Quizza-deploy
+       # Build directory to deploy
+       build_dir: front/dist/Quizza
