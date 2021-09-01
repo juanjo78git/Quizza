@@ -19,8 +19,10 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm install -g angular-cli-ghpages    
-    - run: |
+    - name: Install angular-cli-ghpages
+      run: npm install -g angular-cli-ghpages    
+    - name: Audit packages
+      run: |
         cd front
         npm audit fix
     - name: Build
