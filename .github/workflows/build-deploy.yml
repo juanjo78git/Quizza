@@ -20,6 +20,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - run: npm install -g angular-cli-ghpages    
+    - run: npm audit fix
     - name: Build
       run: |
         cd front
@@ -37,6 +38,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
        # GitHub repository where assets will be deployed (default $GITHUB_REPOSITORY)
-       repo: https://github.com/juanjo78git/Quizza-deploy.git
+       repo: juanjo78git/Quizza-deploy
        # Build directory to deploy
        build_dir: front/dist/Quizza
