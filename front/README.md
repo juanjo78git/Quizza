@@ -24,4 +24,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 `angular-cli-ghpages --dir dist/Quizza --repo=https://github.com/juanjo78git/Quizza-deploy.git`
 
 #### Access URL:
-`https://juanjo78git.github.io/Quizza-deploy/`
+[https://juanjo78git.github.io/Quizza-deploy/](https://juanjo78git.github.io/Quizza-deploy/)
