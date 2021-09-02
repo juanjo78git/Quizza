@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --base-href=/Quizza/",
+    "deploy": "ng build --base-href=/Quizza-deploy/",
     "ghpages": "angular-cli-ghpages --dir dist/Quizza --repo=https://github.com/juanjo78git/Quizza-deploy.git"
   },
   "private": true,
