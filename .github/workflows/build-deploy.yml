@@ -42,6 +42,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
        # GitHub repository where assets will be deployed (default $GITHUB_REPOSITORY)
-       repo: juanjo78git/Quizza-deploy
+       # repo: juanjo78git/Quizza-deploy
+       # Git branch where assets will be deployed
+       target_branch: gh-pages
        # Build directory to deploy
        build_dir: front/dist/Quizza
