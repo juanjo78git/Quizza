@@ -13,18 +13,19 @@ export class BookShowComponent implements OnInit {
   @Input()
   book: Book;
 
-  bookpageid: number = 1;
+  bookPageId: number;
 
   constructor(private bookService: BookService) {
-    this.book = this.bookService.getBook();
+    this.book = this.bookService.getBook(1);
+    this.bookPageId = 1;
   }
 
   ngOnInit(): void {
   }
   receiveMessage($event: number) {
-    this.bookpageid = $event;
+    this.bookPageId = $event;
   }
   currentPage()  {
-    return this.bookService.getPage(this.bookpageid);
+    return this.bookService.getPage( this.book.id, this.bookPageId);
   }
 }
