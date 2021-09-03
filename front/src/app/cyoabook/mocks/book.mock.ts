@@ -17,21 +17,29 @@ pages:   [
     answers: [
       {
         id: 1,
+        bookPageId: 1,
+        bookId: 1,
         answer: 'Respuesta 1_2',
         goPage: 2
       },
       {
         id: 2,
+        bookPageId: 1,
+        bookId: 1,
         answer: 'Respuesta 2_3',
         goPage: 3
       },
       {
         id: 3,
+        bookPageId: 1,
+        bookId: 1,
         answer: 'Respuesta 3_4',
         goPage: 4
       },
       {
         id: 4,
+        bookPageId: 1,
+        bookId: 1,
         answer: 'Respuesta 4_3',
         goPage: 3
       }
@@ -46,11 +54,15 @@ pages:   [
     answers: [
       {
         id: 1,
+        bookPageId: 2,
+        bookId: 1,
         answer: 'Respuesta 1_1',
         goPage: 1
       },
       {
         id: 2,
+        bookPageId: 2,
+        bookId: 1,
         answer: 'Respuesta 2_4',
         goPage: 4
       }
@@ -65,16 +77,22 @@ pages:   [
     answers: [
       {
         id: 1,
+        bookPageId: 3,
+        bookId: 1,
         answer: 'Respuesta 1_2',
         goPage: 2
       },
       {
         id: 2,
+        bookPageId: 3,
+        bookId: 1,
         answer: 'Respuesta 2_1',
         goPage: 1
       },
       {
         id: 3,
+        bookPageId: 3,
+        bookId: 1,
         answer: 'Respuesta 3_4',
         goPage: 4
       }
@@ -89,6 +107,8 @@ pages:   [
     answers: [
       {
         id: 1,
+        bookPageId: 4,
+        bookId: 1,
         answer: 'Respuesta 1_1',
         goPage: 1
       }

@@ -14,15 +14,21 @@ export class BookService {
 
   }
 
-  getPage(bookId: number, bookPageId: number) : BookPage {
-    return this.books[bookId-1].pages[bookPageId-1];
+  getBooks() : Book[] {
+    return this.books;
   }
 
   getBook(bookId: number) : Book {
     return this.books[bookId - 1];
   }
 
-  getBooks() : Book[] {
-    return this.books;
+  getPage(bookId: number, bookPageId: number) : BookPage {
+    return this.books[bookId-1].pages[bookPageId-1];
   }
+
+  getPageAnswer(bookId: number, bookPageId: number, answerId: number) : BookPage {
+    let newPage: number = this.books[bookId-1].pages[bookPageId-1].answers[answerId-1].goPage;
+    return  this.books[bookId-1].pages[newPage];
+  }
+
 }
