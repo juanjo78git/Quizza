@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BookPage, Answer } from '../models/book.model';
+import { BookService } from '../services/book.service';
 
 @Component({
   selector: 'app-bookpage-show',
@@ -8,19 +9,19 @@ import { BookPage, Answer } from '../models/book.model';
 })
 export class BookpageShowComponent implements OnInit {
 
-  @Input()
-  bookpage: BookPage | null = null;
-  @Output()
-  bookpageid = new EventEmitter<number>();
+  public bookpage!: BookPage;
 
-  constructor() {
-    this.bookpageid = new EventEmitter();
+  constructor(private bookService: BookService) {
    }
 
   ngOnInit(): void {
+    this.bookpage = this.bookService.getCurrentPage();
+
   }
 
+
   onSelectAnswer(answer: Answer): void {
-    this.bookpageid.emit(answer.goPage);
+    this.bookpage = this.bookService.getPageAnswer(answer.bookId, answer.bookPageId, answer.id );
+
   }
 }

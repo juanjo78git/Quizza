@@ -21,10 +21,9 @@ export class BookShowComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.bookService.setCurrentPage( this.bookPageId);
   }
-  receiveMessage($event: number) {
-    this.bookPageId = $event;
-  }
+
   currentPage()  {
     return this.bookService.getPage( this.book.id, this.bookPageId);
   }
