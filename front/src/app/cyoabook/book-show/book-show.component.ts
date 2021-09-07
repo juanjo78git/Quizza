@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BookService } from '../services/book.service';
-//import { BookService } from '../cyoabook.module';
 import { Book } from '../models/book.model';
+import { NotificationService } from 'src/app/common/services/notification.service';
 
 @Component({
   selector: 'app-book-show',
@@ -15,7 +15,7 @@ export class BookShowComponent implements OnInit {
 
   bookPageId: number;
 
-  constructor(private bookService: BookService) {
+  constructor(private bookService: BookService,private notifications : NotificationService) {
     this.book = this.bookService.getBook(1);
     this.bookPageId = 1;
   }
