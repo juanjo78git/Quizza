@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../services/book.service';
 import { Book } from '../models/book.model';
 import { NotificationService } from 'src/app/common/services/notification.service';
@@ -15,8 +16,9 @@ export class BookShowComponent implements OnInit {
 
   bookPageId: number;
 
-  constructor(private bookService: BookService,private notifications : NotificationService) {
-    this.book = this.bookService.getBook(1);
+  constructor(private route: ActivatedRoute, private bookService: BookService,private notifications : NotificationService) {
+    this.book = this.bookService.getBook(this.route.snapshot.params.bookId);
+    this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     this.bookPageId = 1;
   }
 

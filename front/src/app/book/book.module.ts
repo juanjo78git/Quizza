@@ -3,19 +3,24 @@ import { CommonModule } from '@angular/common';
 import { BookpageShowComponent } from './bookpage-show/bookpage-show.component';
 import { BookShowComponent } from './book-show/book-show.component';
 import { BookService } from './services/book.service';
+import { BookListComponent } from './book-list/book-list.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     BookShowComponent,
-    BookpageShowComponent
+    BookpageShowComponent,
+    BookListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     BookShowComponent,
-    BookpageShowComponent
+    BookpageShowComponent,
+    BookListComponent
   ],
   providers: [
     BookService

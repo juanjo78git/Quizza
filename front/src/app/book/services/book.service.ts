@@ -13,7 +13,7 @@ export class BookService {
 
 
   constructor() {
-    this.books.push(BOOK);
+    this.books = BOOK;
     this.book = this.books[0];
   }
 

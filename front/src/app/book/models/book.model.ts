@@ -18,6 +18,7 @@ export interface BookPage {
 
 export interface Book {
   id: number;
+  title: string,
   version: string;
   description: string;
   author: string;

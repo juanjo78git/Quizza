@@ -1,26 +1,4 @@
 <h1>Quizza</h1>
-<app-book-show></app-book-show>
-<div class="float-end position-absolute bottom-0 end-0" role="alert">
-    <div class="m-0 p-0" *ngFor="let item of messages" [ngSwitch]="item.severity">
-    <div class="alert alert-info alert-dismissible fade show" *ngSwitchCase="'info'">
-      {{item.severity}} <strong>{{item.summary}}</strong> {{item.detail}}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)='deleteMessage(item)' ></button>
-    </div>
-    <div class="alert alert-success alert-dismissible fade show" *ngSwitchCase="'success'">
-      {{item.severity}} <strong>{{item.summary}}</strong> {{item.detail}}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)='deleteMessage(item)' ></button>
-    </div>
-    <div class="alert alert-warning alert-dismissible fade show" *ngSwitchCase="'warning'">
-      {{item.severity}} <strong>{{item.summary}}</strong> {{item.detail}}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)='deleteMessage(item)' ></button>
-    </div>
-    <div class="alert alert-danger alert-dismissible fade show" *ngSwitchCase="'error'">
-      {{item.severity}} <strong>{{item.summary}}</strong> {{item.detail}}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)='deleteMessage(item)' ></button>
-    </div>
-    <div class="alert alert-primary alert-dismissible fade show" *ngSwitchDefault>
-      {{item.severity}} <strong>{{item.summary}}</strong> {{item.detail}}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)='deleteMessage(item)' ></button>
-    </div>
-  </div>
-</div>
+
+<router-outlet></router-outlet>
+<app-messages></app-messages>
