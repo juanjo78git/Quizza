@@ -21,7 +21,6 @@ export class BookpageShowComponent implements OnInit {
   }
 
   onSelectAnswer(answer: Answer): void {
-    this.notifications.showInfo('Ir a: ' + answer.goPage);
     this.bookpage = this.bookService.getPageAnswer(answer.bookId, answer.bookPageId, answer.id );
   }
 }

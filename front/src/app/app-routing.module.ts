@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: BookListComponent },
   { path: 'book', component: BookListComponent },
   { path: 'book/:bookId/show', component: BookShowComponent },
+  { path: 'book/:bookId/page/:bookPageId/show', component: BookShowComponent },
   { path: '**', component: AppComponent }
 ];
 

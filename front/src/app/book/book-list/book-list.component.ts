@@ -12,7 +12,7 @@ import { BookService } from '../services/book.service';
 export class BookListComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute, private bookService: BookService, private notifications : NotificationService) { }
+    private route: ActivatedRoute, private bookService: BookService, private notifier : NotificationService) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +22,6 @@ export class BookListComponent implements OnInit {
   }
 
   onSelectBook(book: Book) {
-    this.notifications.showInfo("Book selected: " + book.id);
+    this.notifier.showInfo("Book selected: " + book.id);
   }
 }
