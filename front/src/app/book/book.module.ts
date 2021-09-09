@@ -21,4 +21,4 @@ import { BookService } from './services/book.service';
     BookService
   ]
 })
-export class CYOABookModule { }
+export class BookModule { }
