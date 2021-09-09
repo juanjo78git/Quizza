@@ -24,6 +24,14 @@ export class BookShowComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookService.setCurrentPage( this.bookPageId);
+    this.route.paramMap.subscribe(params => {
+      let bookId = params.get('bookId');
+      if (bookId == null) {
+          this.notifications.showError("No se ha seleccionado nada");
+      } else {
+        this.book = this.bookService.getBook(+bookId);
+      }
+    });
   }
 
   currentPage()  {

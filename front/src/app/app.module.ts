@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServerErrorInterceptor } from './common/server-error.interceptor';
-import { MessagesComponent } from './common/components/messages.component';
+import { MessagesComponent } from './common/components/messages/messages.component';
 
 @NgModule({
   declarations: [

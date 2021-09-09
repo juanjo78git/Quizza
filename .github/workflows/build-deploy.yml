@@ -21,10 +21,6 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install angular-cli-ghpages
       run: npm install -g angular-cli-ghpages    
-    - name: Audit packages
-      run: |
-        cd front
-        npm audit fix
     - name: Build
       run: |
         cd front
