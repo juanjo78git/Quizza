@@ -25,29 +25,66 @@ export class BookService {
     return this.book;
   }
   setCurrentBook(bookId: number) {
-    this.book = this.books[bookId-1];
+    let book = this.books.find(element => element.id == bookId);
+    if(book == undefined) {
+      throw new Error("No se ha encontrado el libro");
+    } else {
+      this.book = book;
+    }
   }
 
   getCurrentPage() : BookPage {
-    return this.book.pages[this.bookPageId-1];
+    let bookPage = this.book.pages.find(element => element.id == this.bookPageId);
+    if(bookPage == undefined) {
+      throw new Error("No se ha encontrado la página");
+    }
+    return bookPage;
   }
   setCurrentPage(bookPageId: number) {
     this.bookPageId = bookPageId;
   }
 
   getBook(bookId: number) : Book {
-    return this.books[bookId - 1];
+    let book = this.books.find(element => element.id == bookId);
+    if(book == undefined) {
+      throw new Error("No se ha encontrado el libro");
+    }
+    return book;
   }
 
   getPage(bookId: number, bookPageId: number) : BookPage {
 
-    return this.books[bookId-1].pages[bookPageId-1];
+    let book = this.books.find(element => element.id == bookId);
+    if(book == undefined) {
+      throw new Error("No se ha encontrado el libro");
+    }
+    let bookPage = book.pages.find(element => element.id == bookPageId);
+    if(bookPage == undefined) {
+      throw new Error("No se ha encontrado la página del libro");
+    }
+    return bookPage;
   }
 
   getPageAnswer(bookId: number, bookPageId: number, answerId: number) : BookPage {
-    let newPage: number = this.books[bookId-1].pages[bookPageId-1].answers[answerId-1].goPage;
-    this.setCurrentPage(newPage);
-    return  this.books[bookId-1].pages[newPage-1];
+    let book = this.books.find(element => element.id == bookId);
+    if(book == undefined) {
+      throw new Error("No se ha encontrado el libro");
+    }
+    let bookPage = book.pages.find(element => element.id == bookPageId);
+    if(bookPage == undefined) {
+      throw new Error("No se ha encontrado la página");
+    }
+    let answer = bookPage.answers.find(element => element.id == answerId);
+    if(answer == undefined) {
+      throw new Error("No se ha encontrado la respuesta");
+    }
+    let bookPageNew = book.pages.find(element => element.id == answer?.goPage);
+    if(bookPageNew == undefined) {
+      throw new Error("No se ha encontrado la página destino");
+    }
+    this.setCurrentPage(bookPageNew.id);
+    return bookPageNew;
+
   }
 
 }
