@@ -15,7 +15,7 @@ describe('NotificationService', () => {
   it('should enviar y obtener una notificacion', () => {
     const msg = 'Prueba';
     const service: NotificationService = TestBed.get(NotificationService);
-    service.getNotificacion().subscribe(
+    service.getNotification().subscribe(
         noti => {
             console.log(noti.detail);
             expect(noti.detail).toEqual(msg);

@@ -22,6 +22,6 @@ export class BookListComponent implements OnInit {
   }
 
   onSelectBook(book: Book) {
-    this.notifier.showInfo("Book selected: " + book.id);
+
   }
 }

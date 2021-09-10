@@ -18,9 +18,9 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     this.notificationSub =
-    this.notifications.getNotificacion().subscribe(
-       (notificacion: Notification) => {
-           this.messages.push(notificacion);
+    this.notifications.getNotification().subscribe(
+       (notification: Notification) => {
+           this.messages.push(notification);
         }
      );
  }

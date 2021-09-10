@@ -11,11 +11,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServerErrorInterceptor } from './common/server-error.interceptor';
 import { MessagesComponent } from './common/components/messages/messages.component';
+import { ErrorPageComponent } from './common/components/error-page/error-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MessagesComponent
+    MessagesComponent,
+    ErrorPageComponent
   ],
   imports: [
     MatSnackBarModule,

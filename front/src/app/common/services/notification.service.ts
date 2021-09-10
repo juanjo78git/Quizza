@@ -8,15 +8,15 @@ import { Observable, Subject } from 'rxjs';
 })
 export class NotificationService {
 
-  private showNotificacionSource: Subject<Notification> = new Subject();
+  private showNotificationSource: Subject<Notification> = new Subject();
 
   constructor(
     public snackBar: MatSnackBar,
     private zone: NgZone) { }
 
 
-  getNotificacion(): Observable<Notification> {
-    return this.showNotificacionSource.asObservable();
+  getNotification(): Observable<Notification> {
+    return this.showNotificationSource.asObservable();
   }
   showSuccess(message: string, summary?: string, mode?: string): void {
     this.zone.run(() => {
@@ -44,20 +44,20 @@ export class NotificationService {
   }
 
   private show(severity: string, message: string, summary?: string, mode?: string) {
-    const notificacion: Notification = {
+    const notification: Notification = {
       severity: severity,
       summary: summary,
       detail: message
     };
-      this.notify(notificacion, mode);
+      this.notify(notification, mode);
   }
 
-  private notify(notificacion: Notification, mode?: string): void {
+  private notify(notification: Notification, mode?: string): void {
 
     // UTILIZANDO MATERIAL PARA NOTIFICACIONES FLEET
     if (mode == "fleet") {
       let panelClass : string[] =  [];
-      switch(notificacion.severity) {
+      switch(notification.severity) {
         case 'info': {
           panelClass =  ['error','info','alert-info', 'alert-dismissible','fade'];
             break;
@@ -81,9 +81,9 @@ export class NotificationService {
       }
       // The second parameter is the text in the button.
       // In the third, we send in the css class for the snack bar.
-      this.snackBar.open(notificacion.detail, 'X', {panelClass});
+      this.snackBar.open(notification.detail, 'X', {panelClass});
     } else {
-      this.showNotificacionSource.next(notificacion);
+      this.showNotificationSource.next(notification);
     }
   }
 }

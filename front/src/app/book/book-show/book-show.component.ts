@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../services/book.service';
-import { Book } from '../models/book.model';
+import { Book, BookPage } from '../models/book.model';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 
@@ -13,44 +13,34 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class BookShowComponent implements OnInit {
 
   @Input()
-  book: Book;
-
+  bookId: number;
   bookPageId: number;
 
   paramsSubscription!: Subscription;
 
   constructor(private route: ActivatedRoute, private bookService: BookService,private notifier : NotificationService) {
-    this.book = this.bookService.getBook(this.route.snapshot.params.bookId);
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
-    if (this.route.snapshot.params.bookPageId == null) {
-      this.bookPageId = 1;
-    } else {
-      this.bookPageId = this.route.snapshot.params.bookPageId;
-    }
+    this.bookId = this.route.snapshot.params.bookId;
+    this.bookPageId = 1;
   }
 
   ngOnInit(): void {
-    this.book = this.bookService.getBook(this.route.snapshot.params.bookId);
+    this.bookId = this.route.snapshot.params.bookId;
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
-    if (this.route.snapshot.params.bookPageId == null) {
-      this.bookPageId = 1;
-    } else {
-      this.bookPageId = this.route.snapshot.params.bookPageId;
-    }
+    this.bookPageId = 1;
     this.bookService.setCurrentPage( this.bookPageId);
 
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       let bookId = params.get('bookId');
-      let bookPageId = params.get('bookPageId');
       if (bookId == null) {
-          this.notifier.showError("No se ha seleccionado libro");
+          throw new Error("No se ha seleccionado un libro");
       } else {
-        if (bookPageId != null) {
-          this.bookPageId = +bookPageId;
-          this.bookService.setCurrentPage(+bookPageId);
+        if (this.bookId != +bookId) {
+          this.bookId = +bookId;
+          this.bookService.setCurrentBook(this.bookId);
+          this.bookPageId = 1;
+          this.bookService.setCurrentPage( this.bookPageId);
         }
-        this.book = this.bookService.getBook(+bookId);
-        this.bookService.setCurrentBook(+bookId);
       }
     });
   }
@@ -59,7 +49,10 @@ export class BookShowComponent implements OnInit {
     this.paramsSubscription.unsubscribe();
   }
 
-  currentPage()  {
-    return this.bookService.getPage( this.book.id, this.bookPageId);
+  currentBook() : Book {
+    return this.bookService.getBook( this.bookId);
+  }
+  currentPage() : BookPage {
+    return this.bookService.getPage( this.bookId, this.bookPageId);
   }
 }

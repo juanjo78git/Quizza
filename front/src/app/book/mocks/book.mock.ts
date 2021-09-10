@@ -119,7 +119,7 @@ pages:   [
  },
  {
   id: 2,
-  title: 'Libro 1',
+  title: 'Libro 2',
   version: '0.2.1',
   description: 'Descripción del libro 2',
   author: 'Nadie2',
