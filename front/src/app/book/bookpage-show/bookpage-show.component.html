@@ -9,18 +9,10 @@
     <p class="card-title">
       {{bookpage?.question}} <span class="card-title bi bi-question-circle-fill"></span>
     </p>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item list-group-item-action"  (click)="onSelectAnswer(item)" *ngFor="let item of bookpage?.answers">
-        <span class="badge rounded-pill bg-warning">
-          {{item.id}}
-        </span>
-        <span class="card-text">
-        {{item.answer}}
-        </span>
-        <span class="badge rounded-pill bg-primary">
-          {{item.goPage}}
-        </span>
-      </li>
-    </ul>
+    <div class="btn-group-vertical w-100">
+        <button type="button" class="btn btn-outline-primary btn-block text-left"  (click)="onSelectAnswer(item)" *ngFor="let item of bookpage?.answers">
+          <span class="badge rounded-pill bg-warning">{{item.id}} ({{item.goPage}})</span> {{item.answer}}
+      </button>
+    </div>
   </div>
 </article>
