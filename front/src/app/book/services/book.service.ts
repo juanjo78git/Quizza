@@ -54,4 +54,19 @@ export class BookService {
     this.setCurrentPage(answer.goPage);
     return this.getCurrentPage();
   }
+
+  deletePage(bookPageId: number) {
+    this.book.pages.forEach((element,index) =>{
+      if(element.id == bookPageId) {
+        this.book.pages.splice(index,1);
+      }
+    });
+  }
+  insertNewPage(bookPage: BookPage) {
+    this.book.pages.push(bookPage);
+  }
+  updatePage(bookPageId: number, bookPage: BookPage) {
+    this.deletePage(bookPageId);
+    this.insertNewPage(bookPage);
+  }
 }
