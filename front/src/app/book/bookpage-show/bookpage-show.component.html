@@ -1,16 +1,16 @@
 <article class="card" >
-  <div class="card-header">{{bookpage?.id}}</div>
+  <div class="card-header">{{getPage().id}}</div>
   <div class="card-body">
     <div class="card-title">
-      {{bookpage?.text}}
+      {{getPage().text}}
     </div>
   </div>
   <div class="card-footer">
     <p class="card-title">
-      {{bookpage?.question}} <span class="card-title bi bi-question-circle-fill"></span>
+      {{getPage().question}} <span class="card-title bi bi-question-circle-fill"></span>
     </p>
     <div class="btn-group-vertical w-100">
-        <button type="button" class="btn btn-outline-primary btn-block text-left"  (click)="onSelectAnswer(item)" *ngFor="let item of bookpage?.answers">
+        <button type="button" class="btn btn-outline-primary btn-block text-left"  (click)="onSelectAnswer(item)" *ngFor="let item of getAnwers()">
           <span class="badge rounded-pill bg-warning">{{item.id}} ({{item.goPage}})</span> {{item.answer}}
       </button>
     </div>

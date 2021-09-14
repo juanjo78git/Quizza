@@ -1,7 +1,27 @@
 import { Book } from '../models/book.model';
 
 export const BOOK: Book[] =
-[ {
+[
+  {
+    id: 0,
+    title: 'Empty book',
+    version: '0.0.0',
+    description: 'None',
+    author: 'Nobody',
+    pages:  [ {
+      id: 1,
+      bookId: 0,
+      type: 'end',
+      text: 'First Page',
+      answers: [ {
+        id: 1,
+        bookPageId: 1,
+        bookId: 0,
+        answer: 'Ok',
+        goPage: 1
+      }]}]
+  },
+{
 id: 1,
 title: 'Libro 1',
 version: '0.0.1',

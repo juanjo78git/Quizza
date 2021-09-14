@@ -12,7 +12,7 @@ export interface BookPage {
   bookId: number;
   type: string;
   text: string;
-  question: string;
+  question?: string;
   answers: Answer[];
 }
 

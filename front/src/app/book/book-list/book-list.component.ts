@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../common/services/notification.service';
 import { Book } from '../models/book.model';
-import { BookService } from '../services/book.service';
+import { BookcaseService } from '../services/bookcase.service';
 
 @Component({
   selector: 'app-book-list',
@@ -12,13 +12,13 @@ import { BookService } from '../services/book.service';
 export class BookListComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute, private bookService: BookService, private notifier : NotificationService) { }
+    private route: ActivatedRoute, private bookcaseService: BookcaseService, private notifier : NotificationService) { }
 
   ngOnInit(): void {
   }
 
   getBooks(): Book[] {
-    return this.bookService.getBooks();
+    return this.bookcaseService.getBookcase();
   }
 
   onSelectBook(book: Book) {

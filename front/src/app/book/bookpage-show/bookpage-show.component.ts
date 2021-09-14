@@ -11,16 +11,19 @@ import { NotificationService } from '../../common/services/notification.service'
 })
 export class BookpageShowComponent implements OnInit {
 
-  public bookpage!: BookPage;
-
   constructor(private bookService: BookService, private notifications : NotificationService) {
    }
 
   ngOnInit(): void {
-    this.bookpage = this.bookService.getCurrentPage();
   }
 
+  getPage(): BookPage {
+    return this.bookService.getCurrentPage();
+  }
+  getAnwers(): Answer[] {
+    return this.bookService.getCurrentAnswers();
+  }
   onSelectAnswer(answer: Answer): void {
-    this.bookpage = this.bookService.getPageAnswer(answer.bookId, answer.bookPageId, answer.id );
+    this.bookService.setAnswerSelected(answer);
   }
 }

@@ -14,7 +14,7 @@ export class BookShowComponent implements OnInit {
 
   @Input()
   bookId: number;
-  bookPageId: number;
+  private bookPageId: number;
 
   paramsSubscription!: Subscription;
 
@@ -50,9 +50,9 @@ export class BookShowComponent implements OnInit {
   }
 
   currentBook() : Book {
-    return this.bookService.getBook( this.bookId);
+    return this.bookService.getCurrentBook();
   }
   currentPage() : BookPage {
-    return this.bookService.getPage( this.bookId, this.bookPageId);
+    return this.bookService.getCurrentPage();
   }
 }
