@@ -1,5 +1,5 @@
 <article class="card" >
-  <div class="card-header">{{getPage().id}}</div>
+  <div class="card-header  text-center">{{getPage().id}}</div>
   <div class="card-body">
     <div class="card-title">
       {{getPage().text}}
@@ -9,10 +9,27 @@
     <p class="card-title">
       {{getPage().question}} <span class="card-title bi bi-question-circle-fill"></span>
     </p>
-    <div class="btn-group-vertical w-100">
-        <button type="button" class="btn btn-outline-primary btn-block text-left"  (click)="onSelectAnswer(item)" *ngFor="let item of getAnwers()">
+    <div class="btn-group-vertical w-100" *ngIf="!getStats()">
+      <button type="button" class="btn btn-outline-primary btn-block text-left d-flex justify-content-start"  (click)="onSelectAnswer(item)" *ngFor="let item of getAnwers()">
           <span class="badge rounded-pill bg-warning">{{item.id}} ({{item.goPage}})</span> {{item.answer}}
       </button>
     </div>
+  <div class="w-100" *ngIf="getStats()">
+    <div class="btn-group-vertical w-100">
+    Other users chose:
+    <div class="btn text-left" *ngFor="let item of getAnwers()" [ngClass]="item.id == getAnswerSelected().id ? 'btn-outline-primary active' : 'btn-outline-secondary nohover'">
+        <div class="text-left d-flex justify-content-start">
+          {{item.answer}}
+        </div>
+        <div class="progress" >
+          <div class="progress-bar bg-warning"   role="progressbar"
+          [style.width.%]="item.stats" [attr.aria-valuenow]="item.stats"> {{item.stats}}% </div>
+        </div>
+     </div>
   </div>
+  <div class="d-flex justify-content-center">
+  <button type="button" class="btn btn-outline-primary mt-2"  (click)="runAnswer()">Continue</button>
+  </div>
+  </div>
+</div>
 </article>

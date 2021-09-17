@@ -81,7 +81,7 @@ export class NotificationService {
       }
       // The second parameter is the text in the button.
       // In the third, we send in the css class for the snack bar.
-      this.snackBar.open(notification.detail, 'X', {panelClass});
+      this.snackBar.open(notification.detail, '<button type="button" class="btn-close" aria-label="Close"></button>', {panelClass});
     } else {
       this.showNotificationSource.next(notification);
     }

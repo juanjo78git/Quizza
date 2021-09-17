@@ -6,6 +6,7 @@ export interface Answer {
   bookId: number;
   answer: string;
   goPage: number;
+  stats: number;
 }
 export interface BookPage {
   id: number;

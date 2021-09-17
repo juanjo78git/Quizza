@@ -1,11 +1,13 @@
-<main class="container  text-center mt-5 mb-5" >
+<main class="container mt-5 mb-5" >
   <section class="bookquiz" >
     <div class="card" *ngFor="let item of getBooks()" >
-      <h5 class="card-header">{{item.title}}</h5>
+      <h5 class="card-header text-center">{{item.title}}</h5>
       <div class="card-body">
         <h5 class="card-title">{{item.author}}</h5>
-        <p class="card-text">{{item.description}}</p>
+        <p class="card-text ">{{item.description}}</p>
+        <div class="d-flex justify-content-center">
         <a href="#" class="btn btn-primary" [routerLink]="['/', 'book', item.id, 'show']" (click)="onSelectBook(item)">Read</a>
+      </div>
       </div>
     </div>
   </section>

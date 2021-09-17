@@ -18,7 +18,8 @@ export const BOOK: Book[] =
         bookPageId: 1,
         bookId: 0,
         answer: 'Ok',
-        goPage: 1
+        goPage: 1,
+        stats: 100
       }]}]
   },
 {
@@ -41,28 +42,32 @@ pages:   [
           bookPageId: 1,
           bookId: 1,
           answer: 'Respuesta1 1_2',
-          goPage: 2
+          goPage: 2,
+          stats: 25
         },
         {
           id: 2,
           bookPageId: 1,
           bookId: 1,
           answer: 'Respuesta1 2_3',
-          goPage: 3
+          goPage: 3,
+          stats: 25
         },
         {
           id: 3,
           bookPageId: 1,
           bookId: 1,
           answer: 'Respuesta1 3_4',
-          goPage: 4
+          goPage: 4,
+          stats: 30
         },
         {
           id: 4,
           bookPageId: 1,
           bookId: 1,
           answer: 'Respuesta1 4_3',
-          goPage: 3
+          goPage: 3,
+          stats: 20
         }
       ]
     },
@@ -78,14 +83,16 @@ pages:   [
           bookPageId: 2,
           bookId: 1,
           answer: 'Respuesta2 1_1',
-          goPage: 1
+          goPage: 1,
+          stats: 40
         },
         {
           id: 2,
           bookPageId: 2,
           bookId: 1,
           answer: 'Respuesta2 2_4',
-          goPage: 4
+          goPage: 4,
+          stats: 60
         }
       ]
     },
@@ -101,21 +108,24 @@ pages:   [
           bookPageId: 3,
           bookId: 1,
           answer: 'Respuesta3 1_2',
-          goPage: 2
+          goPage: 2,
+          stats: 33
         },
         {
           id: 2,
           bookPageId: 3,
           bookId: 1,
           answer: 'Respuesta3 2_1',
-          goPage: 1
+          goPage: 1,
+          stats: 33
         },
         {
           id: 3,
           bookPageId: 3,
           bookId: 1,
           answer: 'Respuesta3 3_4',
-          goPage: 4
+          goPage: 4,
+          stats: 34
         }
       ]
     },
@@ -131,7 +141,8 @@ pages:   [
           bookPageId: 4,
           bookId: 1,
           answer: 'Respuesta4 1_1',
-          goPage: 1
+          goPage: 1,
+          stats: 100
         }
       ]
     }
@@ -156,14 +167,16 @@ pages:   [
           bookPageId: 1,
           bookId: 2,
           answer: 'Respuesta2 1_1',
-          goPage: 1
+          goPage: 1,
+          stats: 75
         },
         {
           id: 2,
           bookPageId: 1,
           bookId: 2,
           answer: 'Respuesta2 2_1',
-          goPage: 1
+          goPage: 1,
+          stats: 25
         }
       ]
     }
