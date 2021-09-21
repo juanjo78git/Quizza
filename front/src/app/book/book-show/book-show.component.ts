@@ -15,7 +15,7 @@ export class BookShowComponent implements OnInit {
   @Input()
   bookId: number;
   private bookPageId: number;
-
+  private showStats: boolean = false;
   paramsSubscription!: Subscription;
 
   constructor(private route: ActivatedRoute, private bookService: BookService,private notifier : NotificationService) {
@@ -54,5 +54,12 @@ export class BookShowComponent implements OnInit {
   }
   currentPage() : BookPage {
     return this.bookService.getCurrentPage();
+  }
+
+  getStats(): boolean {
+    return this.showStats;
+  }
+  setStats(showStats: boolean) {
+    this.showStats = showStats;
   }
 }

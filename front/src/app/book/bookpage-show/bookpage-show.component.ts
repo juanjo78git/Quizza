@@ -22,15 +22,16 @@ import { delay } from 'rxjs/internal/operators/delay';
   }
 })
 export class BookpageShowComponent implements OnInit {
-
-  private viewStats : boolean = false;
+  @Input()
+  showStats : boolean = false;
+  private showStatsAnswers = false;
   private answerSelected!: Answer;
 
   constructor(private bookService: BookService, private notifications : NotificationService) {
    }
 
   ngOnInit(): void {
-    this.viewStats = false;
+    this.showStatsAnswers = false;
   }
 
   getPage(): BookPage {
@@ -41,8 +42,11 @@ export class BookpageShowComponent implements OnInit {
   }
   onSelectAnswer(answer: Answer): void {
     this.setAnswerSelected(answer);
-    this.setStats(true);
-//    this.bookService.setAnswerSelected(this.answerSelected);
+    if(this.showStats) {
+      this.setStats(true);
+    } else {
+      this.runAnswer();
+    }
   }
   runAnswer() {
     this.setStats(false);
@@ -55,9 +59,9 @@ export class BookpageShowComponent implements OnInit {
     this.answerSelected = answer;
   }
   getStats() : boolean {
-    return this.viewStats;
+    return this.showStatsAnswers;
   }
   setStats(stats: boolean) {
-    this.viewStats = stats;
+    this.showStatsAnswers = stats;
   }
 }

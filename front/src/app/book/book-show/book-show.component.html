@@ -1,6 +1,9 @@
 <main class="container  mt-5 mb-5" >
   <section class="bookquiz" >
     <h1 class=" text-center">{{currentBook().title}}</h1>
-    <app-bookpage-show></app-bookpage-show>
+    <div class="form-check form-switch d-flex justify-content-end">
+      <input class="form-check-input justify-content-end" type="checkbox" id="flexSwitchCheckDefault" (click)="setStats(!getStats())" /> <label class="form-check-label" for="flexSwitchCheckDefault">Show Stats</label>
+    </div>
+    <app-bookpage-show [showStats]="getStats()"></app-bookpage-show>
   </section>
 </main>
