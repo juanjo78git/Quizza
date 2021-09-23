@@ -1,9 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { Component, OnInit, Input } from '@angular/core';
 import { BookPage, Answer } from '../models/book.model';
 import { BookService } from '../services/book.service';
 import { NotificationService } from '../../common/services/notification.service';
-import { delay } from 'rxjs/internal/operators/delay';
 
 @Component({
   selector: 'app-bookpage-show',
@@ -42,7 +40,7 @@ export class BookpageShowComponent implements OnInit {
   }
   onSelectAnswer(answer: Answer): void {
     this.setAnswerSelected(answer);
-    if(this.showStats) {
+    if(this.showStats && (this.bookService.getCurrentAnswers().length > 1)) {
       this.setStats(true);
     } else {
       this.runAnswer();
