@@ -6,24 +6,10 @@ import { BookService } from './services/book.service';
 import { BookListComponent } from './book-list/book-list.component';
 import { RouterModule } from '@angular/router';
 
-
 @NgModule({
-  declarations: [
-    BookShowComponent,
-    BookpageShowComponent,
-    BookListComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    BookShowComponent,
-    BookpageShowComponent,
-    BookListComponent
-  ],
-  providers: [
-    BookService
-  ]
+  declarations: [BookShowComponent, BookpageShowComponent, BookListComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [BookShowComponent, BookpageShowComponent, BookListComponent],
+  providers: [BookService],
 })
-export class BookModule { }
+export class BookModule {}

@@ -17,16 +17,18 @@ import { NotificationService } from '../../common/services/notification.service'
 
     // Binding that updates the current value of the progressbar.
     '[attr.aria-valuenow]': 'value',
-  }
+  },
 })
 export class BookpageShowComponent implements OnInit {
   @Input()
-  showStats : boolean = false;
+  showStats: boolean = false;
   private showStatsAnswers = false;
   private answerSelected!: Answer;
 
-  constructor(private bookService: BookService, private notifications : NotificationService) {
-   }
+  constructor(
+    private bookService: BookService,
+    private notifications: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.showStatsAnswers = false;
@@ -41,7 +43,7 @@ export class BookpageShowComponent implements OnInit {
   onSelectAnswer(answer: Answer): void {
     this.setAnswerSelected(answer);
     this.bookService.updateCurrentAnswerStats();
-    if(this.showStats && (this.bookService.getCurrentAnswers().length > 1)) {
+    if (this.showStats && this.bookService.getCurrentAnswers().length > 1) {
       this.setStats(true);
     } else {
       this.runAnswer();
@@ -57,11 +59,10 @@ export class BookpageShowComponent implements OnInit {
   setAnswerSelected(answer: Answer) {
     this.answerSelected = answer;
   }
-  getStats() : boolean {
+  getStats(): boolean {
     return this.showStatsAnswers;
   }
   setStats(stats: boolean) {
     this.showStatsAnswers = stats;
   }
-
 }

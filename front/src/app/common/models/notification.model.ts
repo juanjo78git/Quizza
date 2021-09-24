@@ -1,5 +1,5 @@
 export interface Notification {
-    severity: string;
-    summary?: string;
-    detail: string;
-};
+  severity: string;
+  summary?: string;
+  detail: string;
+}

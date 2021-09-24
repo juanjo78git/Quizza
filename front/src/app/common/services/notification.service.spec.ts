@@ -7,7 +7,7 @@ describe('NotificationService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NotificationService]
+      providers: [NotificationService],
     });
     service = TestBed.inject(NotificationService);
   });
@@ -16,20 +16,20 @@ describe('NotificationService', () => {
     const msg = 'Prueba';
     const service: NotificationService = TestBed.get(NotificationService);
     service.getNotification().subscribe(
-        noti => {
-            console.log(noti.detail);
-            expect(noti.detail).toEqual(msg);
-        },
-        error => {
-            fail(error);
-        }
+      (noti) => {
+        console.log(noti.detail);
+        expect(noti.detail).toEqual(msg);
+      },
+      (error) => {
+        fail(error);
+      }
     );
     service.showError(msg);
     service.showSuccess(msg);
     service.showWarning(msg);
     service.showInfo(msg);
   });
-/*
+  /*
   it('should be created', () => {
     expect(service).toBeTruthy();
   });

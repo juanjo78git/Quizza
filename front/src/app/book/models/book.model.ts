@@ -1,4 +1,3 @@
-
 export interface Answer {
   id: number;
   bookPageId: number;
@@ -19,7 +18,7 @@ export interface BookPage {
 
 export interface Book {
   id: number;
-  title: string,
+  title: string;
   version: string;
   description: string;
   author: string;

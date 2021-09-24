@@ -3,23 +3,21 @@ import { Book, BookPage, Answer } from '../models/book.model';
 import { BookcaseService } from '../services/bookcase.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookService {
-
   private book!: Book;
   private readonly firstPage: number = 1;
   private bookPageId: number;
 
-
-  constructor(private bookcase: BookcaseService ) {
+  constructor(private bookcase: BookcaseService) {
     //this.book = this.bookcase.getBook(this.firstPage);
     this.bookPageId = this.firstPage;
   }
 
-  getCurrentBook() : Book {
-    if(this.book == undefined) {
-      throw new Error("No se ha seleccionado libro");
+  getCurrentBook(): Book {
+    if (this.book == undefined) {
+      throw new Error('No se ha seleccionado libro');
     }
     return this.book;
   }
@@ -28,10 +26,12 @@ export class BookService {
     this.setCurrentPage(this.firstPage);
   }
 
-  getCurrentPage() : BookPage {
-    let bookPage = this.book.pages.find(element => element.id == this.bookPageId);
-    if(bookPage == undefined) {
-      throw new Error("No se ha encontrado la página");
+  getCurrentPage(): BookPage {
+    let bookPage = this.book.pages.find(
+      (element) => element.id == this.bookPageId
+    );
+    if (bookPage == undefined) {
+      throw new Error('No se ha encontrado la página');
     }
     return bookPage;
   }
@@ -39,22 +39,22 @@ export class BookService {
     this.bookPageId = bookPageId;
     return this.getCurrentPage();
   }
-  getPage(bookPageId: number) : BookPage {
-    let bookPage = this.book.pages.find(element => element.id == bookPageId);
-    if(bookPage == undefined) {
-      throw new Error("No se ha encontrado la página");
+  getPage(bookPageId: number): BookPage {
+    let bookPage = this.book.pages.find((element) => element.id == bookPageId);
+    if (bookPage == undefined) {
+      throw new Error('No se ha encontrado la página');
     }
     return bookPage;
   }
   getCurrentAnswers(): Answer[] {
     return this.getCurrentPage().answers;
   }
-  getAnswers(bookPageId: number) : Answer[] {
-    return  this.getPage(bookPageId).answers;
+  getAnswers(bookPageId: number): Answer[] {
+    return this.getPage(bookPageId).answers;
   }
 
   //Update % Stats
-  updateCurrentAnswerStats(){
+  updateCurrentAnswerStats() {
     let totalResponses: number = 0;
     let totalResponsesPc: number = 0;
     let answers = this.getCurrentAnswers();
@@ -63,14 +63,14 @@ export class BookService {
       totalResponses += answer.stats;
     });
     answers.forEach((answer) => {
-      answer.statsPc = (100*answer.stats)/totalResponses;
+      answer.statsPc = (100 * answer.stats) / totalResponses;
       answer.statsPc = Math.round(answer.statsPc);
       totalResponsesPc += answer.statsPc;
     });
     //Evitar redondeos baja
     if (totalResponsesPc != 100 && answers.length > 0) {
-      let diff : number = 100 - totalResponsesPc;
-      if (answers[0].statsPc != undefined){
+      let diff: number = 100 - totalResponsesPc;
+      if (answers[0].statsPc != undefined) {
         answers[0].statsPc += diff;
       }
     }
@@ -82,9 +82,9 @@ export class BookService {
   }
 
   deletePage(bookPageId: number) {
-    this.book.pages.forEach((element,index) =>{
-      if(element.id == bookPageId) {
-        this.book.pages.splice(index,1);
+    this.book.pages.forEach((element, index) => {
+      if (element.id == bookPageId) {
+        this.book.pages.splice(index, 1);
       }
     });
   }

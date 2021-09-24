@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler  } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { GlobalErrorHandler } from './common/global-error-handler';
 
@@ -14,11 +14,7 @@ import { MessagesComponent } from './common/components/messages/messages.compone
 import { ErrorPageComponent } from './common/components/error-page/error-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MessagesComponent,
-    ErrorPageComponent
-  ],
+  declarations: [AppComponent, MessagesComponent, ErrorPageComponent],
   imports: [
     MatSnackBarModule,
     HttpClientModule,
@@ -29,8 +25,12 @@ import { ErrorPageComponent } from './common/components/error-page/error-page.co
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

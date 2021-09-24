@@ -8,17 +8,20 @@ import { Subscription } from 'rxjs/internal/Subscription';
 @Component({
   selector: 'app-book-show',
   templateUrl: './book-show.component.html',
-  styleUrls: ['./book-show.component.css']
+  styleUrls: ['./book-show.component.css'],
 })
 export class BookShowComponent implements OnInit {
-
   @Input()
   bookId: number;
   private bookPageId: number;
   private showStats: boolean = false;
   paramsSubscription!: Subscription;
 
-  constructor(private route: ActivatedRoute, private bookService: BookService,private notifier : NotificationService) {
+  constructor(
+    private route: ActivatedRoute,
+    private bookService: BookService,
+    private notifier: NotificationService
+  ) {
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     this.bookId = this.route.snapshot.params.bookId;
     this.bookPageId = 1;
@@ -28,18 +31,18 @@ export class BookShowComponent implements OnInit {
     this.bookId = this.route.snapshot.params.bookId;
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     this.bookPageId = 1;
-    this.bookService.setCurrentPage( this.bookPageId);
+    this.bookService.setCurrentPage(this.bookPageId);
 
-    this.paramsSubscription = this.route.paramMap.subscribe(params => {
+    this.paramsSubscription = this.route.paramMap.subscribe((params) => {
       let bookId = params.get('bookId');
       if (bookId == null) {
-          throw new Error("No se ha seleccionado un libro");
+        throw new Error('No se ha seleccionado un libro');
       } else {
         if (this.bookId != +bookId) {
           this.bookId = +bookId;
           this.bookService.setCurrentBook(this.bookId);
           this.bookPageId = 1;
-          this.bookService.setCurrentPage( this.bookPageId);
+          this.bookService.setCurrentPage(this.bookPageId);
         }
       }
     });
@@ -49,10 +52,10 @@ export class BookShowComponent implements OnInit {
     this.paramsSubscription.unsubscribe();
   }
 
-  currentBook() : Book {
+  currentBook(): Book {
     return this.bookService.getCurrentBook();
   }
-  currentPage() : BookPage {
+  currentPage(): BookPage {
     return this.bookService.getCurrentPage();
   }
 

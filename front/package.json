@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "prettier":"npx prettier --write .",
     "test": "ng test",
     "deploy": "ng build --base-href=/Quizza-deploy/",
     "ghpages": "angular-cli-ghpages --dir dist/Quizza --repo=https://github.com/juanjo78git/Quizza-deploy.git"
@@ -45,6 +46,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "prettier": "2.4.1",
     "typescript": "^4.3.5"
   }
 }

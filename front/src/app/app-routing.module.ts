@@ -9,11 +9,11 @@ const routes: Routes = [
   { path: '', component: BookListComponent },
   { path: 'book', component: BookListComponent },
   { path: 'book/:bookId/show', component: BookShowComponent },
-  { path: '**', component: ErrorPageComponent }
+  { path: '**', component: ErrorPageComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
