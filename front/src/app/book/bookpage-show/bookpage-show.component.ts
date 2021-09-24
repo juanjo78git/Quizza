@@ -40,6 +40,7 @@ export class BookpageShowComponent implements OnInit {
   }
   onSelectAnswer(answer: Answer): void {
     this.setAnswerSelected(answer);
+    this.bookService.updateCurrentAnswerStats();
     if(this.showStats && (this.bookService.getCurrentAnswers().length > 1)) {
       this.setStats(true);
     } else {
@@ -62,4 +63,5 @@ export class BookpageShowComponent implements OnInit {
   setStats(stats: boolean) {
     this.showStatsAnswers = stats;
   }
+
 }

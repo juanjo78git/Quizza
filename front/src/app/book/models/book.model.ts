@@ -1,4 +1,3 @@
-import { Identifiers } from "@angular/compiler";
 
 export interface Answer {
   id: number;
@@ -7,6 +6,7 @@ export interface Answer {
   answer: string;
   goPage: number;
   stats: number;
+  statsPc?: number;
 }
 export interface BookPage {
   id: number;

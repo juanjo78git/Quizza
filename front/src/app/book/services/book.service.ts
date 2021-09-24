@@ -7,17 +7,20 @@ import { BookcaseService } from '../services/bookcase.service';
 })
 export class BookService {
 
-  private book: Book;
+  private book!: Book;
   private readonly firstPage: number = 1;
   private bookPageId: number;
 
 
   constructor(private bookcase: BookcaseService ) {
-    this.book = this.bookcase.getBook(this.firstPage);
+    //this.book = this.bookcase.getBook(this.firstPage);
     this.bookPageId = this.firstPage;
   }
 
   getCurrentBook() : Book {
+    if(this.book == undefined) {
+      throw new Error("No se ha seleccionado libro");
+    }
     return this.book;
   }
   setCurrentBook(bookId: number) {
@@ -48,6 +51,29 @@ export class BookService {
   }
   getAnswers(bookPageId: number) : Answer[] {
     return  this.getPage(bookPageId).answers;
+  }
+
+  //Update % Stats
+  updateCurrentAnswerStats(){
+    let totalResponses: number = 0;
+    let totalResponsesPc: number = 0;
+    let answers = this.getCurrentAnswers();
+
+    answers.forEach((answer) => {
+      totalResponses += answer.stats;
+    });
+    answers.forEach((answer) => {
+      answer.statsPc = (100*answer.stats)/totalResponses;
+      answer.statsPc = Math.round(answer.statsPc);
+      totalResponsesPc += answer.statsPc;
+    });
+    //Evitar redondeos baja
+    if (totalResponsesPc != 100 && answers.length > 0) {
+      let diff : number = 100 - totalResponsesPc;
+      if (answers[0].statsPc != undefined){
+        answers[0].statsPc += diff;
+      }
+    }
   }
 
   setAnswerSelected(answer: Answer): BookPage {
