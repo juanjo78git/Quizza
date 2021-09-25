@@ -12,9 +12,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServerErrorInterceptor } from './common/server-error.interceptor';
 import { MessagesComponent } from './common/components/messages/messages.component';
 import { ErrorPageComponent } from './common/components/error-page/error-page.component';
+import { MenuComponent } from './common/components/menu/menu.component';
+import { UserRegisterComponent } from './common/components/user-register/user-register.component';
+import { UserLoginComponent } from './common/components/user-login/user-login.component';
+import { UserProfileComponent } from './common/components/user-profile/user-profile.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, MessagesComponent, ErrorPageComponent],
+  declarations: [AppComponent, MessagesComponent, ErrorPageComponent, MenuComponent, UserRegisterComponent, UserLoginComponent, UserProfileComponent],
   imports: [
     MatSnackBarModule,
     HttpClientModule,
@@ -22,6 +27,7 @@ import { ErrorPageComponent } from './common/components/error-page/error-page.co
     AppRoutingModule,
     BookModule,
     BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
