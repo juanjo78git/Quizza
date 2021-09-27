@@ -5,7 +5,8 @@ export const BOOK: Book[] = [
     id: 0,
     title: 'Empty book',
     version: '0.0.0',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, illum deserunt repellat distinctio minus recusandae necessitatibus beatae. Quis accusamus ex quisquam, dolorum fugit incidunt enim nulla minus alias autem vitae!',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, illum deserunt repellat distinctio minus recusandae necessitatibus beatae. Quis accusamus ex quisquam, dolorum fugit incidunt enim nulla minus alias autem vitae!',
     author: 'Nomen Nescio',
     mediaType: 'img',
     mediaURL: 'assets/book.svg',

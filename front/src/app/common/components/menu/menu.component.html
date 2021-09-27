@@ -1,6 +1,19 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark d-flex justify-content-between">
+<nav
+  class="
+    navbar navbar-expand navbar-dark
+    bg-dark
+    d-flex
+    justify-content-between
+  "
+>
   <a href="#" class="navbar-brand">
-    <img src="assets/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    <img
+      src="assets/logo.svg"
+      width="30"
+      height="30"
+      class="d-inline-block align-top"
+      alt=""
+    />
     Quizza
   </a>
   <ul class="navbar-nav mr-auto" routerLinkActive="active">
@@ -23,15 +36,32 @@
 
   <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="assets/user.png" width="25" height="25" class="d-inline-block align-center rounded" alt="">
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        id="navbarDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <img
+          src="assets/user.png"
+          width="25"
+          height="25"
+          class="d-inline-block align-center rounded"
+          alt=""
+        />
         {{ username }}
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a href="/profile" class="dropdown-item" routerLink="profile">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a href="/profile" class="dropdown-item" routerLink="profile"
+            >Profile</a
+          >
+        </li>
+        <li><hr class="dropdown-divider" /></li>
         <li><a href="#" class="dropdown-item" (click)="logout()">LogOut</a></li>
-    </ul>
+      </ul>
     </li>
   </ul>
 </nav>

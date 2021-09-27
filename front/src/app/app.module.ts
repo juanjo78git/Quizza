@@ -19,7 +19,15 @@ import { UserProfileComponent } from './common/components/user-profile/user-prof
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, MessagesComponent, ErrorPageComponent, MenuComponent, UserRegisterComponent, UserLoginComponent, UserProfileComponent],
+  declarations: [
+    AppComponent,
+    MessagesComponent,
+    ErrorPageComponent,
+    MenuComponent,
+    UserRegisterComponent,
+    UserLoginComponent,
+    UserProfileComponent,
+  ],
   imports: [
     MatSnackBarModule,
     HttpClientModule,
@@ -27,7 +35,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BookModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },

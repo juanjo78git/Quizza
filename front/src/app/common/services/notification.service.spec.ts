@@ -14,16 +14,16 @@ describe('NotificationService', () => {
 
   it('should enviar y obtener una notificacion', () => {
     const msg = 'Prueba';
-    const service: NotificationService = TestBed.get(NotificationService);
-    service.getNotification().subscribe(
-      (noti) => {
+    const service: NotificationService = TestBed.inject(NotificationService);
+    service.getNotification().subscribe({
+      next: (noti) => {
         console.log(noti.detail);
         expect(noti.detail).toEqual(msg);
       },
-      (error) => {
+      error: (error) => {
         fail(error);
-      }
-    );
+      },
+    });
     service.showError(msg);
     service.showSuccess(msg);
     service.showWarning(msg);

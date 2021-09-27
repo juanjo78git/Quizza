@@ -6,11 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./error-page.component.css'],
 })
 export class ErrorPageComponent implements OnInit {
-
   @Input()
-  messageTitle : string = "404 Not Found";
+  messageTitle: string = '404 Not Found';
   @Input()
-  messageDetail : string = "An unexpected error has occurred";
+  messageDetail: string = 'An unexpected error has occurred';
 
   constructor() {}
 
@@ -24,4 +23,3 @@ export class ErrorPageComponent implements OnInit {
     return this.messageDetail;
   }
 }
-
