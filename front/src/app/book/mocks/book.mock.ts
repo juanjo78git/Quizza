@@ -5,14 +5,18 @@ export const BOOK: Book[] = [
     id: 0,
     title: 'Empty book',
     version: '0.0.0',
-    description: 'None',
-    author: 'Nobody',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, illum deserunt repellat distinctio minus recusandae necessitatibus beatae. Quis accusamus ex quisquam, dolorum fugit incidunt enim nulla minus alias autem vitae!',
+    author: 'Nomen Nescio',
+    mediaType: 'img',
+    mediaURL: 'assets/book.svg',
     pages: [
       {
         id: 1,
         bookId: 0,
         type: 'end',
         text: 'First Page',
+        mediaType: 'img',
+        mediaURL: 'assets/book.svg',
         answers: [
           {
             id: 1,

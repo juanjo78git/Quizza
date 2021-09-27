@@ -11,6 +11,8 @@ export interface BookPage {
   id: number;
   bookId: number;
   type: string;
+  mediaType?: string;
+  mediaURL?: string;
   text: string;
   question?: string;
   answers: Answer[];
@@ -22,5 +24,7 @@ export interface Book {
   version: string;
   description: string;
   author: string;
+  mediaType?: string;
+  mediaURL?: string;
   pages: BookPage[];
 }
