@@ -4,12 +4,13 @@ import { AppComponent } from './app.component';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookShowComponent } from './book/book-show/book-show.component';
 import { ErrorPageComponent } from './common/components/error-page/error-page.component';
+import { HomeComponent } from './common/components/home/home.component';
 import { UserLoginComponent } from './common/components/user-login/user-login.component';
 import { UserProfileComponent } from './common/components/user-profile/user-profile.component';
 import { UserSignupComponent } from './common/components/user-signup/user-signup.component';
 
 const routes: Routes = [
-  { path: '', component: BookListComponent },
+  { path: '', component: HomeComponent },
   { path: 'book', component: BookListComponent },
   { path: 'book/:bookId/show', component: BookShowComponent },
   { path: 'login', component: UserLoginComponent },
