@@ -11,6 +11,7 @@ export class UserRegisterComponent implements OnInit {
     username: null,
     email: null,
     password: null,
+    confirmPassword: null
   };
   isSuccessful = false;
   isSignUpFailed = false;
@@ -21,9 +22,9 @@ export class UserRegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    const { username, email, password } = this.form;
+    const { username, email, password, confirmPassword } = this.form;
 
-    this.authService.register(username, email, password).subscribe({
+    this.authService.register(username, email, password, confirmPassword).subscribe({
       next: (data) => {
         console.log(data);
         this.isSuccessful = true;

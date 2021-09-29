@@ -1,6 +1,6 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img id="profile-img" src="assets/user.png" class="profile-img-card" />
+<div class="col-md-12 mx-auto mt-3" style="max-width:400px" >
+  <div class="card mx-3">
+    <img src="assets/user.png" class="rounded-circle mx-auto d-block p-3" />
     <form
       *ngIf="!isSuccessful"
       name="form"
@@ -8,7 +8,7 @@
       #f="ngForm"
       novalidate
     >
-      <div class="form-group">
+      <div class="form-group mx-2">
         <label for="username">Username</label>
         <input
           type="text"
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group mx-2">
         <label for="email">Email</label>
         <input
           type="email"
@@ -48,7 +48,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group mx-2">
         <label for="password">Password</label>
         <input
           type="password"
@@ -66,7 +66,22 @@
           </div>
         </div>
       </div>
-      <div class="form-group d-flex justify-content-center mt-4">
+      <div class="form-group mx-2">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="confirmPassword"
+          [(ngModel)]="form.confirmPassword"
+          required
+          #confirmPassword="ngModel"
+        />
+        <div class="alert-danger" *ngIf="(confirmPassword.errors || (confirmPassword != password)) && f.submitted">
+          <div *ngIf="confirmPassword.errors && confirmPassword.errors.required">Confirm Password is required</div>
+          <div *ngIf="confirmPassword != password">Password and Confirm Password must be match</div>
+        </div>
+      </div>
+      <div class="form-group d-flex justify-content-center m-4">
         <button class="btn btn-primary btn-block">Sign Up</button>
       </div>
 
