@@ -13,7 +13,7 @@ import { ServerErrorInterceptor } from './common/server-error.interceptor';
 import { MessagesComponent } from './common/components/messages/messages.component';
 import { ErrorPageComponent } from './common/components/error-page/error-page.component';
 import { MenuComponent } from './common/components/menu/menu.component';
-import { UserRegisterComponent } from './common/components/user-register/user-register.component';
+import { UserSignupComponent } from './common/components/user-signup/user-signup.component';
 import { UserLoginComponent } from './common/components/user-login/user-login.component';
 import { UserProfileComponent } from './common/components/user-profile/user-profile.component';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     MessagesComponent,
     ErrorPageComponent,
     MenuComponent,
-    UserRegisterComponent,
+    UserSignupComponent,
     UserLoginComponent,
     UserProfileComponent,
   ],

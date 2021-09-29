@@ -3,10 +3,10 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.css'],
+  templateUrl: './user-signup.component.html',
+  styleUrls: ['./user-signup.component.css'],
 })
-export class UserRegisterComponent implements OnInit {
+export class UserSignupComponent implements OnInit {
   form: any = {
     username: null,
     email: null,
@@ -24,7 +24,7 @@ export class UserRegisterComponent implements OnInit {
   onSubmit(): void {
     const { username, email, password, confirmPassword } = this.form;
 
-    this.authService.register(username, email, password, confirmPassword).subscribe({
+    this.authService.register(username, email, password).subscribe({
       next: (data) => {
         console.log(data);
         this.isSuccessful = true;
