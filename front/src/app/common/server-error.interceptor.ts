@@ -20,7 +20,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
       catchError((error) => {
         console.log('error in intercept');
         console.error(error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }

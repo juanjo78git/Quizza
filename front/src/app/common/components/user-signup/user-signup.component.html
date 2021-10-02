@@ -2,7 +2,7 @@
   <div class="card mx-3">
     <img src="assets/user.png" class="rounded-circle mx-auto d-block p-3" />
     <form
-      *ngIf="!isSuccessful"
+      *ngIf="!isLoggedIn()"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
@@ -85,12 +85,12 @@
         <button class="btn btn-primary btn-block">Sign Up</button>
       </div>
 
-      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+      <div class="alert alert-warning" *ngIf="f.submitted && (this.errorMessage=='')">
         Signup failed!<br />{{ errorMessage }}
       </div>
     </form>
 
-    <div class="alert alert-success" *ngIf="isSuccessful">
+    <div class="alert alert-success" *ngIf="isLoggedIn()">
       Your registration is successful!
     </div>
   </div>

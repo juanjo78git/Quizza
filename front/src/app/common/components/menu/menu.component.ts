@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from '../../services/token-storage.service';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,28 +9,26 @@ import { TokenStorageService } from '../../services/token-storage.service';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
-  private roles: string[] = [];
-  isLoggedIn = false;
-  showAdminBoard = false;
-  username: string = 'None';
+  subscriptions : Subscription[] = [];
+  user?: User;
 
-  constructor(private tokenStorageService: TokenStorageService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-
-      this.username = user.username;
-    }
+    this.subscriptions.push(this.userService.getUser().subscribe({
+      next: (data) => { this.user = data},
+      error: (err) => { }
+    }));
   }
-  //TODO: No recargar
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+   }
+
+   isLoggedIn(): boolean {
+     return !(this.user == undefined || this.user.token == undefined);
+   }
+
   logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
+    this.userService.logout();
   }
 }

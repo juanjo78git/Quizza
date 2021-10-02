@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { TokenStorageService } from '../../services/token-storage.service';
+import { Subscription } from 'rxjs';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,44 +13,31 @@ export class UserLoginComponent implements OnInit {
     username: null,
     password: null,
   };
-  isLoggedIn = false;
-  isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
+  subscriptions : Subscription[] = [];
+  user?: User;
 
   constructor(
-    private authService: AuthService,
-    private tokenStorage: TokenStorageService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
+    this.subscriptions.push(this.userService.getUser().subscribe({
+      next: (data) => { this.user = data},
+      error: (err) => { }
+    }));
   }
 
   onSubmit(): void {
     const { username, password } = this.form;
-
-    this.authService.login(username, password).subscribe({
-      next: (data) => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
-
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
-      },
-      error: (err) => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      },
-    });
+    this.errorMessage = this.userService.login(username, password);
   }
-  //TODO: No recargar
-  reloadPage(): void {
-    window.location.reload();
-  }
+
+   ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+   }
+
+   isLoggedIn(): boolean {
+     return !(this.user == undefined || this.user.token == undefined);
+   }
 }
