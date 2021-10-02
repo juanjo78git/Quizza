@@ -63,9 +63,15 @@
         </div>
       </div>
     </form>
+    <div class="text-center m-4" *ngIf="!isLoggedIn()">
+      <p class="h2">--- OR ---</p>
+      <p >Login with... </p>
+      <button (click)="loginWithGoogle()" class="btn btn-outline-danger btn-block">Google</button>
+      </div>
+    </div>
 
     <div class="alert alert-success" *ngIf="isLoggedIn()">
       Logged in as {{ user!.username }}.
     </div>
-  </div>
 </div>
+

@@ -18,6 +18,8 @@ import { UserLoginComponent } from './common/components/user-login/user-login.co
 import { UserProfileComponent } from './common/components/user-profile/user-profile.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './common/components/home/home.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { HomeComponent } from './common/components/home/home.component';
     BookModule,
     BrowserAnimationsModule,
     FormsModule,
+    SocialLoginModule,
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
@@ -45,6 +48,20 @@ import { HomeComponent } from './common/components/home/home.component';
       provide: HTTP_INTERCEPTORS,
       useClass: ServerErrorInterceptor,
       multi: true,
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '283360580524-4r5c2ivdepbdcdgfp0387joqgt828t9q.apps.googleusercontent.com'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
     },
   ],
   bootstrap: [AppComponent],

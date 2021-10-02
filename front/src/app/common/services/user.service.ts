@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { AuthService } from './auth.service';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,11 +18,29 @@ export class UserService {
   };
   private user : User = this.userDefault;
 
-private user$ : BehaviorSubject<User>;
 
-  constructor(private http: HttpClient, private auth : AuthService) {
+  // TODO: GOOGLE
+  userGoogle?: SocialUser;
+
+private user$ : BehaviorSubject<User>;
+subscriptions : Subscription[] = [];
+
+  constructor(private http: HttpClient, private auth : AuthService,
+    private authServiceGoogle: SocialAuthService) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);
+    // TODO: GOOGLE
+    this.subscriptions.push(
+      this.authServiceGoogle.authState.subscribe((userGoogle) => {
+      this.userGoogle = userGoogle;
+      if (userGoogle != null) {
+        this.user.avatar = userGoogle.photoUrl;
+        this.user.username = userGoogle.name;
+        this.user.mail = userGoogle.email;
+        this.user.id = userGoogle.id;
+        this.user.token = userGoogle.idToken;
+      }
+    }));
    }
 
   getUser(): Observable<User> {
@@ -77,6 +96,7 @@ private user$ : BehaviorSubject<User>;
   logout() {
     this.user = this.userDefault;
     this.user$.next(this.user);
+    this.logoutWithGoogle();
   }
 
   signup(username: string, mail: string, password: string): string {
@@ -87,4 +107,20 @@ private user$ : BehaviorSubject<User>;
   isLoggedIn(): boolean {
     return !(this.user == undefined || this.user.token == undefined);
   }
+
+
+  //TODO GOOGLE
+  loginWithGoogle(): void {
+    this.authServiceGoogle.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+  logoutWithGoogle(): void {
+    this.authServiceGoogle.signOut();
+  }
+  refreshTokenGoogle(): void {
+    this.authServiceGoogle.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  destroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+   }
 }

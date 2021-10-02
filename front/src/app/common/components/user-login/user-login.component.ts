@@ -40,4 +40,9 @@ export class UserLoginComponent implements OnInit {
    isLoggedIn(): boolean {
      return !(this.user == undefined || this.user.token == undefined);
    }
+
+   loginWithGoogle() {
+     this.userService.loginWithGoogle();
+   }
+
 }
