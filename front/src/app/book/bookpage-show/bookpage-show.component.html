@@ -12,12 +12,21 @@
       getPage().mediaURL != undefined
     "
   />
-  <video width="400" height="400" controls controlsList="nodownload" autoplay="autoplay" playsinline class="card-img-top embed-responsive" *ngIf="
-  getPage().mediaType != undefined &&
-  getPage().mediaType == 'video' &&
-  getPage().mediaURL != undefined
-">
-    <source src="{{ getPage().mediaURL }}" type="video/mp4">
+  <video
+    width="400"
+    height="400"
+    controls
+    controlsList="nodownload"
+    autoplay="autoplay"
+    playsinline
+    class="card-img-top embed-responsive"
+    *ngIf="
+      getPage().mediaType != undefined &&
+      getPage().mediaType == 'video' &&
+      getPage().mediaURL != undefined
+    "
+  >
+    <source src="{{ getPage().mediaURL }}" type="video/mp4" />
   </video>
 
   <div class="card-body">

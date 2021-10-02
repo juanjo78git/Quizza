@@ -18,7 +18,10 @@ import { UserLoginComponent } from './common/components/user-login/user-login.co
 import { UserProfileComponent } from './common/components/user-profile/user-profile.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './common/components/home/home.component';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 
 @NgModule({
@@ -58,9 +61,9 @@ import { GoogleLoginProvider } from 'angularx-social-login';
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
               '283360580524-4r5c2ivdepbdcdgfp0387joqgt828t9q.apps.googleusercontent.com'
-            )
-          }
-        ]
+            ),
+          },
+        ],
       } as SocialAuthServiceConfig,
     },
   ],

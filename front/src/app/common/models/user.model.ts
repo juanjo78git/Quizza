@@ -4,5 +4,5 @@ export interface User {
   mail?: string;
   avatar?: string;
   roles: string[];
-  token?: string
+  token?: string;
 }

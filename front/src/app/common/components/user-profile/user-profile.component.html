@@ -1,15 +1,18 @@
-<div class="container" *ngIf="isLoggedIn() && user != undefined else loggedOut">
-    <h3>
-      <strong>{{ user.username }}</strong> profile
-    </h3>
-    <p>
-      <strong>Avatar:</strong>
-      <img
+<div
+  class="container"
+  *ngIf="isLoggedIn() && user != undefined; else loggedOut"
+>
+  <h3>
+    <strong>{{ user.username }}</strong> profile
+  </h3>
+  <p>
+    <strong>Avatar:</strong>
+    <img
       src="{{ user.avatar }}"
       class="rounded-circle mx-auto d-block p-3"
       alt=""
     />
-    </p>
+  </p>
   <p>
     <strong>Token:</strong>
     {{ user.token }}

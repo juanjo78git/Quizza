@@ -15,20 +15,17 @@ const httpOptions = {
 })
 //TODO
 export class AuthService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-  }
-
-
-  login(username: string, password: string) : User {
+  login(username: string, password: string): User {
     //    return this.http.post(AUTH_API + 'login', {username, password, }, httpOptions);
     let user: User;
     user = {
-      id: "0",
+      id: '0',
       username: username,
-      avatar: "assets/user.png",
-      roles: ["DEFAULT_ROLE"],
-      token: password
+      avatar: 'assets/user.png',
+      roles: ['DEFAULT_ROLE'],
+      token: password,
     };
     return user;
   }
@@ -38,12 +35,12 @@ export class AuthService {
 
     let user: User;
     user = {
-      id: "0",
+      id: '0',
       username: username,
       mail: mail,
-      avatar: "assets/user.png",
-      roles: ["DEFAULT_ROLE"],
-      token: password
+      avatar: 'assets/user.png',
+      roles: ['DEFAULT_ROLE'],
+      token: password,
     };
     return user;
   }

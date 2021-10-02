@@ -1,4 +1,8 @@
-<div class="col-md-12 mx-auto mt-3" style="max-width:400px" *ngIf="!isLoggedIn()">
+<div
+  class="col-md-12 mx-auto mt-3"
+  style="max-width: 400px"
+  *ngIf="!isLoggedIn()"
+>
   <div class="card mx-3">
     <img src="assets/user.png" class="rounded-circle mx-auto d-block p-3" />
     <form
@@ -76,22 +80,35 @@
           required
           #confirmPassword="ngModel"
         />
-        <div class="alert-danger" *ngIf="(confirmPassword.errors || (confirmPassword != password)) && f.submitted">
-          <div *ngIf="confirmPassword.errors && confirmPassword.errors.required">Confirm Password is required</div>
-          <div *ngIf="confirmPassword != password">Password and Confirm Password must be match</div>
+        <div
+          class="alert-danger"
+          *ngIf="
+            (confirmPassword.errors || confirmPassword != password) &&
+            f.submitted
+          "
+        >
+          <div
+            *ngIf="confirmPassword.errors && confirmPassword.errors.required"
+          >
+            Confirm Password is required
+          </div>
+          <div *ngIf="confirmPassword != password">
+            Password and Confirm Password must be match
+          </div>
         </div>
       </div>
       <div class="form-group d-flex justify-content-center m-4">
         <button class="btn btn-primary btn-block">Sign Up</button>
       </div>
 
-      <div class="alert alert-warning" *ngIf="f.submitted && (this.errorMessage=='')">
+      <div
+        class="alert alert-warning"
+        *ngIf="f.submitted && this.errorMessage == ''"
+      >
         Signup failed!<br />{{ errorMessage }}
       </div>
     </form>
-
   </div>
-
 </div>
 
 <div class="alert alert-success m-5" *ngIf="isLoggedIn()">
