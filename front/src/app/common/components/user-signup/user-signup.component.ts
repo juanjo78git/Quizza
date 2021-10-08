@@ -11,7 +11,7 @@ export class UserSignupComponent implements OnInit {
     username: null,
     email: null,
     password: null,
-    confirmPassword: null
+    confirmPassword: null,
   };
   errorMessage = '';
 

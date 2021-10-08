@@ -1,50 +1,52 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { AuthService } from './auth.service';
-import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { SocialAuthService } from 'angularx-social-login';
+import { AuthGoogleService } from './auth-google.service';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-
-  private readonly userDefault : User = {
-    id: "0",
-    username: "Nobody",
-    mail: "name@domain",
-    avatar: "assets/user.png",
-    roles: ["DEFAULT_ROLE"]
+  private readonly userDefault: User = {
+    id: '0',
+    username: 'Nobody',
+    mail: 'name@domain',
+    avatar: 'assets/user.png',
+    roles: ['DEFAULT_ROLE'],
+    provider: this.auth.getProvider(),
+    token: undefined,
   };
-  private user : User = this.userDefault;
+  private user: User = this.userDefault;
 
+  private user$: BehaviorSubject<User>;
+  subscriptions: Subscription[] = [];
 
-  // TODO: GOOGLE
-  userGoogle?: SocialUser;
-
-private user$ : BehaviorSubject<User>;
-subscriptions : Subscription[] = [];
-
-  constructor(private http: HttpClient, private auth : AuthService,
-    private authServiceGoogle: SocialAuthService) {
+  constructor(
+    private auth: AuthService,
+    private authServiceGoogle: SocialAuthService,
+    private authGoogle: AuthGoogleService
+  ) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);
-    // TODO: GOOGLE
+    // TODO: GOOGLE - Meter en AuthGoogleService
     this.subscriptions.push(
       this.authServiceGoogle.authState.subscribe((userGoogle) => {
-      this.userGoogle = userGoogle;
-      if (userGoogle != null) {
-        this.user.avatar = userGoogle.photoUrl;
-        this.user.username = userGoogle.name;
-        this.user.mail = userGoogle.email;
-        this.user.id = userGoogle.id;
-        this.user.token = userGoogle.idToken;
-      }
-    }));
-   }
+        if (userGoogle != null) {
+          this.user.avatar = userGoogle.photoUrl;
+          this.user.username = userGoogle.name;
+          this.user.mail = userGoogle.email;
+          this.user.id = userGoogle.id;
+          this.user.provider = 'GOOGLE';
+          this.user.token = userGoogle.idToken;
+          this.user$.next(this.user);
+        }
+      })
+    );
+  }
 
   getUser(): Observable<User> {
-    return  this.user$.asObservable();;
+    return this.user$.asObservable();
   }
   setUser(user: User) {
     this.user = user;
@@ -52,11 +54,11 @@ subscriptions : Subscription[] = [];
   }
   updateUser(user: User) {
     this.user.id = user.id;
-    if(user.username != undefined) this.user.username = user.username;
-    if(user.avatar != undefined) this.user.avatar = user.avatar;
-    if(user.mail != undefined) this.user.mail = user.mail;
-    if(user.roles != undefined) this.user.roles = user.roles;
-    if(user.token != undefined) this.user.token = user.token;
+    if (user.username != undefined) this.user.username = user.username;
+    if (user.avatar != undefined) this.user.avatar = user.avatar;
+    if (user.mail != undefined) this.user.mail = user.mail;
+    if (user.roles != undefined) this.user.roles = user.roles;
+    if (user.token != undefined) this.user.token = user.token;
     this.user$.next(this.user);
   }
   setId(id: string) {
@@ -83,20 +85,37 @@ subscriptions : Subscription[] = [];
     this.user.roles.push(role);
     this.user$.next(this.user);
   }
-  addToken(token: string) {
+  setToken(token: string) {
     this.user.token = token;
     this.user$.next(this.user);
   }
 
-  login(username: string, password: string) : string {
-    this.setUser(this.auth.login(username, password));
+  login(provider: string, username?: string, password?: string): string {
+    switch (provider) {
+      case this.authGoogle.getProvider(): {
+        this.authGoogle.login();
+        break;
+      }
+      default: {
+        if (username != undefined && password != undefined) {
+          this.setUser(this.auth.login(username, password));
+        }
+      }
+    }
     return 'OK'; //TODO
   }
 
   logout() {
+    switch (this.getProvider()) {
+      case this.authGoogle.getProvider(): {
+        this.authGoogle.logout();
+        break;
+      }
+      default: {
+      }
+    }
     this.user = this.userDefault;
     this.user$.next(this.user);
-    this.logoutWithGoogle();
   }
 
   signup(username: string, mail: string, password: string): string {
@@ -108,19 +127,32 @@ subscriptions : Subscription[] = [];
     return !(this.user == undefined || this.user.token == undefined);
   }
 
-
-  //TODO GOOGLE
-  loginWithGoogle(): void {
-    this.authServiceGoogle.signIn(GoogleLoginProvider.PROVIDER_ID);
+  getToken(): string | undefined {
+    if (this.user.token != undefined) {
+      return this.user.token;
+    } else {
+      return undefined;
+    }
   }
-  logoutWithGoogle(): void {
-    this.authServiceGoogle.signOut();
+  getProvider(): string {
+    return this.user.provider;
   }
-  refreshTokenGoogle(): void {
-    this.authServiceGoogle.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+  refreshToken(): void {
+    let token = this.getToken();
+    if (token != undefined) {
+      switch (this.getProvider()) {
+        case this.authGoogle.getProvider(): {
+          this.authGoogle.refreshToken();
+          break;
+        }
+        default: {
+          this.setToken(this.auth.refreshToken(token));
+          this.user$.next(this.user);
+        }
+      }
+    }
   }
-
   destroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
-   }
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
 }

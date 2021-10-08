@@ -1,6 +1,7 @@
 <nav
   class="
-    navbar navbar-expand navbar-dark sticky-top
+    navbar navbar-expand navbar-dark
+    sticky-top
     bg-dark
     d-flex
     justify-content-between
@@ -22,7 +23,11 @@
     </li>
   </ul>
 
-  <ul class="navbar-nav ml-auto" routerLinkActive="active" *ngIf="!isLoggedIn()">
+  <ul
+    class="navbar-nav ml-auto"
+    routerLinkActive="active"
+    *ngIf="!isLoggedIn()"
+  >
     <li class="nav-item">
       <a href="/signup" class="nav-link" routerLink="signup">Sign Up</a>
     </li>
@@ -42,15 +47,23 @@
         aria-expanded="false"
       >
         <img
-        src= "{{user.avatar }}"
-        width="30"
-        height="30"
-        class="d-inline-block align-center rounded"
-        alt=""
-        *ngIf="this.user != undefined && this.user.avatar != undefined "/>
+          src="{{ user.avatar }}"
+          width="30"
+          height="30"
+          class="d-inline-block align-center rounded"
+          alt=""
+          *ngIf="this.user != undefined && this.user.avatar != undefined"
+        />
         {{ this.user!.username }}
       </a>
-      <ul class="dropdown-menu  dropdown-menu-end dropdown-menu-dark  border-dark bg-dark" aria-labelledby="navbarDropdown">
+      <ul
+        class="
+          dropdown-menu dropdown-menu-end dropdown-menu-dark
+          border-dark
+          bg-dark
+        "
+        aria-labelledby="navbarDropdown"
+      >
         <li>
           <a href="/profile" class="dropdown-item" routerLink="profile"
             >Profile</a

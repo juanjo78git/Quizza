@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
+import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 
 // TODO: Cambiar API
 //const AUTH_API = 'http://localhost:8080/api/auth/';
@@ -15,20 +16,20 @@ const httpOptions = {
 })
 //TODO
 export class AuthService {
+  private readonly provider: string = 'NONE';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
-
-  login(username: string, password: string) : User {
+  login(username: string, password: string): User {
     //    return this.http.post(AUTH_API + 'login', {username, password, }, httpOptions);
     let user: User;
     user = {
-      id: "0",
+      id: '0',
       username: username,
-      avatar: "assets/user.png",
-      roles: ["DEFAULT_ROLE"],
-      token: password
+      avatar: 'assets/user.png',
+      roles: ['DEFAULT_ROLE'],
+      token: password,
+      provider: this.provider,
     };
     return user;
   }
@@ -38,13 +39,23 @@ export class AuthService {
 
     let user: User;
     user = {
-      id: "0",
+      id: '0',
       username: username,
       mail: mail,
-      avatar: "assets/user.png",
-      roles: ["DEFAULT_ROLE"],
-      token: password
+      avatar: 'assets/user.png',
+      roles: ['DEFAULT_ROLE'],
+      token: password,
+      provider: this.provider,
     };
     return user;
+  }
+
+  refreshToken(token: string): string {
+    //    return this.http.post(AUTH_API + 'refreshToken', {token, }, httpOptions);
+    return token;
+  }
+
+  getProvider(): string {
+    return this.provider;
   }
 }

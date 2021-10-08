@@ -1,6 +1,6 @@
-<div class="col-md-12 mx-auto mt-3" style="max-width:400px" >
+<div class="col-md-12 mx-auto mt-3" style="max-width: 400px">
   <div class="card mx-3">
-    <img src="assets/user.png" class="rounded-circle mx-auto d-block p-3"  />
+    <img src="assets/user.png" class="rounded-circle mx-auto d-block p-3" />
     <form
       *ngIf="!isLoggedIn()"
       name="form"
@@ -57,7 +57,7 @@
         <div
           class="alert alert-danger"
           role="alert"
-          *ngIf="f.submitted && (errorMessage != '')"
+          *ngIf="f.submitted && errorMessage != ''"
         >
           Login failed: {{ errorMessage }}
         </div>
@@ -65,13 +65,17 @@
     </form>
     <div class="text-center m-4" *ngIf="!isLoggedIn()">
       <p class="h2">--- OR ---</p>
-      <p >Login with... </p>
-      <button (click)="loginWithGoogle()" class="btn btn-outline-danger btn-block">Google</button>
-      </div>
+      <p>Login with...</p>
+      <button
+        (click)="loginWithGoogle()"
+        class="btn btn-outline-danger btn-block"
+      >
+        Google
+      </button>
     </div>
+  </div>
 
-    <div class="alert alert-success" *ngIf="isLoggedIn()">
-      Logged in as {{ user!.username }}.
-    </div>
+  <div class="alert alert-success" *ngIf="isLoggedIn()">
+    Logged in as {{ user!.username }}.
+  </div>
 </div>
-
