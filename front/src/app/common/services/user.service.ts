@@ -2,8 +2,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { AuthService } from './auth.service';
+<<<<<<< HEAD
 import { SocialAuthService } from 'angularx-social-login';
 import { AuthGoogleService } from './auth-google.service';
+=======
+import {
+  GoogleLoginProvider,
+  SocialAuthService,
+  SocialUser,
+} from 'angularx-social-login';
+>>>>>>> 2f5fcc061499ea4039a90b8bbf199fde06114361
 @Injectable({
   providedIn: 'root',
 })
@@ -14,18 +22,31 @@ export class UserService {
     mail: 'name@domain',
     avatar: 'assets/user.png',
     roles: ['DEFAULT_ROLE'],
+<<<<<<< HEAD
     provider: this.auth.getProvider(),
     token: undefined,
+=======
+>>>>>>> 2f5fcc061499ea4039a90b8bbf199fde06114361
   };
   private user: User = this.userDefault;
 
   private user$: BehaviorSubject<User>;
   subscriptions: Subscription[] = [];
 
+<<<<<<< HEAD
   constructor(
     private auth: AuthService,
     private authServiceGoogle: SocialAuthService,
     private authGoogle: AuthGoogleService
+=======
+  private user$: BehaviorSubject<User>;
+  subscriptions: Subscription[] = [];
+
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService,
+    private authServiceGoogle: SocialAuthService
+>>>>>>> 2f5fcc061499ea4039a90b8bbf199fde06114361
   ) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);

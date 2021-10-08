@@ -1,4 +1,8 @@
-<div class="col-md-12 mx-auto mt-3" style="max-width: 400px">
+<div
+  class="col-md-12 mx-auto mt-3"
+  style="max-width: 400px"
+  *ngIf="!isLoggedIn()"
+>
   <div class="card mx-3">
     <img src="assets/user.png" class="rounded-circle mx-auto d-block p-3" />
     <form
@@ -104,9 +108,9 @@
         Signup failed!<br />{{ errorMessage }}
       </div>
     </form>
-
-    <div class="alert alert-success" *ngIf="isLoggedIn()">
-      Your registration is successful!
-    </div>
   </div>
+</div>
+
+<div class="alert alert-success m-5" *ngIf="isLoggedIn()">
+  Your registration is successful!
 </div>
