@@ -31,7 +31,7 @@ export class UserService {
     private authGoogle: AuthGoogleService,
     private authFacebook: AuthFacebookService,
     private authAmazon: AuthAmazonService,
-    private authMicrosoft: AuthMicrosoftService,
+    private authMicrosoft: AuthMicrosoftService
   ) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);

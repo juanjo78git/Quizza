@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MicrosoftLoginProvider, SocialAuthService } from 'angularx-social-login';
+import {
+  MicrosoftLoginProvider,
+  SocialAuthService,
+} from 'angularx-social-login';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthMicrosoftService {
   private readonly provider: string = 'MICROSOFT';
