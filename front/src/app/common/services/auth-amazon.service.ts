@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { AmazonLoginProvider, SocialAuthService } from 'angularx-social-login';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthAmazonService {
-
   private readonly provider: string = 'AMAZON';
 
   constructor(private authService: SocialAuthService) {}

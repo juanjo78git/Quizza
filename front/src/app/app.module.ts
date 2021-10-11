@@ -78,11 +78,16 @@ import { AuthInterceptor } from './common/helpers/auth.interceptor';
           },
           {
             id: AmazonLoginProvider.PROVIDER_ID,
-            provider: new AmazonLoginProvider('amzn1.application-oa2-client.4f09be24512c473291d0d0b6c56fc8fd'),
+            provider: new AmazonLoginProvider(
+              'amzn1.application-oa2-client.4f09be24512c473291d0d0b6c56fc8fd'
+            ),
           },
-          {  //TODO: Change ID
+          {
+            //TODO: Change ID
             id: MicrosoftLoginProvider.PROVIDER_ID,
-            provider: new MicrosoftLoginProvider('0611ccc3-9521-45b6-b432-039852002705'),
+            provider: new MicrosoftLoginProvider(
+              '0611ccc3-9521-45b6-b432-039852002705'
+            ),
           },
         ],
       } as SocialAuthServiceConfig,

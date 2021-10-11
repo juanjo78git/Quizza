@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  GoogleLoginProvider,
-  SocialAuthService,
-} from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root',
