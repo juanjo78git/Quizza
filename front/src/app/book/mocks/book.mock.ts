@@ -81,13 +81,15 @@ export const BOOK: Book[] = [
             stats: 20,
           },
         ],
-        redirect: [{
-          id: 1,
-          bookId: 1,
-          bookPageId: 3,
-          AnswerId: 1,
-          goPage: 2
-        }]
+        redirect: [
+          {
+            id: 1,
+            bookId: 1,
+            bookPageId: 3,
+            AnswerId: 1,
+            goPage: 2,
+          },
+        ],
       },
       {
         id: 2,
@@ -127,7 +129,8 @@ export const BOOK: Book[] = [
             id: 1,
             bookPageId: 3,
             bookId: 1,
-            answer: 'Respuesta3 1_2 (Ya no pasarás por Pagina 1, te madará a la 2)',
+            answer:
+              'Respuesta3 1_2 (Ya no pasarás por Pagina 1, te madará a la 2)',
             goPage: 2,
             stats: 33,
           },

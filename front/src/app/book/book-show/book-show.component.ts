@@ -4,6 +4,7 @@ import { BookService } from '../services/book.service';
 import { Book, BookPage } from '../models/book.model';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { BookmarkHistoryService } from '../services/bookmark-history.service';
 
 @Component({
   selector: 'app-book-show',
@@ -15,12 +16,14 @@ export class BookShowComponent implements OnInit {
   bookId: number;
   private bookPageId: number;
   private showStats: boolean = false;
+  private showBookmarkHistory: boolean = false;
   paramsSubscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
-    private notifier: NotificationService
+    private notifier: NotificationService,
+    private bookmarkHistory: BookmarkHistoryService
   ) {
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     this.bookId = this.route.snapshot.params.bookId;
@@ -32,6 +35,7 @@ export class BookShowComponent implements OnInit {
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     this.bookPageId = 1;
     this.bookService.setCurrentPage(this.bookPageId);
+    this.bookmarkHistory.setBookmarkHistory();
 
     this.paramsSubscription = this.route.paramMap.subscribe((params) => {
       let bookId = params.get('bookId');
@@ -64,5 +68,12 @@ export class BookShowComponent implements OnInit {
   }
   setStats(showStats: boolean) {
     this.showStats = showStats;
+  }
+
+  getBookmarkHistory(): boolean {
+    return this.showBookmarkHistory;
+  }
+  setBookmarkHistory(showBookmarkHistory: boolean) {
+    this.showBookmarkHistory = showBookmarkHistory;
   }
 }

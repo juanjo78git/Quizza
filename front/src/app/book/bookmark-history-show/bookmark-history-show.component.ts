@@ -8,31 +8,30 @@ import { BookmarkHistoryService } from '../services/bookmark-history.service';
 @Component({
   selector: 'app-bookmark-history-show',
   templateUrl: './bookmark-history-show.component.html',
-  styleUrls: ['./bookmark-history-show.component.css']
+  styleUrls: ['./bookmark-history-show.component.css'],
 })
 export class BookmarkHistoryShowComponent implements OnInit {
-
   constructor(
     private bookcase: BookcaseService,
     private book: BookService,
     private notifications: NotificationService,
-    private bookmarkHistory: BookmarkHistoryService) { }
+    private bookmarkHistory: BookmarkHistoryService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getBookmarkHistory(): BookmarkHistory[] {
     return this.bookmarkHistory.getBookmarkHistory();
   }
 
-
   getAnswer(bookPageId: number, answer: number | undefined): string {
-
-    let answerResult = this.book.getAnswers(bookPageId).find((element) => element.id == answer);
+    let answerResult = this.book
+      .getAnswers(bookPageId)
+      .find((element) => element.id == answer);
     if (answerResult != undefined) {
       return answerResult.answer;
     } else {
-      return "None"
+      return 'None';
     }
   }
   getBookpage(bookPageId: number): string {
@@ -42,5 +41,4 @@ export class BookmarkHistoryShowComponent implements OnInit {
   getBook(bookId: number): string {
     return this.bookcase.getBook(bookId).title;
   }
-
 }

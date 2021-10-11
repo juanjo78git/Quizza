@@ -53,7 +53,10 @@ export class BookpageShowComponent implements OnInit {
   }
   runAnswer() {
     this.setStats(false);
-    this.bookService.setAnswerSelected(this.answerSelected,this.bookmarkHistory);
+    this.bookService.setAnswerSelected(
+      this.answerSelected,
+      this.bookmarkHistory
+    );
   }
   getAnswerSelected(): Answer {
     return this.answerSelected;

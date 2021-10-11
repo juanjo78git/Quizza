@@ -8,9 +8,8 @@ describe('BookmarkHistoryShowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookmarkHistoryShowComponent ]
-    })
-    .compileComponents();
+      declarations: [BookmarkHistoryShowComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

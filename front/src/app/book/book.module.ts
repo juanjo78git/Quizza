@@ -8,7 +8,12 @@ import { RouterModule } from '@angular/router';
 import { BookmarkHistoryShowComponent } from './bookmark-history-show/bookmark-history-show.component';
 
 @NgModule({
-  declarations: [BookShowComponent, BookpageShowComponent, BookListComponent, BookmarkHistoryShowComponent],
+  declarations: [
+    BookShowComponent,
+    BookpageShowComponent,
+    BookListComponent,
+    BookmarkHistoryShowComponent,
+  ],
   imports: [CommonModule, RouterModule],
   exports: [BookShowComponent, BookpageShowComponent, BookListComponent],
   providers: [BookService],

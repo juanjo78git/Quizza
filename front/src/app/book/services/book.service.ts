@@ -80,13 +80,22 @@ export class BookService {
     }
   }
 
-  setAnswerSelected(answer: Answer, bookmarkHistory :BookmarkHistoryService): BookPage {
+  setAnswerSelected(
+    answer: Answer,
+    bookmarkHistory: BookmarkHistoryService
+  ): BookPage {
     let bookPage = this.getPage(answer.goPage);
     let bookPageId = bookPage.id;
     if (bookPage.redirect != undefined) {
-      bookPage.redirect.forEach(data => {
-        if (bookmarkHistory.existsOption(data.bookId, data.bookPageId, data.AnswerId)) {
-            bookPageId = data.goPage;
+      bookPage.redirect.forEach((data) => {
+        if (
+          bookmarkHistory.existsOption(
+            data.bookId,
+            data.bookPageId,
+            data.AnswerId
+          )
+        ) {
+          bookPageId = data.goPage;
         }
       });
     }
@@ -109,5 +118,4 @@ export class BookService {
     this.deletePage(bookPageId);
     this.insertNewPage(bookPage);
   }
-
 }
