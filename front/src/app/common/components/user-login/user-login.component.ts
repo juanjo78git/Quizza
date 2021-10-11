@@ -49,4 +49,10 @@ export class UserLoginComponent implements OnInit {
   loginWithFacebook() {
     this.userService.login('FACEBOOK');
   }
+  loginWithAmazon() {
+    this.userService.login('AMAZON');
+  }
+  loginWithMicrosoft() {
+    this.userService.login('MICROSOFT');
+  }
 }

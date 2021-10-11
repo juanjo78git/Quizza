@@ -5,6 +5,8 @@ import { AuthService } from './auth.service';
 import { SocialAuthService } from 'angularx-social-login';
 import { AuthGoogleService } from './auth-google.service';
 import { AuthFacebookService } from './auth-facebook.service';
+import { AuthAmazonService } from './auth-amazon.service';
+import { AuthMicrosoftService } from './auth-microsoft.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,12 +29,16 @@ export class UserService {
     private auth: AuthService,
     private authService: SocialAuthService,
     private authGoogle: AuthGoogleService,
-    private authFacebook: AuthFacebookService
+    private authFacebook: AuthFacebookService,
+    private authAmazon: AuthAmazonService,
+    private authMicrosoft: AuthMicrosoftService,
   ) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);
     // TODO: GOOGLE - Meter en AuthGoogleService
     // TODO: FACEBOOK - Meter en AuthFacebookService
+    // TODO: AMAZON - Meter en AuthAmazonService
+    // TODO: MICROSOFT - Meter en AuthMicrosoftService
     this.subscriptions.push(
       this.authService.authState.subscribe((userSocial) => {
         if (userSocial != null) {
@@ -106,6 +112,14 @@ export class UserService {
         this.authFacebook.login();
         break;
       }
+      case this.authAmazon.getProvider(): {
+        this.authAmazon.login();
+        break;
+      }
+      case this.authMicrosoft.getProvider(): {
+        this.authMicrosoft.login();
+        break;
+      }
       default: {
         if (username != undefined && password != undefined) {
           this.setUser(this.auth.login(username, password));
@@ -123,6 +137,14 @@ export class UserService {
       }
       case this.authFacebook.getProvider(): {
         this.authFacebook.logout();
+        break;
+      }
+      case this.authAmazon.getProvider(): {
+        this.authAmazon.logout();
+        break;
+      }
+      case this.authMicrosoft.getProvider(): {
+        this.authMicrosoft.logout();
         break;
       }
       default: {
@@ -145,6 +167,14 @@ export class UserService {
         break;
       }
       case this.authFacebook.getProvider(): {
+        loggedIn = !(this.user == undefined || this.user.token == undefined);
+        break;
+      }
+      case this.authAmazon.getProvider(): {
+        loggedIn = !(this.user == undefined || this.user.token == undefined);
+        break;
+      }
+      case this.authMicrosoft.getProvider(): {
         loggedIn = !(this.user == undefined || this.user.token == undefined);
         break;
       }
@@ -175,6 +205,14 @@ export class UserService {
         }
         case this.authFacebook.getProvider(): {
           this.authFacebook.refreshToken();
+          break;
+        }
+        case this.authAmazon.getProvider(): {
+          this.authAmazon.refreshToken();
+          break;
+        }
+        case this.authMicrosoft.getProvider(): {
+          this.authMicrosoft.refreshToken();
           break;
         }
         default: {
