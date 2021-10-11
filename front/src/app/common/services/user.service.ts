@@ -65,6 +65,9 @@ export class UserService {
     this.user.id = id;
     this.user$.next(this.user);
   }
+  getId(): string {
+    return this.user.id;
+  }
   setUsername(username: string) {
     this.user.username = username;
     this.user$.next(this.user);

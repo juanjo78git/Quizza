@@ -5,9 +5,10 @@ import { BookShowComponent } from './book-show/book-show.component';
 import { BookService } from './services/book.service';
 import { BookListComponent } from './book-list/book-list.component';
 import { RouterModule } from '@angular/router';
+import { BookmarkHistoryShowComponent } from './bookmark-history-show/bookmark-history-show.component';
 
 @NgModule({
-  declarations: [BookShowComponent, BookpageShowComponent, BookListComponent],
+  declarations: [BookShowComponent, BookpageShowComponent, BookListComponent, BookmarkHistoryShowComponent],
   imports: [CommonModule, RouterModule],
   exports: [BookShowComponent, BookpageShowComponent, BookListComponent],
   providers: [BookService],

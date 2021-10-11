@@ -15,6 +15,7 @@ export const BOOK: Book[] = [
         id: 1,
         bookId: 0,
         type: 'end',
+        title: 'Página 1',
         text: 'First Page',
         mediaType: 'img',
         mediaURL: 'assets/book.svg',
@@ -42,6 +43,7 @@ export const BOOK: Book[] = [
         id: 1,
         bookId: 1,
         type: 'choose',
+        title: 'Página 1',
         text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat ipsam at natus ad? Consequatur dolores deleniti quia, maiores dolore adipisci harum. Molestias itaque delectus deleniti officiis corporis quos amet deserunt.',
         question:
           'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat ipsam at natus ad',
@@ -79,11 +81,19 @@ export const BOOK: Book[] = [
             stats: 20,
           },
         ],
+        redirect: [{
+          id: 1,
+          bookId: 1,
+          bookPageId: 3,
+          AnswerId: 1,
+          goPage: 2
+        }]
       },
       {
         id: 2,
         bookId: 1,
         type: 'choose',
+        title: 'Página 2',
         text: 'Bla bla bla',
         question: 'Pregunta 2',
         answers: [
@@ -109,6 +119,7 @@ export const BOOK: Book[] = [
         id: 3,
         bookId: 1,
         type: 'choose',
+        title: 'Página 3',
         text: 'Bla bla bla',
         question: 'Pregunta 3',
         answers: [
@@ -116,7 +127,7 @@ export const BOOK: Book[] = [
             id: 1,
             bookPageId: 3,
             bookId: 1,
-            answer: 'Respuesta3 1_2',
+            answer: 'Respuesta3 1_2 (Ya no pasarás por Pagina 1, te madará a la 2)',
             goPage: 2,
             stats: 33,
           },
@@ -142,6 +153,7 @@ export const BOOK: Book[] = [
         id: 4,
         bookId: 1,
         type: 'choose',
+        title: 'Página 4',
         text: 'Bla bla bla',
         question: 'Pregunta 4',
         answers: [
@@ -167,6 +179,7 @@ export const BOOK: Book[] = [
       {
         id: 1,
         bookId: 2,
+        title: 'Página 1',
         type: 'choose',
         text: 'Lorem.',
         mediaType: 'video',

@@ -1,0 +1,21 @@
+<h2>Bookmark History</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Book</th>
+      <th scope="col">Order</th>
+      <th scope="col">BookPage</th>
+      <th scope="col">Answer</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let item of getBookmarkHistory()">
+    <tr>
+      <th scope="row">{{ item.bookId }} - {{ getBook(item.bookId) }}</th>
+      <td>{{ item.id }}</td>
+      <td>{{ item.bookPageId }} - {{ getBookpage(item.bookPageId) }}</td>
+      <td>{{ item.AnswerId }} - {{ getAnswer(item.bookPageId, item.AnswerId) }}</td>
+    </tr>
+  </tbody>
+</table>
+

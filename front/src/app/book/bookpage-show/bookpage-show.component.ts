@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BookPage, Answer } from '../models/book.model';
 import { BookService } from '../services/book.service';
 import { NotificationService } from '../../common/services/notification.service';
+import { BookmarkHistoryService } from '../services/bookmark-history.service';
 
 @Component({
   selector: 'app-bookpage-show',
@@ -27,7 +28,8 @@ export class BookpageShowComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    private notifications: NotificationService
+    private notifications: NotificationService,
+    private bookmarkHistory: BookmarkHistoryService
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class BookpageShowComponent implements OnInit {
   }
   runAnswer() {
     this.setStats(false);
-    this.bookService.setAnswerSelected(this.answerSelected);
+    this.bookService.setAnswerSelected(this.answerSelected,this.bookmarkHistory);
   }
   getAnswerSelected(): Answer {
     return this.answerSelected;

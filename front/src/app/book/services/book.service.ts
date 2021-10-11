@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Book, BookPage, Answer } from '../models/book.model';
 import { BookcaseService } from '../services/bookcase.service';
+import { BookmarkHistoryService } from './bookmark-history.service';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,9 @@ export class BookService {
     }
     return bookPage;
   }
+  getBookId(): number {
+    return this.book.id;
+  }
   getCurrentAnswers(): Answer[] {
     return this.getCurrentPage().answers;
   }
@@ -76,8 +80,18 @@ export class BookService {
     }
   }
 
-  setAnswerSelected(answer: Answer): BookPage {
-    this.setCurrentPage(answer.goPage);
+  setAnswerSelected(answer: Answer, bookmarkHistory :BookmarkHistoryService): BookPage {
+    let bookPage = this.getPage(answer.goPage);
+    let bookPageId = bookPage.id;
+    if (bookPage.redirect != undefined) {
+      bookPage.redirect.forEach(data => {
+        if (bookmarkHistory.existsOption(data.bookId, data.bookPageId, data.AnswerId)) {
+            bookPageId = data.goPage;
+        }
+      });
+    }
+    this.setCurrentPage(bookPageId);
+    bookmarkHistory.addBookmarkHistory(answer);
     return this.getCurrentPage();
   }
 
@@ -95,4 +109,5 @@ export class BookService {
     this.deletePage(bookPageId);
     this.insertNewPage(bookPage);
   }
+
 }

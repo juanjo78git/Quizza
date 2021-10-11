@@ -10,12 +10,14 @@ export interface Answer {
 export interface BookPage {
   id: number;
   bookId: number;
+  title: string;
   type: string;
   mediaType?: string;
   mediaURL?: string;
   text: string;
   question?: string;
   answers: Answer[];
+  redirect?: BookPageRedirect[];
 }
 
 export interface Book {
@@ -27,4 +29,20 @@ export interface Book {
   mediaType?: string;
   mediaURL?: string;
   pages: BookPage[];
+}
+
+export interface BookPageRedirect {
+  id: number;
+  bookId: number;
+  bookPageId: number;
+  AnswerId?: number;
+  goPage: number;
+}
+
+export interface BookmarkHistory {
+  id: number;
+  userId: string;
+  bookId: number;
+  bookPageId: number;
+  AnswerId?: number;
 }
