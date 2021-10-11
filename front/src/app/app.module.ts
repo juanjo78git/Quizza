@@ -72,10 +72,8 @@ import { AuthInterceptor } from './common/helpers/auth.interceptor';
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider(
-              '574050800586055'
-            )
-          }
+            provider: new FacebookLoginProvider('574050800586055'),
+          },
         ],
       } as SocialAuthServiceConfig,
     },

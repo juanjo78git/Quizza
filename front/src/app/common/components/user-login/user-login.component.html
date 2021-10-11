@@ -54,7 +54,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group  m-4 d-grid gap-2">
+      <div class="form-group m-4 d-grid gap-2">
         <button class="btn btn-primary btn-block">Login</button>
       </div>
       <div class="form-group">
@@ -67,7 +67,7 @@
         </div>
       </div>
     </form>
-    <div class="text-center  m-4 d-grid gap-2" *ngIf="!isLoggedIn()">
+    <div class="text-center m-4 d-grid gap-2" *ngIf="!isLoggedIn()">
       <p class="h2">--- OR ---</p>
       <p>Login with...</p>
       <button
@@ -77,11 +77,11 @@
         Google
       </button>
       <button
-      (click)="loginWithFacebook()"
-      class="btn btn-outline-primary btn-block"
-    >
-      Facebook
-    </button>
+        (click)="loginWithFacebook()"
+        class="btn btn-outline-primary btn-block"
+      >
+        Facebook
+      </button>
     </div>
   </div>
 </div>

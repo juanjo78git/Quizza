@@ -5,14 +5,13 @@ import {
   SocialUser,
 } from 'angularx-social-login';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthFacebookService {
   private readonly provider: string = 'FACEBOOK';
   userFacebook?: SocialUser;
 
-  constructor(private authServiceGoogle: SocialAuthService) { }
-
+  constructor(private authServiceGoogle: SocialAuthService) {}
 
   login(): void {
     this.authServiceGoogle.signIn(FacebookLoginProvider.PROVIDER_ID);
