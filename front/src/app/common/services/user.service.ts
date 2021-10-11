@@ -7,6 +7,7 @@ import { AuthGoogleService } from './auth-google.service';
 import { AuthFacebookService } from './auth-facebook.service';
 import { AuthAmazonService } from './auth-amazon.service';
 import { AuthMicrosoftService } from './auth-microsoft.service';
+import { NotificationService } from './notification.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,7 +32,8 @@ export class UserService {
     private authGoogle: AuthGoogleService,
     private authFacebook: AuthFacebookService,
     private authAmazon: AuthAmazonService,
-    private authMicrosoft: AuthMicrosoftService
+    private authMicrosoft: AuthMicrosoftService,
+    private notifier: NotificationService,
   ) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);
@@ -40,7 +42,8 @@ export class UserService {
     // TODO: AMAZON - Meter en AuthAmazonService
     // TODO: MICROSOFT - Meter en AuthMicrosoftService
     this.subscriptions.push(
-      this.authService.authState.subscribe((userSocial) => {
+      this.authService.authState.subscribe({
+        next: (userSocial) => {
         if (userSocial != null) {
           this.user.avatar = userSocial.photoUrl;
           this.user.username = userSocial.name;
@@ -50,8 +53,13 @@ export class UserService {
           this.user.token = userSocial.authToken;
           this.user$.next(this.user);
         }
-      })
-    );
+      },
+      error: (e) =>{
+        notifier.showError('Error login. ' + e);
+        this.user = this.userDefault;
+        this.user$.next(this.user);
+      }
+      }));
   }
 
   getUser(): Observable<User> {
