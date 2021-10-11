@@ -21,8 +21,9 @@ import { HomeComponent } from './common/components/home/home.component';
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
 } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
 import { AuthInterceptor } from './common/helpers/auth.interceptor';
 
 @NgModule({
@@ -69,6 +70,12 @@ import { AuthInterceptor } from './common/helpers/auth.interceptor';
               '283360580524-4r5c2ivdepbdcdgfp0387joqgt828t9q.apps.googleusercontent.com'
             ),
           },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '574050800586055'
+            )
+          }
         ],
       } as SocialAuthServiceConfig,
     },

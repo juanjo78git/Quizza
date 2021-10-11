@@ -30,6 +30,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   isLoggedIn(): boolean {
-    return !(this.user == undefined || this.user.token == undefined);
+    return this.userService.isLoggedIn();
   }
 }

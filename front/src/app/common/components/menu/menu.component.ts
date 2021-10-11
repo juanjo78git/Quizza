@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
   }
 
   isLoggedIn(): boolean {
-    return !(this.user == undefined || this.user.token == undefined);
+    return this.userService.isLoggedIn();
   }
 
   logout(): void {

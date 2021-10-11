@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import { AuthService } from './auth.service';
 import { SocialAuthService } from 'angularx-social-login';
 import { AuthGoogleService } from './auth-google.service';
+import { AuthFacebookService } from './auth-facebook.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -24,21 +25,23 @@ export class UserService {
 
   constructor(
     private auth: AuthService,
-    private authServiceGoogle: SocialAuthService,
-    private authGoogle: AuthGoogleService
+    private authService: SocialAuthService,
+    private authGoogle: AuthGoogleService,
+    private authFacebook: AuthFacebookService
   ) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);
     // TODO: GOOGLE - Meter en AuthGoogleService
+    // TODO: FACEBOOK - Meter en AuthFacebookService
     this.subscriptions.push(
-      this.authServiceGoogle.authState.subscribe((userGoogle) => {
-        if (userGoogle != null) {
-          this.user.avatar = userGoogle.photoUrl;
-          this.user.username = userGoogle.name;
-          this.user.mail = userGoogle.email;
-          this.user.id = userGoogle.id;
-          this.user.provider = 'GOOGLE';
-          this.user.token = userGoogle.idToken;
+      this.authService.authState.subscribe((userSocial) => {
+        if (userSocial != null) {
+          this.user.avatar = userSocial.photoUrl;
+          this.user.username = userSocial.name;
+          this.user.mail = userSocial.email;
+          this.user.id = userSocial.id;
+          this.user.provider = userSocial.provider;
+          this.user.token = userSocial.authToken;
           this.user$.next(this.user);
         }
       })
@@ -99,6 +102,10 @@ export class UserService {
         this.authGoogle.login();
         break;
       }
+      case this.authFacebook.getProvider(): {
+        this.authFacebook.login();
+        break;
+      }
       default: {
         if (username != undefined && password != undefined) {
           this.setUser(this.auth.login(username, password));
@@ -114,6 +121,10 @@ export class UserService {
         this.authGoogle.logout();
         break;
       }
+      case this.authFacebook.getProvider(): {
+        this.authFacebook.logout();
+        break;
+      }
       default: {
       }
     }
@@ -127,7 +138,21 @@ export class UserService {
   }
 
   isLoggedIn(): boolean {
-    return !(this.user == undefined || this.user.token == undefined);
+    let loggedIn: boolean = true;
+    switch (this.user$.getValue().provider) {
+      case this.authGoogle.getProvider(): {
+        loggedIn = !(this.user == undefined || this.user.token == undefined);
+        break;
+      }
+      case this.authFacebook.getProvider(): {
+        loggedIn = !(this.user == undefined || this.user.token == undefined);
+        break;
+      }
+      default: {
+        loggedIn = !(this.user == undefined || this.user.token == undefined);
+      }
+    }
+    return loggedIn;
   }
 
   getToken(): string | undefined {
@@ -146,6 +171,10 @@ export class UserService {
       switch (this.getProvider()) {
         case this.authGoogle.getProvider(): {
           this.authGoogle.refreshToken();
+          break;
+        }
+        case this.authFacebook.getProvider(): {
+          this.authFacebook.refreshToken();
           break;
         }
         default: {

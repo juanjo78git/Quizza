@@ -40,10 +40,13 @@ export class UserLoginComponent implements OnInit {
   }
 
   isLoggedIn(): boolean {
-    return !(this.user == undefined || this.user.token == undefined);
+    return this.userService.isLoggedIn();
   }
 
   loginWithGoogle() {
     this.userService.login('GOOGLE');
+  }
+  loginWithFacebook() {
+    this.userService.login('FACEBOOK');
   }
 }
