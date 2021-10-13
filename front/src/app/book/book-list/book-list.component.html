@@ -1,9 +1,7 @@
 <main class="container mt-5 mb-5">
   <section class="bookquiz">
     <div class="card" *ngFor="let item of getBooks()">
-      <h5 class="card-header text-center">{{ item.title }}</h5>
-      <div class="card-body">
-        <h5 class="card-title">{{ item.author }}</h5>
+      <div class="card-header">
         <img
           src="{{ item.mediaURL }}"
           width="100"
@@ -16,7 +14,28 @@
             item.mediaURL != undefined
           "
         />
+        <img
+          src="assets/book.svg"
+          width="100"
+          height="100"
+          class="card-img-top"
+          alt=""
+          *ngIf="
+            !(
+              item.mediaType != undefined &&
+              item.mediaType == 'img' &&
+              item.mediaURL != undefined
+            )
+          "
+        />
+        <h5 class="card-title text-center mb-2 mt-2">{{ item.title }}</h5>
+        <h6 class="card-subtitle text-muted">{{ item.author }}</h6>
+      </div>
+
+      <div class="card-body" style="overflow-y: auto">
         <p class="card-text">{{ item.description }}</p>
+      </div>
+      <div class="card-footer">
         <div class="d-flex justify-content-center">
           <a
             href="#"

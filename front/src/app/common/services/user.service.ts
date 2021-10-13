@@ -33,7 +33,7 @@ export class UserService {
     private authFacebook: AuthFacebookService,
     private authAmazon: AuthAmazonService,
     private authMicrosoft: AuthMicrosoftService,
-    private notifier: NotificationService,
+    private notifier: NotificationService
   ) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);
@@ -44,22 +44,23 @@ export class UserService {
     this.subscriptions.push(
       this.authService.authState.subscribe({
         next: (userSocial) => {
-        if (userSocial != null) {
-          this.user.avatar = userSocial.photoUrl;
-          this.user.username = userSocial.name;
-          this.user.mail = userSocial.email;
-          this.user.id = userSocial.id;
-          this.user.provider = userSocial.provider;
-          this.user.token = userSocial.authToken;
+          if (userSocial != null) {
+            this.user.avatar = userSocial.photoUrl;
+            this.user.username = userSocial.name;
+            this.user.mail = userSocial.email;
+            this.user.id = userSocial.id;
+            this.user.provider = userSocial.provider;
+            this.user.token = userSocial.authToken;
+            this.user$.next(this.user);
+          }
+        },
+        error: (e) => {
+          notifier.showError('Error login. ' + e);
+          this.user = this.userDefault;
           this.user$.next(this.user);
-        }
-      },
-      error: (e) =>{
-        notifier.showError('Error login. ' + e);
-        this.user = this.userDefault;
-        this.user$.next(this.user);
-      }
-      }));
+        },
+      })
+    );
   }
 
   getUser(): Observable<User> {

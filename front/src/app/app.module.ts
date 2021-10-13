@@ -92,7 +92,7 @@ import { AuthInterceptor } from './common/helpers/auth.interceptor';
         ],
         onError: (err) => {
           console.error(err);
-        }
+        },
       } as SocialAuthServiceConfig,
     },
   ],
