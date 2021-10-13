@@ -1,5 +1,7 @@
 <article class="card">
-  <div class="card-header text-center">{{ getPage().id }} - {{ getPage().title }}</div>
+  <div class="card-header text-center">
+    {{ getPage().id }} - {{ getPage().title }}
+  </div>
   <img
     src="{{ getPage().mediaURL }}"
     width="100"
@@ -51,9 +53,9 @@
         (click)="onSelectAnswer(item)"
         *ngFor="let item of getAnwers()"
       >
-        <span class="badge rounded-pill bg-warning align-middle"
-          >{{ item.id }}</span
-         >
+        <span class="badge rounded-pill bg-warning align-middle">{{
+          item.id
+        }}</span>
         <span class="px-2">{{ item.answer }}</span>
       </button>
     </div>
