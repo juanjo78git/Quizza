@@ -11,9 +11,23 @@ export class BookmarkHistoryService {
 
   constructor(private book: BookService, private user: UserService) {}
 
-  getBookmarkHistory(): BookmarkHistory[] {
-    return this.bookmarkHistory;
+  getBookmarkHistory(bookId?: number): BookmarkHistory[] {
+    let bookmarkFiltered: BookmarkHistory[];
+    if (bookId != undefined) {
+      bookmarkFiltered = this.bookmarkHistory.filter((data) => {
+        return data.bookId == bookId;
+      });
+    } else {
+      bookmarkFiltered = this.bookmarkHistory;
+    }
+    bookmarkFiltered = bookmarkFiltered.sort((a, b) => {
+      if (a.id < b.id) return -1;
+      else if (a.id > b.id) return 1;
+      return 0;
+    });
+    return bookmarkFiltered;
   }
+
   setBookmarkHistory(bookmarkHistory?: BookmarkHistory[]) {
     if (bookmarkHistory == undefined) {
       this.bookmarkHistory = [];

@@ -35,7 +35,8 @@ export class BookShowComponent implements OnInit {
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     this.bookPageId = 1;
     this.bookService.setCurrentPage(this.bookPageId);
-    this.bookmarkHistory.setBookmarkHistory();
+    //Borra el historico
+    //this.bookmarkHistory.setBookmarkHistory();
 
     this.paramsSubscription = this.route.paramMap.subscribe((params) => {
       let bookId = params.get('bookId');

@@ -31,8 +31,10 @@
       {{ role }}
     </li>
   </ul>
+  <br />
+  <app-bookmark-history-show></app-bookmark-history-show>
 </div>
 
 <ng-template #loggedOut>
-  Please <a href="/login" class="nav-link" routerLink="login">login</a>.
+  Please <a href="/login" routerLink="/login">login</a>.
 </ng-template>

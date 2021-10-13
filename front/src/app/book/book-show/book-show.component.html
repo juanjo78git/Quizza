@@ -27,6 +27,7 @@
   <section>
     <app-bookmark-history-show
       *ngIf="getBookmarkHistory()"
+      [bookId]="currentBook().id"
     ></app-bookmark-history-show>
   </section>
 </main>

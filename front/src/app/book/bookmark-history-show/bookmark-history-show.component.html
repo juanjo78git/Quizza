@@ -1,21 +1,27 @@
 <h2 class="text-center">Bookmark History</h2>
 <div class="">
-  <table class="table table-bordered table-hover table-sm">
+  <table class="table table-bordered table-hover">
     <thead class="thead-light">
       <tr>
-        <!--      <th scope="col">Book</th> -->
+        <th scope="col" *ngIf="bookId == undefined">Book</th>
         <th scope="col">Order</th>
         <th scope="col">BookPage</th>
         <th scope="col">Answer</th>
       </tr>
     </thead>
-    <tbody *ngFor="let item of getBookmarkHistory()">
+    <tbody *ngFor="let item of getBookmarkHistory(bookId)">
       <tr>
-        <!--      <th scope="row">{{ item.bookId }} - {{ getBook(item.bookId) }}</th> -->
+        <th scope="row" *ngIf="bookId == undefined">
+          {{ item.bookId }} - {{ getBookTitle(item.bookId) }}
+        </th>
         <th scope="row">{{ item.id }}</th>
-        <td>{{ item.bookPageId }} - {{ getBookpage(item.bookPageId) }}</td>
         <td>
-          {{ item.AnswerId }} - {{ getAnswer(item.bookPageId, item.AnswerId) }}
+          {{ item.bookPageId }} -
+          {{ getBookpageTitle(item.bookId, item.bookPageId) }}
+        </td>
+        <td>
+          {{ item.AnswerId }} -
+          {{ getAnswer(item.bookId, item.bookPageId, item.AnswerId) }}
         </td>
       </tr>
     </tbody>

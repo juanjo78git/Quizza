@@ -15,7 +15,12 @@ import { BookmarkHistoryShowComponent } from './bookmark-history-show/bookmark-h
     BookmarkHistoryShowComponent,
   ],
   imports: [CommonModule, RouterModule],
-  exports: [BookShowComponent, BookpageShowComponent, BookListComponent],
+  exports: [
+    BookShowComponent,
+    BookpageShowComponent,
+    BookListComponent,
+    BookmarkHistoryShowComponent,
+  ],
   providers: [BookService],
 })
 export class BookModule {}
