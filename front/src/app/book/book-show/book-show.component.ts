@@ -14,7 +14,8 @@ import { BookmarkHistoryService } from '../services/bookmark-history.service';
 export class BookShowComponent implements OnInit {
   @Input()
   bookId: number;
-  private bookPageId: number;
+  @Input()
+  private bookPageId: number = 1;
   private showStats: boolean = false;
   private showBookmarkHistory: boolean = false;
   paramsSubscription!: Subscription;
@@ -27,16 +28,24 @@ export class BookShowComponent implements OnInit {
   ) {
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     this.bookId = this.route.snapshot.params.bookId;
-    this.bookPageId = 1;
+    if (this.route.snapshot.params.bookPageId == undefined) {
+      this.bookPageId = 1;
+    } else {
+      this.bookPageId = this.route.snapshot.params.bookPageId;
+    }
   }
 
   ngOnInit(): void {
     this.bookId = this.route.snapshot.params.bookId;
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
-    this.bookPageId = 1;
+    if (this.route.snapshot.params.bookPageId == undefined) {
+      this.bookPageId = 1;
+      //Borra el historico
+      this.bookmarkHistory.setBookmarkHistory();
+    } else {
+      this.bookPageId = this.route.snapshot.params.bookPageId;
+    }
     this.bookService.setCurrentPage(this.bookPageId);
-    //Borra el historico
-    //this.bookmarkHistory.setBookmarkHistory();
 
     this.paramsSubscription = this.route.paramMap.subscribe((params) => {
       let bookId = params.get('bookId');

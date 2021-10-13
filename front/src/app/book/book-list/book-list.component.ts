@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../common/services/notification.service';
 import { Book } from '../models/book.model';
 import { BookcaseService } from '../services/bookcase.service';
+import { BookmarkHistoryService } from '../services/bookmark-history.service';
 
 @Component({
   selector: 'app-book-list',
@@ -13,7 +14,8 @@ export class BookListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private bookcaseService: BookcaseService,
-    private notifier: NotificationService
+    private notifier: NotificationService,
+    private bookmarkHistory: BookmarkHistoryService
   ) {}
 
   ngOnInit(): void {}
@@ -23,4 +25,8 @@ export class BookListComponent implements OnInit {
   }
 
   onSelectBook(book: Book) {}
+
+  getLastPage(bookId: number): number {
+    return this.bookmarkHistory.lastPage(bookId);
+  }
 }

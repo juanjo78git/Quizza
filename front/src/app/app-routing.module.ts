@@ -12,6 +12,7 @@ import { UserSignupComponent } from './common/components/user-signup/user-signup
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'book', component: BookListComponent },
+  { path: 'book/:bookId/show/:bookPageId', component: BookShowComponent },
   { path: 'book/:bookId/show', component: BookShowComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'signup', component: UserSignupComponent },

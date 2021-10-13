@@ -37,13 +37,20 @@
         <p class="card-text">{{ item.description }}</p>
       </div>
       <div class="card-footer">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-evenly">
           <a
             href="#"
-            class="btn btn-primary"
+            class="btn btn-primary btn-lg"
             [routerLink]="['/', 'book', item.id, 'show']"
             (click)="onSelectBook(item)"
-            >Read</a
+            >Read <span class="visually-hidden">First page</span></a
+          >
+          <a
+            href="#"
+            class="btn btn-outline-primary btn-lg"
+            [routerLink]="['/', 'book', item.id, 'show', getLastPage(item.id)]"
+            (click)="onSelectBook(item)"
+            >Bookmark <span class="visually-hidden">Furthest Page Read</span></a
           >
         </div>
       </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BookService } from './book.service';
 import { Book, BookPage, Answer, BookmarkHistory } from '../models/book.model';
 import { UserService } from 'src/app/common/services/user.service';
+import { BookcaseService } from '../services/bookcase.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,11 @@ import { UserService } from 'src/app/common/services/user.service';
 export class BookmarkHistoryService {
   private bookmarkHistory: BookmarkHistory[] = [];
 
-  constructor(private book: BookService, private user: UserService) {}
+  constructor(
+    private book: BookService,
+    private user: UserService,
+    private bookcase: BookcaseService
+  ) {}
 
   getBookmarkHistory(bookId?: number): BookmarkHistory[] {
     let bookmarkFiltered: BookmarkHistory[];
@@ -83,5 +88,50 @@ export class BookmarkHistoryService {
       }
     });
     return exists;
+  }
+
+  lastPage(bookId: number): number {
+    let bookmarkFiltered: BookmarkHistory[];
+    bookmarkFiltered = this.bookmarkHistory
+      .filter((data) => {
+        return data.bookId == bookId;
+      })
+      .sort((a, b) => {
+        if (a.id < b.id) return -1;
+        else if (a.id > b.id) return 1;
+        return 0;
+      });
+    if (bookmarkFiltered.length >= 1) {
+      return this.getAnswerDestination(
+        bookId,
+        bookmarkFiltered[bookmarkFiltered.length - 1].bookPageId,
+        bookmarkFiltered[bookmarkFiltered.length - 1].AnswerId
+      );
+    } else {
+      return 1;
+    }
+  }
+
+  getAnswerDestination(
+    bookId: number,
+    bookPageId: number,
+    answer: number | undefined
+  ): number {
+    let bookPage = this.bookcase.getBook(bookId).pages.find((data) => {
+      return data.id == bookPageId;
+    });
+    let answerResult: Answer | undefined;
+    if (bookPage != undefined) {
+      answerResult = bookPage.answers.find((data) => {
+        return data.id == answer;
+      });
+    } else {
+      return bookPageId;
+    }
+    if (answerResult != undefined) {
+      return answerResult.goPage;
+    } else {
+      return bookPageId;
+    }
   }
 }
