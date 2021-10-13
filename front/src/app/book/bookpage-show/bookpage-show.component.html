@@ -1,5 +1,5 @@
 <article class="card">
-  <div class="card-header text-center">{{ getPage().id }}</div>
+  <div class="card-header text-center">{{ getPage().id }} - {{ getPage().title }}</div>
   <img
     src="{{ getPage().mediaURL }}"
     width="100"
@@ -39,7 +39,7 @@
       {{ getPage().question }}
       <span class="card-title bi bi-question-circle-fill"></span>
     </p>
-    <div class="btn-group-vertical w-100" *ngIf="!getStats()">
+    <div class="btn-group-vertical w-100 m-0 p-0" *ngIf="!getStats()">
       <button
         type="button"
         class="
@@ -51,10 +51,10 @@
         (click)="onSelectAnswer(item)"
         *ngFor="let item of getAnwers()"
       >
-        <span class="badge rounded-pill bg-warning"
-          >{{ item.id }} ({{ item.goPage }})</span
-        >
-        {{ item.answer }}
+        <span class="badge rounded-pill bg-warning align-middle"
+          >{{ item.id }}</span
+         >
+        <span class="px-2">{{ item.answer }}</span>
       </button>
     </div>
     <div class="w-100" *ngIf="getStats()">
