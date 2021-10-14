@@ -8,6 +8,7 @@ import { AuthFacebookService } from './auth-facebook.service';
 import { AuthAmazonService } from './auth-amazon.service';
 import { AuthMicrosoftService } from './auth-microsoft.service';
 import { NotificationService } from './notification.service';
+import { LocalStorageService } from './local-storage.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -33,7 +34,8 @@ export class UserService {
     private authFacebook: AuthFacebookService,
     private authAmazon: AuthAmazonService,
     private authMicrosoft: AuthMicrosoftService,
-    private notifier: NotificationService
+    private notifier: NotificationService,
+    private localStorageService: LocalStorageService
   ) {
     this.user = this.userDefault;
     this.user$ = new BehaviorSubject<User>(this.user);
@@ -159,6 +161,7 @@ export class UserService {
       default: {
       }
     }
+    this.clearUser();
     this.user = this.userDefault;
     this.user$.next(this.user);
   }
@@ -233,5 +236,22 @@ export class UserService {
   }
   destroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  loadUser(): boolean {
+    let z: User = this.localStorageService.get('user');
+    if (z == undefined) {
+      return false;
+    } else {
+      this.user = this.localStorageService.get('user');
+      this.user$.next(this.user);
+      return true;
+    }
+  }
+  saveUser() {
+    this.localStorageService.set('user', this.user);
+  }
+  clearUser() {
+    this.localStorageService.clear('user');
   }
 }

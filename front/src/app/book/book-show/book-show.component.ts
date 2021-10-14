@@ -40,8 +40,7 @@ export class BookShowComponent implements OnInit {
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     if (this.route.snapshot.params.bookPageId == undefined) {
       this.bookPageId = 1;
-      //TODO: Borra el historico solo de este libro
-      this.bookmarkHistory.setBookmarkHistory();
+      this.bookmarkHistory.cleanBookmarkHistory(this.bookId);
     } else {
       this.bookPageId = this.route.snapshot.params.bookPageId;
     }

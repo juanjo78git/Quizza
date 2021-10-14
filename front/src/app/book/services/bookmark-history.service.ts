@@ -3,6 +3,7 @@ import { BookService } from './book.service';
 import { Book, BookPage, Answer, BookmarkHistory } from '../models/book.model';
 import { UserService } from 'src/app/common/services/user.service';
 import { BookcaseService } from '../services/bookcase.service';
+import { LocalStorageService } from 'src/app/common/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,13 @@ export class BookmarkHistoryService {
   constructor(
     private book: BookService,
     private user: UserService,
-    private bookcase: BookcaseService
-  ) {}
+    private bookcase: BookcaseService,
+    private localStorageService: LocalStorageService
+  ) {
+    if (!this.loadBookmarkHistory()) {
+      this.bookmarkHistory = [];
+    }
+  }
 
   getBookmarkHistory(bookId?: number): BookmarkHistory[] {
     let bookmarkFiltered: BookmarkHistory[];
@@ -39,6 +45,21 @@ export class BookmarkHistoryService {
     } else {
       this.bookmarkHistory = bookmarkHistory;
     }
+    this.saveBookmarkHistory();
+  }
+
+  cleanBookmarkHistory(bookId?: number) {
+    if (bookId == undefined) {
+      this.bookmarkHistory = [];
+    } else {
+      this.bookmarkHistory = this.bookmarkHistory.filter((data) => {
+        return (
+          data.bookId != bookId ||
+          !(data.userId == this.user.getId() || 0 == +data.userId)
+        );
+      });
+    }
+    this.saveBookmarkHistory();
   }
 
   addBookmarkHistory(answer: Answer) {
@@ -51,6 +72,7 @@ export class BookmarkHistoryService {
       AnswerId: answer.id,
     };
     this.bookmarkHistory.push(bookmarkHistory);
+    this.saveBookmarkHistory();
   }
   getNewId(): number {
     let max = 0;
@@ -65,6 +87,7 @@ export class BookmarkHistoryService {
     let exists: boolean = false;
     this.bookmarkHistory.forEach((data) => {
       if (
+        (data.userId == this.user.getId() || 0 == +data.userId) &&
         data.bookId == answer.bookId &&
         data.bookPageId == answer.bookPageId &&
         (data.AnswerId == undefined || data.AnswerId == answer.id)
@@ -78,6 +101,7 @@ export class BookmarkHistoryService {
     let exists: boolean = false;
     this.bookmarkHistory.forEach((data) => {
       if (
+        (data.userId == this.user.getId() || 0 == +data.userId) &&
         data.bookId == bookId &&
         data.bookPageId == bookPageId &&
         (data.AnswerId == undefined ||
@@ -94,7 +118,10 @@ export class BookmarkHistoryService {
     let bookmarkFiltered: BookmarkHistory[];
     bookmarkFiltered = this.bookmarkHistory
       .filter((data) => {
-        return data.bookId == bookId;
+        return (
+          data.bookId == bookId &&
+          (data.userId == this.user.getId() || 0 == +data.userId)
+        );
       })
       .sort((a, b) => {
         if (a.id < b.id) return -1;
@@ -102,21 +129,26 @@ export class BookmarkHistoryService {
         return 0;
       });
     if (bookmarkFiltered.length >= 1) {
-      return this.getAnswerDestination(
+      let answer = this.getAnswer(
         bookId,
         bookmarkFiltered[bookmarkFiltered.length - 1].bookPageId,
         bookmarkFiltered[bookmarkFiltered.length - 1].AnswerId
       );
+      if (answer == undefined) {
+        return bookmarkFiltered[bookmarkFiltered.length - 1].bookPageId;
+      } else {
+        return answer.goPage;
+      }
     } else {
       return 1;
     }
   }
 
-  getAnswerDestination(
+  getAnswer(
     bookId: number,
     bookPageId: number,
     answer: number | undefined
-  ): number {
+  ): Answer | undefined {
     let bookPage = this.bookcase.getBook(bookId).pages.find((data) => {
       return data.id == bookPageId;
     });
@@ -126,12 +158,37 @@ export class BookmarkHistoryService {
         return data.id == answer;
       });
     } else {
-      return bookPageId;
+      return undefined;
     }
     if (answerResult != undefined) {
-      return answerResult.goPage;
+      return answerResult;
     } else {
-      return bookPageId;
+      return undefined;
     }
+  }
+
+  getBookPage(bookId: number, bookPageId: number): BookPage | undefined {
+    let bookPage = this.bookcase.getBook(bookId).pages.find((data) => {
+      return data.id == bookPageId;
+    });
+    if (bookPage != undefined) {
+      return bookPage;
+    } else {
+      return undefined;
+    }
+  }
+
+  loadBookmarkHistory(): boolean {
+    let z: BookmarkHistory[] = this.localStorageService.get('bookmarkHistory');
+    if (z == undefined) {
+      this.bookmarkHistory = [];
+      return false;
+    } else {
+      this.bookmarkHistory = this.localStorageService.get('bookmarkHistory');
+      return true;
+    }
+  }
+  saveBookmarkHistory() {
+    this.localStorageService.set('bookmarkHistory', this.bookmarkHistory);
   }
 }

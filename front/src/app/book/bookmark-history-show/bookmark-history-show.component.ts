@@ -31,17 +31,8 @@ export class BookmarkHistoryShowComponent implements OnInit {
     bookPageId: number,
     answer: number | undefined
   ): string {
-    let bookPage = this.bookcase.getBook(bookId).pages.find((data) => {
-      return data.id == bookPageId;
-    });
     let answerResult: Answer | undefined;
-    if (bookPage != undefined) {
-      answerResult = bookPage.answers.find((data) => {
-        return data.id == answer;
-      });
-    } else {
-      return 'None';
-    }
+    answerResult = this.bookmarkHistory.getAnswer(bookId, bookPageId, answer);
     if (answerResult != undefined) {
       return answerResult.answer;
     } else {
@@ -49,11 +40,8 @@ export class BookmarkHistoryShowComponent implements OnInit {
     }
   }
   getBookpageTitle(bookId: number, bookPageId: number): string {
-    console.log('bookId:' + bookId);
-    console.log('bookPageId:' + bookId);
-    let bookPage = this.bookcase.getBook(bookId).pages.find((data) => {
-      return data.id == bookPageId;
-    });
+    let bookPage: BookPage | undefined;
+    bookPage = this.bookmarkHistory.getBookPage(bookId, bookPageId);
     if (bookPage != undefined) {
       return bookPage.title;
     } else {

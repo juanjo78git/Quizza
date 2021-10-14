@@ -24,8 +24,6 @@ export class BookListComponent implements OnInit {
     return this.bookcaseService.getBookcase();
   }
 
-  onSelectBook(book: Book) {}
-
   getLastPage(bookId: number): number {
     return this.bookmarkHistory.lastPage(bookId);
   }

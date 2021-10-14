@@ -42,14 +42,12 @@
             href="#"
             class="btn btn-primary btn-lg"
             [routerLink]="['/', 'book', item.id, 'show']"
-            (click)="onSelectBook(item)"
             >Read <span class="visually-hidden">First page</span></a
           >
           <a
             href="#"
             class="btn btn-outline-primary btn-lg"
             [routerLink]="['/', 'book', item.id, 'show', getLastPage(item.id)]"
-            (click)="onSelectBook(item)"
             >Bookmark <span class="visually-hidden">Furthest Page Read</span></a
           >
         </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BOOK } from '../mocks/book.mock';
 import { Book } from '../models/book.model';
+import { LocalStorageService } from '../../common/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +9,11 @@ import { Book } from '../models/book.model';
 export class BookcaseService {
   private bookcase: Book[] = [];
 
-  constructor() {
-    this.bookcase = BOOK;
+  constructor(private localStorageService: LocalStorageService) {
+    if (!this.loadBookcase()) {
+      this.bookcase = BOOK;
+      this.saveBookcase();
+    }
   }
 
   getBookcase(): Book[] {
@@ -37,5 +41,19 @@ export class BookcaseService {
   updateBook(bookId: number, book: Book) {
     this.deleteBook(bookId);
     this.insertNewBook(book);
+  }
+
+  loadBookcase(): boolean {
+    let z: Book[] = this.localStorageService.get('bookcase');
+    if (z == undefined) {
+      this.bookcase = [];
+      return false;
+    } else {
+      this.bookcase = this.localStorageService.get('bookcase');
+      return true;
+    }
+  }
+  saveBookcase() {
+    this.localStorageService.set('bookcase', this.bookcase);
   }
 }
