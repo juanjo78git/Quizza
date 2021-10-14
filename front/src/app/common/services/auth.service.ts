@@ -16,7 +16,7 @@ const httpOptions = {
 })
 //TODO
 export class AuthService {
-  private readonly provider: string = 'NONE';
+  private readonly provider: string = 'QUIZZA';
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class AuthService {
     //    return this.http.post(AUTH_API + 'login', {username, password, }, httpOptions);
     let user: User;
     user = {
-      id: '0',
+      id: Math.trunc(Math.random() * 1000).toString(),
       username: username,
       avatar: 'assets/user.png',
       roles: ['DEFAULT_ROLE'],

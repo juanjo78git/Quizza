@@ -33,7 +33,7 @@ export class UserLoginComponent implements OnInit {
 
   onSubmit(): void {
     const { username, password, switchKeepMeLoggedIn } = this.form;
-    this.errorMessage = this.userService.login('NONE', username, password);
+    this.errorMessage = this.userService.login('QUIZZA', username, password);
     if (switchKeepMeLoggedIn && this.isLoggedIn()) {
       this.userService.saveUserStorage();
     }
