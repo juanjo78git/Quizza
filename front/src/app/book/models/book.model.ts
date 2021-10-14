@@ -7,6 +7,14 @@ export interface Answer {
   stats: number;
   statsPc?: number;
 }
+export interface BookPageRedirect {
+  id: number;
+  bookId: number;
+  bookPageId: number;
+  AnswerId?: number;
+  goPage: number;
+}
+
 export interface BookPage {
   id: number;
   bookId: number;
@@ -29,14 +37,6 @@ export interface Book {
   mediaType?: string;
   mediaURL?: string;
   pages: BookPage[];
-}
-
-export interface BookPageRedirect {
-  id: number;
-  bookId: number;
-  bookPageId: number;
-  AnswerId?: number;
-  goPage: number;
 }
 
 export interface BookmarkHistory {
