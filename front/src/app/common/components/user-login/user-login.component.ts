@@ -12,6 +12,7 @@ export class UserLoginComponent implements OnInit {
   form: any = {
     username: null,
     password: null,
+    switchKeepMeLoggedIn: false,
   };
   errorMessage = '';
   subscriptions: Subscription[] = [];
@@ -31,8 +32,11 @@ export class UserLoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, password } = this.form;
+    const { username, password, switchKeepMeLoggedIn } = this.form;
     this.errorMessage = this.userService.login('NONE', username, password);
+    if (switchKeepMeLoggedIn && this.isLoggedIn()) {
+      this.userService.saveUserStorage();
+    }
   }
 
   ngOnDestroy(): void {

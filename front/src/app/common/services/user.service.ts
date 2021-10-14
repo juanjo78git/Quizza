@@ -161,7 +161,7 @@ export class UserService {
       default: {
       }
     }
-    this.clearUser();
+    this.clearUserStorage();
     this.user = this.userDefault;
     this.user$.next(this.user);
   }
@@ -238,7 +238,7 @@ export class UserService {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
-  loadUser(): boolean {
+  loadUserStorage(): boolean {
     let z: User = this.localStorageService.get('user');
     if (z == undefined) {
       return false;
@@ -248,10 +248,10 @@ export class UserService {
       return true;
     }
   }
-  saveUser() {
+  saveUserStorage() {
     this.localStorageService.set('user', this.user);
   }
-  clearUser() {
+  clearUserStorage() {
     this.localStorageService.clear('user');
   }
 }
