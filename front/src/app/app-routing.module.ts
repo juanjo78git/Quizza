@@ -17,6 +17,8 @@ const routes: Routes = [
   { path: 'login', component: UserLoginComponent },
   { path: 'signup', component: UserSignupComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'error', component: ErrorPageComponent },
+  { path: 'error/:messageKey', component: ErrorPageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 
