@@ -14,7 +14,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
-//TODO
+
 export class AuthService {
   private readonly provider: string = 'QUIZZA';
 

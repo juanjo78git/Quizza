@@ -137,7 +137,7 @@ export class UserService {
         }
       }
     }
-    return 'OK'; //TODO
+    return 'OK'; //TODO:Gestionar errores
   }
 
   logout() {
@@ -168,7 +168,7 @@ export class UserService {
 
   signup(username: string, mail: string, password: string): string {
     this.setUser(this.auth.signup(username, mail, password));
-    return 'OK'; //TODO
+    return 'OK'; //TODO:Gestionar errores
   }
 
   isLoggedIn(): boolean {
