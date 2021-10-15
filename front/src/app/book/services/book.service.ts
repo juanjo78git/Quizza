@@ -58,7 +58,6 @@ export class BookService {
   }
 
   //Update % Stats
-  //TODO: Update stats in a Bookcase and save
   updateCurrentAnswerStats() {
     let totalResponses: number = 0;
     let totalResponsesPc: number = 0;
@@ -100,6 +99,9 @@ export class BookService {
         }
       });
     }
+    //Update stats
+    ++answer.stats;
+    this.bookcase.saveBookcase();
     this.setCurrentPage(bookPageId);
     bookmarkHistory.addBookmarkHistory(answer);
     return this.getCurrentPage();
