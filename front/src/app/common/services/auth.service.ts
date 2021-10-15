@@ -5,7 +5,7 @@ import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 
 // TODO: Cambiar API
 //const AUTH_API = 'http://localhost:8080/api/auth/';
-const AUTH_API = 'https://reqres.in/api/';
+//const AUTH_API = 'https://reqres.in/api/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

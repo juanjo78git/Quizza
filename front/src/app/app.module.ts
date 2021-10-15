@@ -83,7 +83,6 @@ import { AuthInterceptor } from './common/helpers/auth.interceptor';
             ),
           },
           {
-            //TODO: Change ID
             id: MicrosoftLoginProvider.PROVIDER_ID,
             provider: new MicrosoftLoginProvider(
               '0611ccc3-9521-45b6-b432-039852002705'

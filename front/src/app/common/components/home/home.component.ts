@@ -9,7 +9,6 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    //TODO: Not run in github.io (localhost is ok)
     this.userService.loadUserStorage();
   }
 }

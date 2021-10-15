@@ -58,6 +58,7 @@ export class BookService {
   }
 
   //Update % Stats
+  //TODO: Update stats in a Bookcase and save
   updateCurrentAnswerStats() {
     let totalResponses: number = 0;
     let totalResponsesPc: number = 0;
