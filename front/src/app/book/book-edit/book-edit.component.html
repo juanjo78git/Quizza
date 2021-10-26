@@ -1,6 +1,4 @@
-<div
-  class="col-md-12 mx-auto mt-3"
->
+<div class="col-md-12 mx-auto mt-3">
   <div class="card mx-3">
     <form
       name="form"
@@ -103,7 +101,8 @@
 
       <div class="form-group mx-2">
         <label for="mediaType">Media type</label>
-        <select class="form-select form-control"
+        <select
+          class="form-select form-control"
           name="mediaType"
           [(ngModel)]="form.mediaType"
           minlength="1"
@@ -114,7 +113,7 @@
           <option selected value="none">None</option>
           <option value="img">Image</option>
           <option value="video">Video</option>
-      </select>
+        </select>
         <div class="alert-danger" *ngIf="mediaType.errors && f.submitted">
           <div *ngIf="mediaType.errors.minlength">
             Media type must be at least 1 characters
@@ -123,8 +122,8 @@
             Media type must be at most 50 characters
           </div>
         </div>
-</div>
-<div class="form-group mx-2">
+      </div>
+      <div class="form-group mx-2">
         <label for="mediaURL">Media URL</label>
         <input
           type="text"
@@ -143,12 +142,9 @@
           <div *ngIf="mediaURL.errors.maxlength">
             Media URL must be at most 500 characters
           </div>
-          <div *ngIf="mediaURL.errors.pattern">
-            Media URL invalid
-          </div>
+          <div *ngIf="mediaURL.errors.pattern">Media URL invalid</div>
         </div>
       </div>
-
 
       <div class="form-group d-flex justify-content-center m-4">
         <button class="btn btn-primary btn-block">Save</button>
@@ -156,7 +152,8 @@
 
       <div
         class="alert alert-warning"
-        *ngIf="f.submitted && this.errorMessage == ''">
+        *ngIf="f.submitted && this.errorMessage == ''"
+      >
         Update failed!<br />{{ errorMessage }}
       </div>
     </form>

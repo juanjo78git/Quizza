@@ -4,10 +4,11 @@
     <div class="card" *ngFor="let item of getBooks()">
       <div class="card-header">
         <a
-        href="#"
-        class="bi bi-pencil btn btn-warning btn-sm sticky-top float-end"
-        [routerLink]="['/', 'book', item.id, 'edit']"
-        ><span class="visually-hidden">Edit book</span></a>
+          href="#"
+          class="bi bi-pencil btn btn-warning btn-sm sticky-top float-end"
+          [routerLink]="['/', 'book', item.id, 'edit']"
+          ><span class="visually-hidden">Edit book</span></a
+        >
         <img
           src="{{ item.mediaURL }}"
           width="100"

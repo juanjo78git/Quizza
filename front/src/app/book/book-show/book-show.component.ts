@@ -24,7 +24,7 @@ export class BookShowComponent implements OnInit {
     private route: ActivatedRoute,
     private bookService: BookService,
     private notifier: NotificationService,
-    private bookmarkHistory: BookmarkHistoryService,
+    private bookmarkHistory: BookmarkHistoryService
   ) {
     this.bookService.setCurrentBook(this.route.snapshot.params.bookId);
     this.bookId = this.route.snapshot.params.bookId;

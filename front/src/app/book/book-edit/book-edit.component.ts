@@ -9,7 +9,7 @@ import { BookcaseService } from '../services/bookcase.service';
 @Component({
   selector: 'app-book-edit',
   templateUrl: './book-edit.component.html',
-  styleUrls: ['./book-edit.component.css']
+  styleUrls: ['./book-edit.component.css'],
 })
 export class BookEditComponent implements OnInit {
   @Input()
@@ -26,13 +26,13 @@ export class BookEditComponent implements OnInit {
   };
   errorMessage = '';
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private bookcase: BookcaseService,
     private notifier: NotificationService,
-    private user: UserService,
+    private user: UserService
   ) {
     this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
-
   }
 
   ngOnInit(): void {
@@ -45,11 +45,11 @@ export class BookEditComponent implements OnInit {
     this.form.author = this.book.author;
     this.form.mediaType = this.book.mediaType;
     this.form.mediaURL = this.book.mediaURL;
-
   }
 
   onSubmit(): void {
-    const {id, title, version, description, author, mediaType, mediaURL, } = this.form;
+    const { id, title, version, description, author, mediaType, mediaURL } =
+      this.form;
     this.errorMessage = '';
     if (id == null || id == undefined || id != this.book.id) {
       this.errorMessage = 'ERROR con el ID del libro';
@@ -59,20 +59,27 @@ export class BookEditComponent implements OnInit {
     this.book.version = version;
     this.book.description = description;
     this.book.author = author;
-    if (mediaType != null && mediaType != undefined
-      && mediaURL != null && mediaURL != undefined) {
+    if (
+      mediaType != null &&
+      mediaType != undefined &&
+      mediaURL != null &&
+      mediaURL != undefined
+    ) {
       this.book.mediaType = mediaType;
       this.book.mediaURL = mediaURL;
     }
-    if ((mediaType != null || mediaType != undefined)
-      && (mediaURL == null || mediaURL == undefined)) {
-        this.errorMessage = 'URL is void and media Type is selected';
+    if (
+      (mediaType != null || mediaType != undefined) &&
+      (mediaURL == null || mediaURL == undefined)
+    ) {
+      this.errorMessage = 'URL is void and media Type is selected';
     }
-    if ((mediaType == null || mediaType == undefined)
-    && (mediaURL != null || mediaURL != undefined)) {
+    if (
+      (mediaType == null || mediaType == undefined) &&
+      (mediaURL != null || mediaURL != undefined)
+    ) {
       this.errorMessage = 'URL with data but media Type is not selected';
     }
     this.bookcase.updateBook(id, this.book);
   }
-
 }
