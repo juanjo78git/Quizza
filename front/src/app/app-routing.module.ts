@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { BookEditComponent } from './book/book-edit/book-edit.component';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookShowComponent } from './book/book-show/book-show.component';
 import { ErrorPageComponent } from './common/components/error-page/error-page.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'book', component: BookListComponent },
   { path: 'book/:bookId/show/:bookPageId', component: BookShowComponent },
   { path: 'book/:bookId/show', component: BookShowComponent },
+  { path: 'book/:bookId/edit', component: BookEditComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'signup', component: UserSignupComponent },
   { path: 'profile', component: UserProfileComponent },

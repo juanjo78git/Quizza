@@ -1,0 +1,164 @@
+<div
+  class="col-md-12 mx-auto mt-3"
+>
+  <div class="card mx-3">
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group mx-2">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          [(ngModel)]="form.title"
+          required
+          minlength="1"
+          maxlength="50"
+          #title="ngModel"
+        />
+        <div class="alert-danger" *ngIf="title.errors && f.submitted">
+          <div *ngIf="title.errors.required">Title is required</div>
+          <div *ngIf="title.errors.minlength">
+            Title must be at least 1 characters
+          </div>
+          <div *ngIf="title.errors.maxlength">
+            Title must be at most 50 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group mx-2">
+        <label for="version">Version (Format: major.minor.revision)</label>
+        <input
+          type="text"
+          class="form-control"
+          name="version"
+          [(ngModel)]="form.version"
+          required
+          minlength="5"
+          maxlength="10"
+          #version="ngModel"
+          pattern="^[0-9]\d*(\.[0-9]\d*)*$"
+        />
+        <div class="alert-danger" *ngIf="version.errors && f.submitted">
+          <div *ngIf="version.errors.required">Version is required</div>
+          <div *ngIf="version.errors.minlength">
+            Version must be at least 5 characters
+          </div>
+          <div *ngIf="version.errors.maxlength">
+            Version must be at most 10 characters
+          </div>
+          <div *ngIf="version.errors.pattern">
+            Version format invalid (Format: major.minor.revision Ex: 12.3.2)
+          </div>
+        </div>
+      </div>
+      <div class="form-group mx-2">
+        <label for="version">Description</label>
+        <textarea
+          type="text"
+          class="form-control"
+          name="description"
+          [(ngModel)]="form.description"
+          required
+          minlength="1"
+          maxlength="500"
+          #description="ngModel"
+        ></textarea>
+        <div class="alert-danger" *ngIf="description.errors && f.submitted">
+          <div *ngIf="description.errors.required">Description is required</div>
+          <div *ngIf="description.errors.minlength">
+            Description must be at least 1 characters
+          </div>
+          <div *ngIf="description.errors.maxlength">
+            Description must be at most 500 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group mx-2">
+        <label for="author">Author</label>
+        <input
+          type="text"
+          class="form-control"
+          name="author"
+          [(ngModel)]="form.author"
+          required
+          minlength="1"
+          maxlength="50"
+          #author="ngModel"
+        />
+        <div class="alert-danger" *ngIf="author.errors && f.submitted">
+          <div *ngIf="author.errors.required">Author is required</div>
+          <div *ngIf="author.errors.minlength">
+            Author must be at least 1 characters
+          </div>
+          <div *ngIf="author.errors.maxlength">
+            Author must be at most 50 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mx-2">
+        <label for="mediaType">Media type</label>
+        <select class="form-select form-control"
+          name="mediaType"
+          [(ngModel)]="form.mediaType"
+          minlength="1"
+          maxlength="50"
+          #mediaType="ngModel"
+          ng-init="form.mediaType='none'"
+        >
+          <option selected value="none">None</option>
+          <option value="img">Image</option>
+          <option value="video">Video</option>
+      </select>
+        <div class="alert-danger" *ngIf="mediaType.errors && f.submitted">
+          <div *ngIf="mediaType.errors.minlength">
+            Media type must be at least 1 characters
+          </div>
+          <div *ngIf="mediaType.errors.maxlength">
+            Media type must be at most 50 characters
+          </div>
+        </div>
+</div>
+<div class="form-group mx-2">
+        <label for="mediaURL">Media URL</label>
+        <input
+          type="text"
+          class="form-control"
+          name="mediaURL"
+          [(ngModel)]="form.mediaURL"
+          minlength="1"
+          maxlength="500"
+          #mediaURL="ngModel"
+          pattern="http[s]?://.+"
+        />
+        <div class="alert-danger" *ngIf="mediaURL.errors && f.submitted">
+          <div *ngIf="mediaURL.errors.minlength">
+            Media URL must be at least 1 characters
+          </div>
+          <div *ngIf="mediaURL.errors.maxlength">
+            Media URL must be at most 500 characters
+          </div>
+          <div *ngIf="mediaURL.errors.pattern">
+            Media URL invalid
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group d-flex justify-content-center m-4">
+        <button class="btn btn-primary btn-block">Save</button>
+      </div>
+
+      <div
+        class="alert alert-warning"
+        *ngIf="f.submitted && this.errorMessage == ''">
+        Update failed!<br />{{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div>

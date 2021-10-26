@@ -56,4 +56,14 @@ export class BookcaseService {
   saveBookcase() {
     this.localStorageService.set('bookcase', this.bookcase);
   }
+
+  getNewId(): number {
+    let max = 0;
+    this.bookcase.forEach((data) => {
+      if (data.id > max) {
+        max = data.id;
+      }
+    });
+    return max + 1;
+  }
 }

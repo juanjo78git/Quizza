@@ -6,15 +6,17 @@ import { BookService } from './services/book.service';
 import { BookListComponent } from './book-list/book-list.component';
 import { RouterModule } from '@angular/router';
 import { BookmarkHistoryShowComponent } from './bookmark-history-show/bookmark-history-show.component';
-
+import { BookEditComponent } from './book-edit/book-edit.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     BookShowComponent,
     BookpageShowComponent,
     BookListComponent,
     BookmarkHistoryShowComponent,
+    BookEditComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   exports: [
     BookShowComponent,
     BookpageShowComponent,
