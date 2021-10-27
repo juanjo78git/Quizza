@@ -39,8 +39,10 @@ export class BookcaseService {
     this.bookcase.push(book);
   }
   updateBook(bookId: number, book: Book) {
-    this.deleteBook(bookId);
-    this.insertNewBook(book);
+    if (bookId == book.id) {
+      this.deleteBook(bookId);
+      this.insertNewBook(book);
+    }
   }
 
   loadBookcase(): boolean {

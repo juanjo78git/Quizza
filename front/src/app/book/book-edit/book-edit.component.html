@@ -1,53 +1,66 @@
 <div class="col-md-12 mx-auto mt-3">
   <div class="card mx-3">
-    <form
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group m-2 form-floating">
+    <form name="form" (ngSubmit)="onSubmit()" [formGroup]="bookForm">
+      <div class="form-group m-2 form-floating invisible">
         <input
-          type="text"
+          type="hidden"
+          formControlName="bookId"
           class="form-control"
-          name="title"
-          [(ngModel)]="form.title"
+          name="bookId"
+          [ngClass]="{ 'is-invalid': getForm().bookId.errors }"
           required
           minlength="1"
           maxlength="50"
-          #title="ngModel"
-        /><label for="title">Title</label>
-        <div class="alert-danger" *ngIf="title.errors && f.submitted">
-          <div *ngIf="title.errors.required">Title is required</div>
-          <div *ngIf="title.errors.minlength">
-            Title must be at least 1 characters
-          </div>
-          <div *ngIf="title.errors.maxlength">
-            Title must be at most 50 characters
-          </div>
+        /><label for="bookId">id</label>
+        <div class="invalid-feedback" *ngIf="getForm().bookId.errors">
+          <div *ngIf="getForm().bookId.errors?.required">Error ID</div>
         </div>
       </div>
       <div class="form-group m-2 form-floating">
         <input
           type="text"
+          formControlName="title"
+          class="form-control"
+          name="title"
+          [ngClass]="{ 'is-invalid': getForm().title.errors }"
+          required
+          minlength="1"
+          maxlength="50"
+        /><label for="title">Title</label>
+        <div class="invalid-feedback" *ngIf="getForm().title.errors">
+          <div *ngIf="getForm().title.errors?.required">Title is required</div>
+          <div *ngIf="getForm().title.errors?.minlength">
+            Title must be at least 1 characters
+          </div>
+          <div *ngIf="getForm().title.errors?.maxlength">
+            Title must be at most 50 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group m-2 form-floating">
+        <input
+          type="text"
+          formControlName="version"
           class="form-control"
           name="version"
-          [(ngModel)]="form.version"
+          [ngClass]="{ 'is-invalid': getForm().version.errors }"
           required
           minlength="5"
           maxlength="10"
-          #version="ngModel"
           pattern="^[0-9]\d*(\.[0-9]\d*)*$"
-        /><label for="version">Version (Format: major.minor.revision)</label>
-        <div class="alert-danger" *ngIf="version.errors && f.submitted">
-          <div *ngIf="version.errors.required">Version is required</div>
-          <div *ngIf="version.errors.minlength">
+        /><label for="version">Version</label>
+        <div class="invalid-feedback" *ngIf="getForm().version.errors">
+          <div *ngIf="getForm().version.errors?.required">
+            Version is required
+          </div>
+          <div *ngIf="getForm().version.errors?.minlength">
             Version must be at least 5 characters
           </div>
-          <div *ngIf="version.errors.maxlength">
+          <div *ngIf="getForm().version.errors?.maxlength">
             Version must be at most 10 characters
           </div>
-          <div *ngIf="version.errors.pattern">
+          <div *ngIf="getForm().version.errors?.pattern">
             Version format invalid (Format: major.minor.revision Ex: 12.3.2)
           </div>
         </div>
@@ -56,22 +69,24 @@
       <div class="form-group m-2 form-floating">
         <textarea
           type="text"
+          formControlName="description"
           class="form-control"
           name="description"
-          [(ngModel)]="form.description"
+          [ngClass]="{ 'is-invalid': getForm().description.errors }"
           required
           minlength="1"
           maxlength="500"
-          #description="ngModel"
           style="height: 100px"
         ></textarea
         ><label for="version">Description</label>
-        <div class="alert-danger" *ngIf="description.errors && f.submitted">
-          <div *ngIf="description.errors.required">Description is required</div>
-          <div *ngIf="description.errors.minlength">
+        <div class="invalid-feedback" *ngIf="getForm().description.errors">
+          <div *ngIf="getForm().description.errors?.required">
+            Description is required
+          </div>
+          <div *ngIf="getForm().description.errors?.minlength">
             Description must be at least 1 characters
           </div>
-          <div *ngIf="description.errors.maxlength">
+          <div *ngIf="getForm().description.errors?.maxlength">
             Description must be at most 500 characters
           </div>
         </div>
@@ -79,20 +94,22 @@
       <div class="form-group m-2 form-floating">
         <input
           type="text"
+          formControlName="author"
           class="form-control"
           name="author"
-          [(ngModel)]="form.author"
+          [ngClass]="{ 'is-invalid': getForm().author.errors }"
           required
           minlength="1"
           maxlength="50"
-          #author="ngModel"
         /><label for="author">Author</label>
-        <div class="alert-danger" *ngIf="author.errors && f.submitted">
-          <div *ngIf="author.errors.required">Author is required</div>
-          <div *ngIf="author.errors.minlength">
+        <div class="invalid-feedback" *ngIf="getForm().author.errors">
+          <div *ngIf="getForm().author.errors?.required">
+            Author is required
+          </div>
+          <div *ngIf="getForm().author.errors?.minlength">
             Author must be at least 1 characters
           </div>
-          <div *ngIf="author.errors.maxlength">
+          <div *ngIf="getForm().author.errors?.maxlength">
             Author must be at most 50 characters
           </div>
         </div>
@@ -102,22 +119,21 @@
           <div class="form-group m-2 form-floating">
             <select
               class="form-select form-control"
+              formControlName="mediaType"
               name="mediaType"
-              [(ngModel)]="form.mediaType"
               minlength="1"
               maxlength="50"
-              #mediaType="ngModel"
-              ng-init="form.mediaType='none'"
+              [ngClass]="{ 'is-invalid': getForm()?.mediaType?.errors }"
             >
-              <option selected value="none">None</option>
+              <option [selected] [ngValue]="null">None</option>
               <option value="img">Image</option>
               <option value="video">Video</option></select
             ><label for="mediaType">Media type</label>
-            <div class="alert-danger" *ngIf="mediaType.errors && f.submitted">
-              <div *ngIf="mediaType.errors.minlength">
+            <div class="invalid-feedback" *ngIf="getForm()?.mediaType?.errors">
+              <div *ngIf="getForm()?.mediaType?.errors?.minlength">
                 Media type must be at least 1 characters
               </div>
-              <div *ngIf="mediaType.errors.maxlength">
+              <div *ngIf="getForm()?.mediaType?.errors?.maxlength">
                 Media type must be at most 50 characters
               </div>
             </div>
@@ -128,32 +144,41 @@
             <input
               type="text"
               class="form-control"
+              formControlName="mediaURL"
               name="mediaURL"
-              [(ngModel)]="form.mediaURL"
               minlength="1"
               maxlength="500"
-              #mediaURL="ngModel"
+              [ngClass]="{ 'is-invalid': getForm()?.mediaURL?.errors }"
               pattern="http[s]?://.+"
             /><label for="mediaURL">Media URL</label>
-            <div class="alert-danger" *ngIf="mediaURL.errors && f.submitted">
-              <div *ngIf="mediaURL.errors.minlength">
+            <div class="invalid-feedback" *ngIf="getForm().mediaURL?.errors">
+              <div *ngIf="getForm()?.mediaURL?.errors?.minlength">
                 Media URL must be at least 1 characters
               </div>
-              <div *ngIf="mediaURL.errors.maxlength">
+              <div *ngIf="getForm()?.mediaURL?.errors?.maxlength">
                 Media URL must be at most 500 characters
               </div>
-              <div *ngIf="mediaURL.errors.pattern">Media URL invalid</div>
+              <div *ngIf="getForm()?.mediaURL?.errors?.pattern">
+                Media URL invalid
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="form-group d-flex justify-content-center m-4">
+
+      <div class="form-group d-flex justify-content-around m-4">
         <button class="btn btn-primary btn-block">Save</button>
+        <a
+          href="/book"
+          class="btn btn-outline-primary btn-block"
+          routerLink="/book"
+          >Back</a
+        >
       </div>
 
       <div
         class="alert alert-warning"
-        *ngIf="f.submitted && this.errorMessage == ''"
+        *ngIf="submitted && this.errorMessage != ''"
       >
         Update failed!<br />{{ errorMessage }}
       </div>

@@ -1,4 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {
+  FormControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { UserService } from 'src/app/common/services/user.service';
@@ -14,72 +23,150 @@ import { BookcaseService } from '../services/bookcase.service';
 export class BookEditComponent implements OnInit {
   @Input()
   book: Book;
+  bookForm: FormGroup;
+  submitted: boolean = false;
 
-  form: any = {
-    id: null,
-    title: null,
-    version: null,
-    description: null,
-    author: null,
-    mediaType: null,
-    mediaURL: null,
-  };
   errorMessage = '';
 
   constructor(
     private route: ActivatedRoute,
     private bookcase: BookcaseService,
     private notifier: NotificationService,
-    private user: UserService
+    private user: UserService,
+    private formBuilder: FormBuilder
   ) {
     this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
+    this.bookForm = this.formBuilder.group({}); // TODO: Quitar
   }
 
   ngOnInit(): void {
+    this.submitted = false;
     this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
+    this.bookForm = this.formBuilder.group(
+      {
+        bookId: [this.book.id, [Validators.required]],
+        title: [
+          this.book.title,
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(50),
+          ],
+        ],
+        version: [
+          this.book.version,
+          [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(10),
+            Validators.pattern('^[0-9]d*(.[0-9]d*)*$'),
+          ],
+        ],
+        description: [
+          this.book.description,
+          [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(500),
+          ],
+        ],
+        author: [
+          this.book.author,
+          [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(500),
+          ],
+        ],
+        //      mediaValidation: this.formBuilder.group ( {
+        mediaType: [this.book?.mediaType, [Validators.maxLength(50)]],
+        mediaURL: [
+          this.book?.mediaURL,
+          [Validators.maxLength(500), Validators.pattern('http[s]?://.+')],
+        ],
+        //      }),
+      }
+      /*    // Add Form Validations Directives
+    ,{
+      validator: this.validateMedia("mediaType", "mediaURL"),
+    }
+*/
+    );
+  }
 
-    this.form.id = this.book.id;
-    this.form.title = this.book.title;
-    this.form.version = this.book.version;
-    this.form.description = this.book.description;
-    this.form.author = this.book.author;
-    this.form.mediaType = this.book.mediaType;
-    this.form.mediaURL = this.book.mediaURL;
+  validateMedia(controlNameMedia: string, controlNameURL: string) {
+    return (formGroup: FormGroup) => {
+      const controlMedia = formGroup.controls[controlNameMedia];
+      const controlURL = formGroup.controls[controlNameURL];
+      if (controlURL.errors && !controlURL.errors.validateMedia) {
+        return;
+      }
+      if (controlMedia.value != null && controlURL.value == null) {
+        controlURL.setErrors({ validateMedia: true });
+      }
+      if (controlMedia.value == null && controlURL.value != null) {
+        controlURL.setErrors({ validateMedia: true });
+      } else {
+        controlURL.setErrors(null);
+      }
+    };
+  }
+
+  getForm() {
+    return this.bookForm.controls;
   }
 
   onSubmit(): void {
-    const { id, title, version, description, author, mediaType, mediaURL } =
-      this.form;
+    this.submitted = true;
     this.errorMessage = '';
-    if (id == null || id == undefined || id != this.book.id) {
-      this.errorMessage = 'ERROR con el ID del libro';
+
+    if (this.bookForm.invalid) {
+      this.errorMessage = 'ERROR';
+      return;
+    }
+    //TODO:  mover a validaciones
+    if (
+      this.bookForm.value.bookId == null ||
+      this.bookForm.value.bookId == undefined ||
+      this.bookForm.value.bookId != this.book.id
+    ) {
+      this.errorMessage = 'ERROR with book ID';
+      return;
+    }
+    if (
+      this.bookForm.value?.mediaType != '' &&
+      this.bookForm.value?.mediaType != null &&
+      this.bookForm.value?.mediaURL == null
+    ) {
+      this.errorMessage = 'ERROR: Media type and URL no mismatch';
+      return;
+    }
+    if (
+      (this.bookForm.value?.mediaType == null ||
+        this.bookForm.value?.mediaType == '') &&
+      this.bookForm.value?.mediaURL != null
+    ) {
+      this.errorMessage = 'ERROR: Media URL and type no mismatch';
+      return;
     }
 
-    this.book.title = title;
-    this.book.version = version;
-    this.book.description = description;
-    this.book.author = author;
+    this.book.title = this.bookForm.value.title;
+    this.book.version = this.bookForm.value.version;
+    this.book.description = this.bookForm.value.description;
+    this.book.author = this.bookForm.value.author;
     if (
-      mediaType != null &&
-      mediaType != undefined &&
-      mediaURL != null &&
-      mediaURL != undefined
+      this.bookForm.value?.mediaType != undefined &&
+      this.bookForm.value?.mediaURL != undefined
     ) {
-      this.book.mediaType = mediaType;
-      this.book.mediaURL = mediaURL;
+      this.book.mediaType = this.bookForm.value?.mediaType;
+      this.book.mediaURL = this.bookForm.value?.mediaURL;
     }
-    if (
-      (mediaType != null || mediaType != undefined) &&
-      (mediaURL == null || mediaURL == undefined)
-    ) {
-      this.errorMessage = 'URL is void and media Type is selected';
-    }
-    if (
-      (mediaType == null || mediaType == undefined) &&
-      (mediaURL != null || mediaURL != undefined)
-    ) {
-      this.errorMessage = 'URL with data but media Type is not selected';
-    }
-    this.bookcase.updateBook(id, this.book);
+    this.bookcase.updateBook(this.bookForm.value.bookId, this.book);
+    this.notifier.showSuccess('Updated');
+  }
+
+  onReset() {
+    this.submitted = false;
+    //this.bookForm.reset();
   }
 }
