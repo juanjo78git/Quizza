@@ -25,15 +25,21 @@ export class BookEditComponent implements OnInit {
   book: Book;
   bookForm: FormGroup;
   submitted: boolean = false;
-
   errorMessage = '';
+
+   mediaTypes =
+  [
+  { name: 'Image', value: 'img' },
+  { name: 'Video', value: 'video' },
+  ];
+
 
   constructor(
     private route: ActivatedRoute,
     private bookcase: BookcaseService,
     private notifier: NotificationService,
     private user: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {
     this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
     this.bookForm = this.formBuilder.group({}); // TODO: Quitar
@@ -86,11 +92,11 @@ export class BookEditComponent implements OnInit {
         ],
         //      }),
       }
-      /*    // Add Form Validations Directives
+      /*    //TODO Add Form Validations Directives
     ,{
       validator: this.validateMedia("mediaType", "mediaURL"),
     }
-*/
+      */
     );
   }
 
