@@ -134,17 +134,23 @@ export class BookEditComponent implements OnInit {
       return;
     }
     if (
+      this.bookForm.value?.mediaType != undefined &&
       this.bookForm.value?.mediaType != '' &&
       this.bookForm.value?.mediaType != null &&
-      this.bookForm.value?.mediaURL == null
+      (this.bookForm.value?.mediaURL == undefined ||
+       this.bookForm.value?.mediaURL == null ||
+       this.bookForm.value?.mediaURL == '')
     ) {
       this.errorMessage = 'ERROR: Media type and URL no mismatch';
       return;
     }
     if (
-      (this.bookForm.value?.mediaType == null ||
+       (this.bookForm.value?.mediaType == undefined ||
+        this.bookForm.value?.mediaType == null ||
         this.bookForm.value?.mediaType == '') &&
-      this.bookForm.value?.mediaURL != null
+      (this.bookForm.value?.mediaURL != undefined &&
+        this.bookForm.value?.mediaURL != null &&
+        this.bookForm.value?.mediaURL != '')
     ) {
       this.errorMessage = 'ERROR: Media URL and type no mismatch';
       return;
