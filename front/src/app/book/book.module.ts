@@ -25,5 +25,4 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [BookService],
 })
-export class BookModule {
-}
+export class BookModule {}

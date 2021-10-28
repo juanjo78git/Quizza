@@ -27,19 +27,17 @@ export class BookEditComponent implements OnInit {
   submitted: boolean = false;
   errorMessage = '';
 
-   mediaTypes =
-  [
-  { name: 'Image', value: 'img' },
-  { name: 'Video', value: 'video' },
+  mediaTypes = [
+    { name: 'Image', value: 'img' },
+    { name: 'Video', value: 'video' },
   ];
-
 
   constructor(
     private route: ActivatedRoute,
     private bookcase: BookcaseService,
     private notifier: NotificationService,
     private user: UserService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
   ) {
     this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
     this.bookForm = this.formBuilder.group({}); // TODO: Quitar
@@ -144,19 +142,19 @@ export class BookEditComponent implements OnInit {
       this.bookForm.value?.mediaType != '' &&
       this.bookForm.value?.mediaType != null &&
       (this.bookForm.value?.mediaURL == undefined ||
-       this.bookForm.value?.mediaURL == null ||
-       this.bookForm.value?.mediaURL == '')
+        this.bookForm.value?.mediaURL == null ||
+        this.bookForm.value?.mediaURL == '')
     ) {
       this.errorMessage = 'ERROR: Media type and URL no mismatch';
       return;
     }
     if (
-       (this.bookForm.value?.mediaType == undefined ||
+      (this.bookForm.value?.mediaType == undefined ||
         this.bookForm.value?.mediaType == null ||
         this.bookForm.value?.mediaType == '') &&
-      (this.bookForm.value?.mediaURL != undefined &&
-        this.bookForm.value?.mediaURL != null &&
-        this.bookForm.value?.mediaURL != '')
+      this.bookForm.value?.mediaURL != undefined &&
+      this.bookForm.value?.mediaURL != null &&
+      this.bookForm.value?.mediaURL != ''
     ) {
       this.errorMessage = 'ERROR: Media URL and type no mismatch';
       return;

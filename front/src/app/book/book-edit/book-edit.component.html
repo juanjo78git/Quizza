@@ -126,8 +126,10 @@
               [ngClass]="{ 'is-invalid': getForm()?.mediaType?.errors }"
             >
               <option [selected] [ngValue]="null">None</option>
-              <option  *ngFor="let media of mediaTypes" [ngValue]="media.value">{{media.name}}</option>
-              </select>
+              <option *ngFor="let media of mediaTypes" [ngValue]="media.value">
+                {{ media.name }}
+              </option>
+            </select>
             <label for="mediaType">Media type</label>
             <div class="invalid-feedback" *ngIf="getForm()?.mediaType?.errors">
               <div *ngIf="getForm()?.mediaType?.errors?.minlength">
