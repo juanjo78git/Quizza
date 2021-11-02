@@ -186,4 +186,79 @@
       </div>
     </form>
   </div>
+  <div class="mt-3 mx-3">
+    <h2>Pages</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Bookpage</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of getBookpages()">
+        <tr>
+          <td class="align-middle text-left">
+            {{ item.id }}
+          </td>
+          <td class="text-left">
+            <details>
+              <summary>{{ item.title }}</summary>
+              {{ item.text }}
+            </details>
+            <details
+              *ngIf="item.answers != undefined && item.answers.length > 0"
+            >
+              <summary>Answers ({{ item.answers.length }})</summary>
+              <span>Question:</span> {{ item.question }}
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item"
+                  *ngFor="let itemAnswer of item.answers"
+                >
+                  {{ itemAnswer.id }}. {{ itemAnswer.answer }} --(go to Page)-->
+                  {{ itemAnswer.goPage }}
+                </li>
+              </ul>
+            </details>
+            <details
+              *ngIf="item.redirect != undefined && item.redirect.length > 0"
+            >
+              <summary>
+                Rules (if you selected) ({{ item.redirect.length }})
+              </summary>
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item"
+                  *ngFor="let itemRedirect of item.redirect"
+                >
+                  {{ itemRedirect.id }}. Bookpage:{{
+                    itemRedirect.bookPageId
+                  }}
+                  - {{ itemRedirect.AnswerId }} --(then go to page)-->
+                  {{ itemRedirect.goPage }}
+                </li>
+              </ul>
+            </details>
+          </td>
+          <td class="align-middle text-right">
+            <a
+              href="#"
+              class="bi bi-pencil btn btn-warning btn-sm"
+              [routerLink]="[
+                '/',
+                'book',
+                this.book.id,
+                'bookpage',
+                item.id,
+                'edit'
+              ]"
+            >
+              <span class="visually-hidden">Edit bookpage</span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

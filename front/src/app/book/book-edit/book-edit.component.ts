@@ -11,7 +11,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { UserService } from 'src/app/common/services/user.service';
-import { Book } from '../models/book.model';
+import { Book, BookPage } from '../models/book.model';
 import { BookService } from '../services/book.service';
 import { BookcaseService } from '../services/bookcase.service';
 
@@ -178,5 +178,9 @@ export class BookEditComponent implements OnInit {
   onReset() {
     this.submitted = false;
     //this.bookForm.reset();
+  }
+
+  getBookpages(): BookPage[] {
+    return this.book.pages;
   }
 }
