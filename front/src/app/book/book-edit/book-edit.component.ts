@@ -21,7 +21,6 @@ import { BookcaseService } from '../services/bookcase.service';
   styleUrls: ['./book-edit.component.css'],
 })
 export class BookEditComponent implements OnInit {
-  @Input()
   book: Book;
   bookForm: FormGroup;
   submitted: boolean = false;
@@ -178,9 +177,5 @@ export class BookEditComponent implements OnInit {
   onReset() {
     this.submitted = false;
     //this.bookForm.reset();
-  }
-
-  getBookpages(): BookPage[] {
-    return this.book.pages;
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BOOK } from '../mocks/book.mock';
-import { Book } from '../models/book.model';
+import { Book, BookPage } from '../models/book.model';
 import { LocalStorageService } from '../../common/services/local-storage.service';
 
 @Injectable({
@@ -26,6 +26,20 @@ export class BookcaseService {
       throw new Error('No se ha encontrado el libro');
     }
     return bookSelected;
+  }
+
+  getPage(bookId: number, bookPageId: number): BookPage {
+    let bookSelected = this.bookcase.find((element) => element.id == bookId);
+    if (bookSelected == undefined) {
+      throw new Error('No se ha encontrado el libro');
+    }
+    let bookPage = bookSelected.pages.find(
+      (element) => element.id == bookPageId
+    );
+    if (bookPage == undefined) {
+      throw new Error('No se ha encontrado la página');
+    }
+    return bookPage;
   }
 
   deleteBook(bookId: number) {

@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { BookmarkHistoryShowComponent } from './bookmark-history-show/bookmark-history-show.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BookpageListComponent } from './bookpage-list/bookpage-list.component';
+import { BookpageEditComponent } from './bookpage-edit/bookpage-edit.component';
 @NgModule({
   declarations: [
     BookShowComponent,
@@ -15,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BookListComponent,
     BookmarkHistoryShowComponent,
     BookEditComponent,
+    BookpageListComponent,
+    BookpageEditComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -22,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BookpageShowComponent,
     BookListComponent,
     BookmarkHistoryShowComponent,
+    BookpageEditComponent,
   ],
   providers: [BookService],
 })

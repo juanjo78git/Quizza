@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { BookEditComponent } from './book/book-edit/book-edit.component';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookShowComponent } from './book/book-show/book-show.component';
+import { BookpageEditComponent } from './book/bookpage-edit/bookpage-edit.component';
+import { BookpageListComponent } from './book/bookpage-list/bookpage-list.component';
 import { ErrorPageComponent } from './common/components/error-page/error-page.component';
 import { HomeComponent } from './common/components/home/home.component';
 import { UserLoginComponent } from './common/components/user-login/user-login.component';
@@ -16,6 +18,11 @@ const routes: Routes = [
   { path: 'book/:bookId/show/:bookPageId', component: BookShowComponent },
   { path: 'book/:bookId/show', component: BookShowComponent },
   { path: 'book/:bookId/edit', component: BookEditComponent },
+  { path: 'book/:bookId/bookpage', component: BookpageListComponent },
+  {
+    path: 'book/:bookId/bookpage/:bookpageId/edit',
+    component: BookpageEditComponent,
+  },
   { path: 'login', component: UserLoginComponent },
   { path: 'signup', component: UserSignupComponent },
   { path: 'profile', component: UserProfileComponent },
