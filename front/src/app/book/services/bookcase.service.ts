@@ -41,6 +41,32 @@ export class BookcaseService {
     }
     return bookPage;
   }
+  updatePagebook(bookId: number, bookpageId: number, bookpage: BookPage) {
+    if (bookId == bookpage.id && bookpageId == bookpage.id) {
+      this.deletePagebook(bookId, bookpageId);
+      this.insertPagebook(bookId, bookpage);
+    }
+  }
+  deletePagebook(bookId: number, bookpageId: number) {
+    this.bookcase.forEach((element, index) => {
+      if (element.id == bookId) {
+        element.pages.forEach((elementPage, index) => {
+          if (elementPage.id == bookpageId) {
+            element.pages.splice(index, 1);
+          }
+        });
+      }
+    });
+  }
+  insertPagebook(bookId: number, bookpage: BookPage) {
+    if (bookId == bookpage.bookId) {
+      this.bookcase.forEach((element, index) => {
+        if (element.id == bookId) {
+          element.pages.push(bookpage);
+        }
+      });
+    }
+  }
 
   deleteBook(bookId: number) {
     this.bookcase.forEach((element, index) => {

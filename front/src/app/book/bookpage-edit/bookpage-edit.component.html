@@ -1,2 +1,183 @@
-Book: {{ this.book.id }}<br />
-Bookpage: {{ this.bookpage.id }}
+<div class="col-md-12 mx-auto mt-3">
+  <div class="card mx-3">
+    <form
+      name="bookpageForm"
+      (ngSubmit)="onSubmit()"
+      [formGroup]="bookpageForm"
+    >
+      <div class="form-group m-2 form-floating invisible">
+        <input
+          type="hidden"
+          formControlName="bookId"
+          class="form-control"
+          name="bookId"
+          [ngClass]="{ 'is-invalid': getForm().bookId.errors }"
+          required
+          minlength="1"
+          maxlength="50"
+        /><label for="bookId">Book Id</label>
+        <div class="invalid-feedback" *ngIf="getForm().bookId.errors">
+          <div *ngIf="getForm().bookId.errors?.required">Error Book ID</div>
+        </div>
+      </div>
+      <div class="form-group m-2 form-floating invisible">
+        <input
+          type="hidden"
+          formControlName="bookpageId"
+          class="form-control"
+          name="bookpageId"
+          [ngClass]="{ 'is-invalid': getForm().bookpageId.errors }"
+          required
+          minlength="1"
+          maxlength="50"
+        /><label for="bookpageId">id</label>
+        <div class="invalid-feedback" *ngIf="getForm().bookpageId.errors">
+          <div *ngIf="getForm().bookpageId.errors?.required">
+            Error Bookpage ID
+          </div>
+        </div>
+      </div>
+      <div class="form-group m-2 form-floating">
+        <input
+          type="text"
+          formControlName="title"
+          class="form-control"
+          name="title"
+          [ngClass]="{ 'is-invalid': getForm().title.errors }"
+          required
+          minlength="1"
+          maxlength="50"
+        /><label for="title">Title</label>
+        <div class="invalid-feedback" *ngIf="getForm().title.errors">
+          <div *ngIf="getForm().title.errors?.required">Title is required</div>
+          <div *ngIf="getForm().title.errors?.minlength">
+            Title must be at least 1 characters
+          </div>
+          <div *ngIf="getForm().title.errors?.maxlength">
+            Title must be at most 50 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-2">
+        <div class="col-md-2">
+          <div class="form-group m-2 form-floating">
+            <select
+              class="form-select form-control"
+              formControlName="mediaType"
+              name="mediaType"
+              minlength="1"
+              maxlength="50"
+              [ngClass]="{ 'is-invalid': getForm()?.mediaType?.errors }"
+            >
+              <option [selected] [ngValue]="null">None</option>
+              <option *ngFor="let media of mediaTypes" [ngValue]="media.value">
+                {{ media.name }}
+              </option>
+            </select>
+            <label for="mediaType">Media type</label>
+            <div class="invalid-feedback" *ngIf="getForm()?.mediaType?.errors">
+              <div *ngIf="getForm()?.mediaType?.errors?.minlength">
+                Media type must be at least 1 characters
+              </div>
+              <div *ngIf="getForm()?.mediaType?.errors?.maxlength">
+                Media type must be at most 50 characters
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <div class="form-group m-2 form-floating">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="mediaURL"
+              name="mediaURL"
+              minlength="1"
+              maxlength="500"
+              [ngClass]="{ 'is-invalid': getForm()?.mediaURL?.errors }"
+              pattern="http[s]?://.+"
+            /><label for="mediaURL">Media URL</label>
+            <div class="invalid-feedback" *ngIf="getForm().mediaURL?.errors">
+              <div *ngIf="getForm()?.mediaURL?.errors?.minlength">
+                Media URL must be at least 1 characters
+              </div>
+              <div *ngIf="getForm()?.mediaURL?.errors?.maxlength">
+                Media URL must be at most 500 characters
+              </div>
+              <div *ngIf="getForm()?.mediaURL?.errors?.pattern">
+                Media URL invalid
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group m-2 form-floating">
+        <textarea
+          type="text"
+          formControlName="text"
+          class="form-control"
+          name="text"
+          [ngClass]="{ 'is-invalid': getForm().text.errors }"
+          required
+          minlength="1"
+          maxlength="500"
+          style="height: 100px"
+        ></textarea
+        ><label for="version">Text</label>
+        <div class="invalid-feedback" *ngIf="getForm().text.errors">
+          <div *ngIf="getForm().text.errors?.required">Text is required</div>
+          <div *ngIf="getForm().text.errors?.minlength">
+            Text must be at least 1 characters
+          </div>
+          <div *ngIf="getForm().text.errors?.maxlength">
+            Text must be at most 500 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group m-2 form-floating">
+        <textarea
+          type="text"
+          formControlName="question"
+          class="form-control"
+          name="question"
+          [ngClass]="{ 'is-invalid': getForm().question.errors }"
+          minlength="1"
+          maxlength="500"
+          style="height: 100px"
+        ></textarea
+        ><label for="version">Question</label>
+        <div class="invalid-feedback" *ngIf="getForm().question.errors">
+          <div *ngIf="getForm().question.errors?.required">
+            Question is required
+          </div>
+          <div *ngIf="getForm().question.errors?.minlength">
+            Question must be at least 1 characters
+          </div>
+          <div *ngIf="getForm().question.errors?.maxlength">
+            Question must be at most 500 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group d-flex justify-content-around m-4">
+        <button class="btn btn-primary btn-block">Save</button>
+        <a
+          href="#"
+          class="btn btn-outline-primary btn-block"
+          [routerLink]="['/', 'book', this.book.id, 'edit']"
+          >Back</a
+        >
+      </div>
+
+      <div
+        class="alert alert-warning"
+        *ngIf="submitted && this.errorMessage != ''"
+      >
+        Update failed!<br />{{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div>

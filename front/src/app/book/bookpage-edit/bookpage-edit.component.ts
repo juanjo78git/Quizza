@@ -23,6 +23,14 @@ export class BookpageEditComponent implements OnInit {
   book: Book;
   bookpage: BookPage;
 
+  bookpageForm: FormGroup;
+  submitted: boolean = false;
+  errorMessage = '';
+
+  mediaTypes = [
+    { name: 'Image', value: 'img' },
+    { name: 'Video', value: 'video' },
+  ];
   constructor(
     private route: ActivatedRoute,
     private bookcase: BookcaseService,
@@ -35,7 +43,116 @@ export class BookpageEditComponent implements OnInit {
       this.route.snapshot.params.bookId,
       this.route.snapshot.params.bookpageId
     );
+    this.bookpageForm = this.formBuilder.group({}); // TODO: Quitar
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.submitted = false;
+    this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
+    this.bookpageForm = this.formBuilder.group({
+      bookId: [this.bookpage.bookId, [Validators.required]],
+      bookpageId: [this.bookpage.id, [Validators.required]],
+      title: [
+        this.bookpage.title,
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ],
+      ],
+      type: [this.bookpage.type, [Validators.required]],
+      mediaType: [this.bookpage?.mediaType, [Validators.maxLength(50)]],
+      mediaURL: [
+        this.bookpage?.mediaURL,
+        [Validators.maxLength(500), Validators.pattern('http[s]?://.+')],
+      ],
+      text: [
+        this.bookpage.text,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(500),
+        ],
+      ],
+      question: [
+        this.bookpage.question,
+        [Validators.minLength(1), Validators.maxLength(500)],
+      ],
+    });
+  }
+
+  getForm() {
+    return this.bookpageForm.controls;
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+    this.errorMessage = '';
+
+    if (this.bookpageForm.invalid) {
+      this.errorMessage = 'ERROR';
+      return;
+    }
+    //TODO:  mover a validaciones
+    if (
+      this.bookpageForm.value.bookId == null ||
+      this.bookpageForm.value.bookId == undefined ||
+      this.bookpageForm.value.bookId != this.bookpage.bookId
+    ) {
+      this.errorMessage = 'ERROR with book ID';
+      return;
+    }
+    if (
+      this.bookpageForm.value.bookpageId == null ||
+      this.bookpageForm.value.bookpageId == undefined ||
+      this.bookpageForm.value.bookpageId != this.bookpage.id
+    ) {
+      this.errorMessage = 'ERROR with bookpage ID';
+      return;
+    }
+    if (
+      this.bookpageForm.value?.mediaType != undefined &&
+      this.bookpageForm.value?.mediaType != '' &&
+      this.bookpageForm.value?.mediaType != null &&
+      (this.bookpageForm.value?.mediaURL == undefined ||
+        this.bookpageForm.value?.mediaURL == null ||
+        this.bookpageForm.value?.mediaURL == '')
+    ) {
+      this.errorMessage = 'ERROR: Media type and URL no mismatch';
+      return;
+    }
+    if (
+      (this.bookpageForm.value?.mediaType == undefined ||
+        this.bookpageForm.value?.mediaType == null ||
+        this.bookpageForm.value?.mediaType == '') &&
+      this.bookpageForm.value?.mediaURL != undefined &&
+      this.bookpageForm.value?.mediaURL != null &&
+      this.bookpageForm.value?.mediaURL != ''
+    ) {
+      this.errorMessage = 'ERROR: Media URL and type no mismatch';
+      return;
+    }
+
+    this.bookpage.title = this.bookpageForm.value.title;
+    this.bookpage.text = this.bookpageForm.value.text;
+    this.bookpage.question = this.bookpageForm.value.question;
+    if (
+      this.bookpageForm.value?.mediaType != undefined &&
+      this.bookpageForm.value?.mediaURL != undefined
+    ) {
+      this.bookpage.mediaType = this.bookpageForm.value?.mediaType;
+      this.bookpage.mediaURL = this.bookpageForm.value?.mediaURL;
+    }
+    this.bookcase.updatePagebook(
+      this.bookpageForm.value.bookId,
+      this.bookpageForm.value.bookpageId,
+      this.bookpage
+    );
+    this.notifier.showSuccess('Updated');
+  }
+
+  onReset() {
+    this.submitted = false;
+    //this.bookpageForm.reset();
+  }
 }
