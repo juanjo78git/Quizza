@@ -11,7 +11,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { UserService } from 'src/app/common/services/user.service';
-import { Book, BookPage } from '../models/book.model';
+import { Answer, Book, BookPage } from '../models/book.model';
 import { BookcaseService } from '../services/bookcase.service';
 
 @Component({
@@ -79,12 +79,20 @@ export class BookpageEditComponent implements OnInit {
         [Validators.minLength(1), Validators.maxLength(500)],
       ],
     });
+    //TODO: answers with add and delete
+    //TODO: redirect with add and delete
   }
 
   getForm() {
     return this.bookpageForm.controls;
   }
+  getPage(bookpageId: number): BookPage {
+    return this.bookcase.getPage(this.book.id, bookpageId);
+  }
 
+  getAnswers(bookpageId: number): Answer[] {
+    return this.bookcase.getPage(this.book.id, bookpageId).answers;
+  }
   onSubmit(): void {
     this.submitted = true;
     this.errorMessage = '';
@@ -143,6 +151,10 @@ export class BookpageEditComponent implements OnInit {
       this.bookpage.mediaType = this.bookpageForm.value?.mediaType;
       this.bookpage.mediaURL = this.bookpageForm.value?.mediaURL;
     }
+
+    //TODO: update answers
+    //TODO: update redirect
+
     this.bookcase.updatePagebook(
       this.bookpageForm.value.bookId,
       this.bookpageForm.value.bookpageId,

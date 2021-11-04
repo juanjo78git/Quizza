@@ -125,7 +125,7 @@
           maxlength="500"
           style="height: 100px"
         ></textarea
-        ><label for="version">Text</label>
+        ><label for="text">Text</label>
         <div class="invalid-feedback" *ngIf="getForm().text.errors">
           <div *ngIf="getForm().text.errors?.required">Text is required</div>
           <div *ngIf="getForm().text.errors?.minlength">
@@ -148,7 +148,7 @@
           maxlength="500"
           style="height: 100px"
         ></textarea
-        ><label for="version">Question</label>
+        ><label for="question">Question</label>
         <div class="invalid-feedback" *ngIf="getForm().question.errors">
           <div *ngIf="getForm().question.errors?.required">
             Question is required
@@ -158,6 +158,102 @@
           </div>
           <div *ngIf="getForm().question.errors?.maxlength">
             Question must be at most 500 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="card mx-2 my-3">
+        <p class="mx-3">Answers ({{ this.bookpage.answers.length }})</p>
+        <div
+          class="row g-2 align-items-center"
+          *ngFor="let itemAnswer of this.bookpage.answers"
+        >
+          <div class="col-md-5">
+            <div class="form-group m-2 form-floating">
+              <textarea
+                type="text"
+                class="form-control"
+                name="answer"
+                minlength="1"
+                maxlength="500"
+                style="height: 100px"
+                >{{ itemAnswer.answer }}</textarea
+              ><label for="answer">Answer {{ itemAnswer.id }}</label>
+            </div>
+          </div>
+          <div class="col-md-2 text-center">--(go to Page)--></div>
+          <div class="col-md-5">
+            <div class="form-group m-2 form-floating">
+              <select class="form-select form-control" name="answergoTo">
+                <option
+                  *ngFor="let item of this.book.pages"
+                  [ngValue]="item.id"
+                  [selected]="item.id == itemAnswer.goPage"
+                >
+                  {{ item.id + " - " + item.title }}
+                </option>
+              </select>
+              <label for="answergoTo">Go to</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mx-2 my-3">
+        <p class="mx-3">
+          Rules (if you selected) ({{ this.bookpage.redirect?.length }})
+        </p>
+        <div
+          class="row g-2 align-items-center"
+          *ngFor="let itemRedirect of this.bookpage.redirect"
+        >
+          <div class="col-1">
+            <div class="form-group m-2 form-floating">
+              Rule {{ itemRedirect.id }}
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group m-2 form-floating">
+              <select class="form-select form-control" name="redirectbookpage">
+                <option
+                  *ngFor="let item of this.book.pages"
+                  [ngValue]="item.id"
+                  [selected]="item.id == itemRedirect.bookPageId"
+                >
+                  {{ item.id + " - " + item.title }}
+                </option>
+              </select>
+              <label for="redirectbookpage">Bookpage selected</label>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group m-2 form-floating">
+              <select class="form-select form-control" name="redirectanswer">
+                <option [selected] [ngValue]="null">Any</option>
+                <option
+                  *ngFor="let item of getAnswers(itemRedirect.bookPageId)"
+                  [ngValue]="item.id"
+                  [selected]="item.id == itemRedirect.AnswerId"
+                >
+                  {{ item.id + " - " + item.answer }}
+                </option>
+              </select>
+              <label for="redirectanswer">Answer selected</label>
+            </div>
+          </div>
+          <div class="col-2 text-center">--(then go to page)--></div>
+          <div class="col-3">
+            <div class="form-group m-2 form-floating">
+              <select class="form-select form-control" name="redirectgoTo">
+                <option
+                  *ngFor="let item of this.book.pages"
+                  [ngValue]="item.id"
+                  [selected]="item.id == itemRedirect.goPage"
+                >
+                  {{ item.id + " - " + item.title }}
+                </option>
+              </select>
+              <label for="redirectgoTo">Go to</label>
+            </div>
           </div>
         </div>
       </div>
