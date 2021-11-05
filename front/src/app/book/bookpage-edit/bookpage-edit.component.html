@@ -168,41 +168,50 @@
           formArrayName="answers"
           *ngFor="let itemAnswer of getAnswersForm().controls; let i = index"
         >
-        <div [formGroupName]="i">
-          <div class="row g-2 align-items-center">
-          <div class="col-md-5">
-            <div class="form-group m-2 form-floating">
-              <textarea
-                type="text"
-                class="form-control"
-                [attr.id]="'answer' + i"
-                minlength="1"
-                maxlength="500"
-                style="height: 100px"
-                formControlName="answer"
-                ></textarea
-              ><label [attr.for]="'answer' + i">Answer {{ i }}</label>
-            </div>
-          </div>
-          <div class="col-md-1 text-center">--(go to Page)--></div>
-          <div class="col-md-5">
-            <div class="form-group m-2 form-floating">
-              <select class="form-select form-control" [attr.id]="'goPage' + i"
-              formControlName="goPage">
-                <option [selected] disabled [ngValue]="null">Select one...</option>
-                <option
-                  *ngFor="let item of this.book.pages"
-                  [ngValue]="item.id"
+          <div [formGroupName]="i">
+            <div class="row g-2 align-items-center">
+              <div class="col-md-5">
+                <div class="form-group m-2 form-floating">
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    [attr.id]="'answer' + i"
+                    minlength="1"
+                    maxlength="500"
+                    style="height: 100px"
+                    formControlName="answer"
+                  ></textarea
+                  ><label [attr.for]="'answer' + i">Answer {{ i }}</label>
+                </div>
+              </div>
+              <div class="col-md-1 text-center">--(go to Page)--></div>
+              <div class="col-md-5">
+                <div class="form-group m-2 form-floating">
+                  <select
+                    class="form-select form-control"
+                    [attr.id]="'goPage' + i"
+                    formControlName="goPage"
+                  >
+                    <option [selected] disabled [ngValue]="null">
+                      Select one...
+                    </option>
+                    <option
+                      *ngFor="let item of this.book.pages"
+                      [ngValue]="item.id"
+                    >
+                      {{ item.id + " - " + item.title }}
+                    </option>
+                  </select>
+                  <label [attr.for]="'goPage' + i">Go to</label>
+                </div>
+              </div>
+              <div class="col-md-1 text-center">
+                <a class="btn btn-danger" (click)="deleteAnswerForm(i)"
+                  >Remove</a
                 >
-                  {{ item.id + " - " + item.title }}
-                </option>
-              </select>
-              <label [attr.for]="'goPage' + i">Go to</label>
+              </div>
             </div>
           </div>
-          <div class="col-md-1 text-center"><a class="btn btn-danger" (click)="deleteAnswerForm(i)">Remove</a></div>
-          </div>
-        </div>
         </div>
         <div class="form-group">
           <a class="btn btn-primary" (click)="insertAnswerForm()">Add answer</a>
@@ -224,7 +233,9 @@
           <div class="col-3">
             <div class="form-group m-2 form-floating">
               <select class="form-select form-control" name="redirectbookpage">
-                <option [selected] disabled [ngValue]="null">Select one...</option>
+                <option [selected] disabled [ngValue]="null">
+                  Select one...
+                </option>
                 <option
                   *ngFor="let item of this.book.pages"
                   [ngValue]="item.id"
@@ -255,7 +266,9 @@
           <div class="col-3">
             <div class="form-group m-2 form-floating">
               <select class="form-select form-control" name="redirectgoTo">
-                <option [selected] disabled [ngValue]="null">Select one...</option>
+                <option [selected] disabled [ngValue]="null">
+                  Select one...
+                </option>
                 <option
                   *ngFor="let item of this.book.pages"
                   [ngValue]="item.id"

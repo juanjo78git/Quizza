@@ -88,9 +88,9 @@ export class BookpageEditComponent implements OnInit {
     });
 
     let linesAnswers = this.getAnswersForm();
-    this.bookpage.answers.forEach((item,index) => {
+    this.bookpage.answers.forEach((item, index) => {
       let answersFormGroup = this.formBuilder.group({
-        id: this.getAnswersForm().length +1,
+        id: this.getAnswersForm().length + 1,
         bookPageId: this.bookpage.id,
         bookId: this.bookpage.bookId,
         answer: '',
@@ -99,7 +99,6 @@ export class BookpageEditComponent implements OnInit {
       });
       linesAnswers.push(answersFormGroup);
       linesAnswers.at(index).setValue(item);
-
     });
   }
 
@@ -109,7 +108,7 @@ export class BookpageEditComponent implements OnInit {
 
   insertAnswerForm() {
     let answersFormGroup = this.formBuilder.group({
-      id: this.getAnswersForm().length +1,
+      id: this.getAnswersForm().length + 1,
       bookPageId: this.bookpage.id,
       bookId: this.bookpage.bookId,
       answer: '',
