@@ -165,37 +165,47 @@
       <div class="card mx-2 my-3">
         <p class="mx-3">Answers ({{ this.bookpage.answers.length }})</p>
         <div
-          class="row g-2 align-items-center"
-          *ngFor="let itemAnswer of this.bookpage.answers"
+          formArrayName="answers"
+          *ngFor="let itemAnswer of getAnswersForm().controls; let i = index"
         >
+        <div [formGroupName]="i">
+          <div class="row g-2 align-items-center">
           <div class="col-md-5">
             <div class="form-group m-2 form-floating">
               <textarea
                 type="text"
                 class="form-control"
-                name="answer"
+                [attr.id]="'answer' + i"
                 minlength="1"
                 maxlength="500"
                 style="height: 100px"
-                >{{ itemAnswer.answer }}</textarea
-              ><label for="answer">Answer {{ itemAnswer.id }}</label>
+                formControlName="answer"
+                ></textarea
+              ><label [attr.for]="'answer' + i">Answer {{ i }}</label>
             </div>
           </div>
-          <div class="col-md-2 text-center">--(go to Page)--></div>
+          <div class="col-md-1 text-center">--(go to Page)--></div>
           <div class="col-md-5">
             <div class="form-group m-2 form-floating">
-              <select class="form-select form-control" name="answergoTo">
+              <select class="form-select form-control" [attr.id]="'goPage' + i"
+              formControlName="goPage">
+                <option [selected] disabled [ngValue]="null">Select one...</option>
                 <option
                   *ngFor="let item of this.book.pages"
                   [ngValue]="item.id"
-                  [selected]="item.id == itemAnswer.goPage"
                 >
                   {{ item.id + " - " + item.title }}
                 </option>
               </select>
-              <label for="answergoTo">Go to</label>
+              <label [attr.for]="'goPage' + i">Go to</label>
             </div>
           </div>
+          <div class="col-md-1 text-center"><a class="btn btn-danger" (click)="deleteAnswerForm(i)">Remove</a></div>
+          </div>
+        </div>
+        </div>
+        <div class="form-group">
+          <a class="btn btn-primary" (click)="insertAnswerForm()">Add answer</a>
         </div>
       </div>
       <div class="card mx-2 my-3">
@@ -214,6 +224,7 @@
           <div class="col-3">
             <div class="form-group m-2 form-floating">
               <select class="form-select form-control" name="redirectbookpage">
+                <option [selected] disabled [ngValue]="null">Select one...</option>
                 <option
                   *ngFor="let item of this.book.pages"
                   [ngValue]="item.id"
@@ -230,7 +241,7 @@
               <select class="form-select form-control" name="redirectanswer">
                 <option [selected] [ngValue]="null">Any</option>
                 <option
-                  *ngFor="let item of getAnswers(itemRedirect.bookPageId)"
+                  *ngFor="let item of getAnswersPage(itemRedirect.bookPageId)"
                   [ngValue]="item.id"
                   [selected]="item.id == itemRedirect.AnswerId"
                 >
@@ -244,6 +255,7 @@
           <div class="col-3">
             <div class="form-group m-2 form-floating">
               <select class="form-select form-control" name="redirectgoTo">
+                <option [selected] disabled [ngValue]="null">Select one...</option>
                 <option
                   *ngFor="let item of this.book.pages"
                   [ngValue]="item.id"

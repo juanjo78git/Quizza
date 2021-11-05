@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -7,6 +8,8 @@ import {
   AbstractControl,
   ValidationErrors,
   ValidatorFn,
+  FormArray,
+  Form,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/common/services/notification.service';
@@ -78,9 +81,30 @@ export class BookpageEditComponent implements OnInit {
         this.bookpage.question,
         [Validators.minLength(1), Validators.maxLength(500)],
       ],
+      //TODO: answers with add and delete
+      answers: this.formBuilder.array(this.bookpage.answers),
+      //TODO: redirect with add and delete
+      //redirect: this.formBuilder.array([]),
     });
-    //TODO: answers with add and delete
-    //TODO: redirect with add and delete
+  }
+
+  getAnswersForm(): FormArray {
+    return this.bookpageForm.get('answers') as FormArray;
+  }
+
+  insertAnswerForm() {
+    let answersFormGroup = this.formBuilder.group({
+      id: this.getAnswersForm().length +1,
+      bookPageId: this.bookpage.id,
+      bookId: this.bookpage.bookId,
+      answer: '',
+      goPage: 0,
+      stats: 0,
+    });
+    this.getAnswersForm().push(answersFormGroup);
+  }
+  deleteAnswerForm(index: number) {
+    this.getAnswersForm().removeAt(index);
   }
 
   getForm() {
@@ -90,7 +114,7 @@ export class BookpageEditComponent implements OnInit {
     return this.bookcase.getPage(this.book.id, bookpageId);
   }
 
-  getAnswers(bookpageId: number): Answer[] {
+  getAnswersPage(bookpageId: number): Answer[] {
     return this.bookcase.getPage(this.book.id, bookpageId).answers;
   }
   onSubmit(): void {
@@ -165,6 +189,7 @@ export class BookpageEditComponent implements OnInit {
 
   onReset() {
     this.submitted = false;
+    this.getAnswersForm().clear();
     //this.bookpageForm.reset();
   }
 }
