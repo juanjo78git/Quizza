@@ -81,10 +81,25 @@ export class BookpageEditComponent implements OnInit {
         this.bookpage.question,
         [Validators.minLength(1), Validators.maxLength(500)],
       ],
-      //TODO: answers with add and delete
-      answers: this.formBuilder.array(this.bookpage.answers),
+      //TODO: Validate answers values
+      answers: this.formBuilder.array([]),
       //TODO: redirect with add and delete
       //redirect: this.formBuilder.array([]),
+    });
+
+    let linesAnswers = this.getAnswersForm();
+    this.bookpage.answers.forEach((item,index) => {
+      let answersFormGroup = this.formBuilder.group({
+        id: this.getAnswersForm().length +1,
+        bookPageId: this.bookpage.id,
+        bookId: this.bookpage.bookId,
+        answer: '',
+        goPage: 0,
+        stats: 0,
+      });
+      linesAnswers.push(answersFormGroup);
+      linesAnswers.at(index).setValue(item);
+
     });
   }
 
@@ -98,7 +113,7 @@ export class BookpageEditComponent implements OnInit {
       bookPageId: this.bookpage.id,
       bookId: this.bookpage.bookId,
       answer: '',
-      goPage: 0,
+      goPage: this.bookpage.id,
       stats: 0,
     });
     this.getAnswersForm().push(answersFormGroup);
@@ -177,6 +192,10 @@ export class BookpageEditComponent implements OnInit {
     }
 
     //TODO: update answers
+    this.bookpage.answers.splice(0, this.bookpage.answers.length);
+    this.getAnswersForm().controls.forEach((item) => {
+      this.bookpage.answers.push(item.value);
+    });
     //TODO: update redirect
 
     this.bookcase.updatePagebook(
