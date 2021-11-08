@@ -186,5 +186,17 @@
       </div>
     </form>
   </div>
-  <app-bookpage-list [bookId]="this.book.id"></app-bookpage-list>
+  <app-bookpage-list
+    [bookId]="this.book.id"
+    *ngIf="this.book.id != 0"
+  ></app-bookpage-list>
+  <div class="m-3">
+    <a
+      href="#"
+      class="bi bi-plus-square btn btn-success"
+      [routerLink]="['/', 'book', this.book.id, 'bookpage', 'new']"
+    >
+      New bookpage</a
+    >
+  </div>
 </div>

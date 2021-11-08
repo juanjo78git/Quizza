@@ -18,9 +18,14 @@ const routes: Routes = [
   { path: 'book/:bookId/show/:bookPageId', component: BookShowComponent },
   { path: 'book/:bookId/show', component: BookShowComponent },
   { path: 'book/:bookId/edit', component: BookEditComponent },
+  { path: 'book/new', component: BookEditComponent },
   { path: 'book/:bookId/bookpage', component: BookpageListComponent },
   {
     path: 'book/:bookId/bookpage/:bookpageId/edit',
+    component: BookpageEditComponent,
+  },
+  {
+    path: 'book/:bookId/bookpage/new',
     component: BookpageEditComponent,
   },
   { path: 'login', component: UserLoginComponent },

@@ -42,16 +42,48 @@ export class BookpageEditComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
-    this.bookpage = this.bookcase.getPage(
-      this.route.snapshot.params.bookId,
-      this.route.snapshot.params.bookpageId
-    );
+    if (
+      this.route.snapshot.params.bookpageId != undefined &&
+      this.route.snapshot.params.bookpageId != null
+    ) {
+      this.bookpage = this.bookcase.getPage(
+        this.route.snapshot.params.bookId,
+        this.route.snapshot.params.bookpageId
+      );
+    } else {
+      this.bookpage = {
+        id: 0,
+        bookId: this.route.snapshot.params.bookId,
+        title: '',
+        type: 'choose',
+        text: '',
+        answers: [],
+      };
+    }
     this.bookpageForm = this.formBuilder.group({}); // TODO: Quitar
   }
 
   ngOnInit(): void {
     this.submitted = false;
     this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
+    if (
+      this.route.snapshot.params.bookpageId != undefined &&
+      this.route.snapshot.params.bookpageId != null
+    ) {
+      this.bookpage = this.bookcase.getPage(
+        this.route.snapshot.params.bookId,
+        this.route.snapshot.params.bookpageId
+      );
+    } else {
+      this.bookpage = {
+        id: 0,
+        bookId: this.route.snapshot.params.bookId,
+        title: '',
+        type: 'choose',
+        text: '',
+        answers: [],
+      };
+    }
     this.bookpageForm = this.formBuilder.group({
       bookId: [this.bookpage.bookId, [Validators.required]],
       bookpageId: [this.bookpage.id, [Validators.required]],
@@ -171,7 +203,7 @@ export class BookpageEditComponent implements OnInit {
   }
 
   getAnswersPage(bookpageId: number | null): Answer[] {
-    if (bookpageId != null) {
+    if (bookpageId != null && bookpageId != 0) {
       return this.bookcase.getPage(this.book.id, bookpageId).answers;
     } else {
       return [];
@@ -182,7 +214,7 @@ export class BookpageEditComponent implements OnInit {
     this.errorMessage = '';
 
     if (this.bookpageForm.invalid) {
-      this.errorMessage = 'ERROR';
+      this.errorMessage = 'ERROR ';
       return;
     }
     //TODO:  mover a validaciones
@@ -236,6 +268,10 @@ export class BookpageEditComponent implements OnInit {
       this.bookpage.mediaURL = this.bookpageForm.value?.mediaURL;
     }
 
+    if (this.getAnswersForm().controls.length == 0) {
+      this.errorMessage = 'ERROR: At least one answer is required';
+      return;
+    }
     this.bookpage.answers.splice(0, this.bookpage.answers.length);
     this.getAnswersForm().controls.forEach((item) => {
       this.bookpage.answers.push(item.value);
@@ -246,6 +282,7 @@ export class BookpageEditComponent implements OnInit {
     this.getRedirectForm().controls.forEach((item) => {
       this.bookpage.redirect?.push(item.value);
     });
+    console.log(JSON.stringify(this.bookpage));
     this.bookcase.updatePagebook(
       this.bookpageForm.value.bookId,
       this.bookpageForm.value.bookpageId,

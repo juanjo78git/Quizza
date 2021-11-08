@@ -38,13 +38,41 @@ export class BookEditComponent implements OnInit {
     private user: UserService,
     private formBuilder: FormBuilder
   ) {
-    this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
+    if (
+      this.route.snapshot.params.bookId != undefined &&
+      this.route.snapshot.params.bookId != null
+    ) {
+      this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
+    } else {
+      this.book = {
+        id: 0,
+        title: '',
+        version: '0.0.0',
+        description: '',
+        author: '',
+        pages: [],
+      };
+    }
     this.bookForm = this.formBuilder.group({}); // TODO: Quitar
   }
 
   ngOnInit(): void {
     this.submitted = false;
-    this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
+    if (
+      this.route.snapshot.params.bookId != undefined &&
+      this.route.snapshot.params.bookId != null
+    ) {
+      this.book = this.bookcase.getBook(this.route.snapshot.params.bookId);
+    } else {
+      this.book = {
+        id: 0,
+        title: '',
+        version: '0.0.0',
+        description: '',
+        author: '',
+        pages: [],
+      };
+    }
     this.bookForm = this.formBuilder.group(
       {
         bookId: [this.book.id, [Validators.required]],

@@ -42,8 +42,15 @@ export class BookcaseService {
     return bookPage;
   }
   updatePagebook(bookId: number, bookpageId: number, bookpage: BookPage) {
-    if (bookId == bookpage.id && bookpageId == bookpage.id) {
+    if (bookId == bookpage.id && bookpageId == bookpage.id && bookpageId != 0) {
       this.deletePagebook(bookId, bookpageId);
+      this.insertPagebook(bookId, bookpage);
+    } else if (
+      bookId == bookpage.id &&
+      bookpageId == bookpage.id &&
+      bookpageId == 0
+    ) {
+      bookpage.id = this.getNewBookpageId(bookId);
       this.insertPagebook(bookId, bookpage);
     }
   }
@@ -79,8 +86,11 @@ export class BookcaseService {
     this.bookcase.push(book);
   }
   updateBook(bookId: number, book: Book) {
-    if (bookId == book.id) {
+    if (bookId == book.id && bookId != 0) {
       this.deleteBook(bookId);
+      this.insertNewBook(book);
+    } else if (bookId == book.id && bookId == 0) {
+      book.id = this.getNewBookId();
       this.insertNewBook(book);
     }
   }
@@ -99,9 +109,18 @@ export class BookcaseService {
     this.localStorageService.set('bookcase', this.bookcase);
   }
 
-  getNewId(): number {
+  getNewBookId(): number {
     let max = 0;
     this.bookcase.forEach((data) => {
+      if (data.id > max) {
+        max = data.id;
+      }
+    });
+    return max + 1;
+  }
+  getNewBookpageId(bookId: number): number {
+    let max = 0;
+    this.getBook(bookId).pages.forEach((data) => {
       if (data.id > max) {
         max = data.id;
       }
