@@ -149,48 +149,68 @@
           style="height: 100px"
         ></textarea
         ><label for="question">Question</label>
-        <div class="invalid-feedback" *ngIf="getForm().question.errors">
-          <div *ngIf="getForm().question.errors?.required">
-            Question is required
-          </div>
-          <div *ngIf="getForm().question.errors?.minlength">
-            Question must be at least 1 characters
-          </div>
-          <div *ngIf="getForm().question.errors?.maxlength">
-            Question must be at most 500 characters
-          </div>
-        </div>
       </div>
 
       <div class="card mx-2 my-3">
-        <p class="mx-3">Answers ({{ this.bookpage.answers.length }})</p>
+        <p class="mx-3">
+          Answers
+          <span
+            *ngIf="
+              this.bookpage.answers != undefined &&
+              this.bookpage.answers.length > 0
+            "
+            >({{ this.bookpage.answers.length }})</span
+          >
+        </p>
         <div
           formArrayName="answers"
           *ngFor="let itemAnswer of getAnswersForm().controls; let i = index"
         >
           <div [formGroupName]="i">
-            <div class="row g-2 align-items-center">
+            <div class="row g-2 align-items-baseline">
               <div class="col-md-5">
                 <div class="form-group m-2 form-floating">
                   <textarea
                     type="text"
                     class="form-control"
                     [attr.id]="'answer' + i"
+                    [ngClass]="{
+                      'is-invalid': itemAnswer.get('answer')?.errors
+                    }"
+                    required
                     minlength="1"
                     maxlength="500"
                     style="height: 100px"
                     formControlName="answer"
                   ></textarea
                   ><label [attr.for]="'answer' + i">Answer {{ i }}</label>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="itemAnswer.get('answer')?.errors"
+                  >
+                    <div *ngIf="itemAnswer.get('answer')?.errors?.required">
+                      Answer is required
+                    </div>
+                    <div *ngIf="itemAnswer.get('answer')?.errors?.minlength">
+                      Answer must be at least 1 characters
+                    </div>
+                    <div *ngIf="itemAnswer.get('answer')?.errors?.maxlength">
+                      Answer must be at most 500 characters
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-1 text-center">--(go to Page)--></div>
+              <div class="col-md-1 text-center bi bi-arrow-right"></div>
               <div class="col-md-5">
                 <div class="form-group m-2 form-floating">
                   <select
                     class="form-select form-control"
                     [attr.id]="'goPage' + i"
                     formControlName="goPage"
+                    [ngClass]="{
+                      'is-invalid': itemAnswer.get('goPage')?.errors
+                    }"
+                    required
                   >
                     <option [selected] disabled [ngValue]="null">
                       Select one...
@@ -202,11 +222,19 @@
                       {{ item.id + " - " + item.title }}
                     </option>
                   </select>
-                  <label [attr.for]="'goPage' + i">Go to</label>
+                  <label [attr.for]="'goPage' + i">Go to page</label>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="itemAnswer.get('goPage')?.errors"
+                  >
+                    <div *ngIf="itemAnswer.get('goPage')?.errors?.required">
+                      Go to page is required
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-1 text-center">
-                <a class="btn btn-danger" (click)="deleteAnswerForm(i)"
+                <a class="btn btn-danger m-2" (click)="deleteAnswerForm(i)"
                   >Remove</a
                 >
               </div>
@@ -214,72 +242,145 @@
           </div>
         </div>
         <div class="form-group">
-          <a class="btn btn-primary" (click)="insertAnswerForm()">Add answer</a>
+          <a class="btn btn-warning m-2" (click)="insertAnswerForm()"
+            >Add answer</a
+          >
         </div>
       </div>
+
       <div class="card mx-2 my-3">
         <p class="mx-3">
-          Rules (if you selected) ({{ this.bookpage.redirect?.length }})
+          Rules
+          <span
+            *ngIf="
+              this.bookpage.redirect != undefined &&
+              this.bookpage.redirect.length > 0
+            "
+            >({{ this.bookpage.redirect?.length }})</span
+          >
         </p>
         <div
-          class="row g-2 align-items-center"
-          *ngFor="let itemRedirect of this.bookpage.redirect"
+          formArrayName="redirect"
+          *ngFor="let itemRedirect of getRedirectForm().controls; let i = index"
         >
-          <div class="col-1">
-            <div class="form-group m-2 form-floating">
-              Rule {{ itemRedirect.id }}
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="form-group m-2 form-floating">
-              <select class="form-select form-control" name="redirectbookpage">
-                <option [selected] disabled [ngValue]="null">
-                  Select one...
-                </option>
-                <option
-                  *ngFor="let item of this.book.pages"
-                  [ngValue]="item.id"
-                  [selected]="item.id == itemRedirect.bookPageId"
+          <div [formGroupName]="i">
+            <div class="row g-2 align-items-baseline">
+              <div class="col-md-3">
+                <div class="form-group m-2 form-floating">
+                  <select
+                    class="form-select form-control"
+                    [attr.id]="'bookPageId' + i"
+                    formControlName="bookPageId"
+                    [ngClass]="{
+                      'is-invalid': itemRedirect.get('bookPageId')?.errors
+                    }"
+                    required
+                  >
+                    <option [selected] disabled [ngValue]="null">
+                      Select one...
+                    </option>
+                    <option
+                      *ngFor="let item of this.book.pages"
+                      [ngValue]="item.id"
+                    >
+                      {{ item.id + " - " + item.title }}
+                    </option>
+                  </select>
+                  <label [attr.for]="'bookPageId' + i">Bookpage selected</label>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="itemRedirect.get('bookPageId')?.errors"
+                  >
+                    <div
+                      *ngIf="itemRedirect.get('bookPageId')?.errors?.required"
+                    >
+                      Bookpage selected is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group m-2 form-floating">
+                  <select
+                    class="form-select form-control"
+                    [attr.id]="'answerId' + i"
+                    formControlName="answerId"
+                    [ngClass]="{
+                      'is-invalid': itemRedirect.get('answerId')?.errors
+                    }"
+                    *ngIf="
+                      itemRedirect.get('bookPageId') != undefined &&
+                      itemRedirect.get('bookPageId') != null
+                    "
+                  >
+                    <option [selected] [ngValue]="null">Any</option>
+                    <option
+                      *ngFor="
+                        let item of getAnswersPage(
+                          itemRedirect.get('bookPageId')?.value
+                        )
+                      "
+                      [ngValue]="item.id"
+                    >
+                      {{ item.id + " - " + item.answer }}
+                    </option>
+                  </select>
+                  <label [attr.for]="'answerId' + i">Answer selected</label>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="itemRedirect.get('answerId')?.errors"
+                  >
+                    <div *ngIf="itemRedirect.get('answerId')?.errors?.required">
+                      Answer selected is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1 text-center bi bi-arrow-right"></div>
+              <div class="col-md-4">
+                <div class="form-group m-2 form-floating">
+                  <select
+                    class="form-select form-control"
+                    [attr.id]="'goPage' + i"
+                    formControlName="goPage"
+                    [ngClass]="{
+                      'is-invalid': itemRedirect.get('goPage')?.errors
+                    }"
+                    required
+                  >
+                    <option [selected] disabled [ngValue]="null">
+                      Select one...
+                    </option>
+                    <option
+                      *ngFor="let item of this.book.pages"
+                      [ngValue]="item.id"
+                    >
+                      {{ item.id + " - " + item.title }}
+                    </option>
+                  </select>
+                  <label [attr.for]="'goPage' + i">Go to page</label>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="itemRedirect.get('goPage')?.errors"
+                  >
+                    <div *ngIf="itemRedirect.get('goPage')?.errors?.required">
+                      Go to page is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1 text-center">
+                <a class="btn btn-danger m-2" (click)="deleteRedirectForm(i)"
+                  >Remove</a
                 >
-                  {{ item.id + " - " + item.title }}
-                </option>
-              </select>
-              <label for="redirectbookpage">Bookpage selected</label>
+              </div>
             </div>
           </div>
-          <div class="col-3">
-            <div class="form-group m-2 form-floating">
-              <select class="form-select form-control" name="redirectanswer">
-                <option [selected] [ngValue]="null">Any</option>
-                <option
-                  *ngFor="let item of getAnswersPage(itemRedirect.bookPageId)"
-                  [ngValue]="item.id"
-                  [selected]="item.id == itemRedirect.AnswerId"
-                >
-                  {{ item.id + " - " + item.answer }}
-                </option>
-              </select>
-              <label for="redirectanswer">Answer selected</label>
-            </div>
-          </div>
-          <div class="col-2 text-center">--(then go to page)--></div>
-          <div class="col-3">
-            <div class="form-group m-2 form-floating">
-              <select class="form-select form-control" name="redirectgoTo">
-                <option [selected] disabled [ngValue]="null">
-                  Select one...
-                </option>
-                <option
-                  *ngFor="let item of this.book.pages"
-                  [ngValue]="item.id"
-                  [selected]="item.id == itemRedirect.goPage"
-                >
-                  {{ item.id + " - " + item.title }}
-                </option>
-              </select>
-              <label for="redirectgoTo">Go to</label>
-            </div>
-          </div>
+        </div>
+        <div class="form-group">
+          <a class="btn btn-warning m-2" (click)="insertRedirectForm()"
+            >Add rule</a
+          >
         </div>
       </div>
 

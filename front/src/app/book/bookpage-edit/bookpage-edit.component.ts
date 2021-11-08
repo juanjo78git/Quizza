@@ -81,25 +81,48 @@ export class BookpageEditComponent implements OnInit {
         this.bookpage.question,
         [Validators.minLength(1), Validators.maxLength(500)],
       ],
-      //TODO: Validate answers values
       answers: this.formBuilder.array([]),
-      //TODO: redirect with add and delete
-      //redirect: this.formBuilder.array([]),
+      redirect: this.formBuilder.array([]),
     });
 
     let linesAnswers = this.getAnswersForm();
     this.bookpage.answers.forEach((item, index) => {
       let answersFormGroup = this.formBuilder.group({
-        id: this.getAnswersForm().length + 1,
-        bookPageId: this.bookpage.id,
-        bookId: this.bookpage.bookId,
-        answer: '',
-        goPage: 0,
+        id: [item.id, [Validators.required]],
+        bookPageId: [item.bookPageId, [Validators.required]],
+        bookId: [item.bookId, [Validators.required]],
+        answer: [item.answer, [Validators.required]],
+        goPage: [item.goPage, [Validators.required]],
         stats: 0,
+        statsPc: 0,
       });
       linesAnswers.push(answersFormGroup);
+      if (item.statsPc == undefined) {
+        item.statsPc = 0;
+      }
       linesAnswers.at(index).setValue(item);
     });
+    if (this.bookpage.redirect != undefined && this.bookpage.redirect != null) {
+      let linesRedirects = this.getRedirectForm();
+      this.bookpage.redirect.forEach((item, index) => {
+        let redirectFormGroup = this.formBuilder.group({
+          id: [item.id, [Validators.required]],
+          bookId: item.bookId,
+          bookPageId: [item.bookPageId, [Validators.required]],
+          answerId: [null],
+          goPage: [item.goPage, [Validators.required]],
+        });
+        linesRedirects.push(redirectFormGroup);
+        linesRedirects.at(index).patchValue({
+          id: item.id,
+          bookId: item.bookId,
+          bookPageId: item.bookPageId,
+          answerId: item.AnswerId == undefined ? null : item.AnswerId,
+          goPage: item.goPage,
+        });
+        //linesRedirects.at(index).setValue(item);
+      });
+    }
   }
 
   getAnswersForm(): FormArray {
@@ -108,17 +131,36 @@ export class BookpageEditComponent implements OnInit {
 
   insertAnswerForm() {
     let answersFormGroup = this.formBuilder.group({
-      id: this.getAnswersForm().length + 1,
-      bookPageId: this.bookpage.id,
+      id: [this.getAnswersForm().length + 1, [Validators.required]],
+      bookPageId: [this.bookpage.id, [Validators.required]],
       bookId: this.bookpage.bookId,
-      answer: '',
-      goPage: this.bookpage.id,
+      answer: ['', [Validators.required]],
+      goPage: [null, [Validators.required]],
       stats: 0,
+      statsPc: 0,
     });
     this.getAnswersForm().push(answersFormGroup);
   }
   deleteAnswerForm(index: number) {
     this.getAnswersForm().removeAt(index);
+  }
+
+  getRedirectForm(): FormArray {
+    return this.bookpageForm.get('redirect') as FormArray;
+  }
+
+  insertRedirectForm() {
+    let redirectFormGroup = this.formBuilder.group({
+      id: [this.getRedirectForm().length + 1, [Validators.required]],
+      bookId: this.bookpage.bookId,
+      bookPageId: [null, [Validators.required]],
+      answerId: [null],
+      goPage: [null, [Validators.required]],
+    });
+    this.getRedirectForm().push(redirectFormGroup);
+  }
+  deleteRedirectForm(index: number) {
+    this.getRedirectForm().removeAt(index);
   }
 
   getForm() {
@@ -128,8 +170,12 @@ export class BookpageEditComponent implements OnInit {
     return this.bookcase.getPage(this.book.id, bookpageId);
   }
 
-  getAnswersPage(bookpageId: number): Answer[] {
-    return this.bookcase.getPage(this.book.id, bookpageId).answers;
+  getAnswersPage(bookpageId: number | null): Answer[] {
+    if (bookpageId != null) {
+      return this.bookcase.getPage(this.book.id, bookpageId).answers;
+    } else {
+      return [];
+    }
   }
   onSubmit(): void {
     this.submitted = true;
@@ -190,13 +236,16 @@ export class BookpageEditComponent implements OnInit {
       this.bookpage.mediaURL = this.bookpageForm.value?.mediaURL;
     }
 
-    //TODO: update answers
     this.bookpage.answers.splice(0, this.bookpage.answers.length);
     this.getAnswersForm().controls.forEach((item) => {
       this.bookpage.answers.push(item.value);
     });
-    //TODO: update redirect
 
+    this.bookpage.redirect?.splice(0, this.bookpage.redirect.length);
+    this.bookpage.redirect = [];
+    this.getRedirectForm().controls.forEach((item) => {
+      this.bookpage.redirect?.push(item.value);
+    });
     this.bookcase.updatePagebook(
       this.bookpageForm.value.bookId,
       this.bookpageForm.value.bookpageId,
