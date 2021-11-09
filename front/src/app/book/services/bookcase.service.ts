@@ -42,11 +42,15 @@ export class BookcaseService {
     return bookPage;
   }
   updatePagebook(bookId: number, bookpageId: number, bookpage: BookPage) {
-    if (bookId == bookpage.id && bookpageId == bookpage.id && bookpageId != 0) {
+    if (
+      bookId == bookpage.bookId &&
+      bookpageId == bookpage.id &&
+      bookpageId != 0
+    ) {
       this.deletePagebook(bookId, bookpageId);
       this.insertPagebook(bookId, bookpage);
     } else if (
-      bookId == bookpage.id &&
+      bookId == bookpage.bookId &&
       bookpageId == bookpage.id &&
       bookpageId == 0
     ) {

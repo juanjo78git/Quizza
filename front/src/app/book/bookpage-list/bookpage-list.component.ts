@@ -30,4 +30,7 @@ export class BookpageListComponent implements OnInit {
   getBookpages(): BookPage[] {
     return this.book.pages;
   }
+  deleteBookpage(bookpage: BookPage) {
+    this.bookcase.deletePagebook(bookpage.bookId, bookpage.id);
+  }
 }

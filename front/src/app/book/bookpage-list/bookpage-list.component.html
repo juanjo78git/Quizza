@@ -52,10 +52,10 @@
             </ul>
           </details>
         </td>
-        <td class="align-middle text-right">
+        <td class="align-middle d-flex justify-content-around align-middle">
           <a
             href="#"
-            class="bi bi-pencil btn btn-warning btn-sm"
+            class="bi bi-pencil btn btn-warning btn-sm mx-3"
             [routerLink]="[
               '/',
               'book',
@@ -66,6 +66,12 @@
             ]"
           >
             <span class="visually-hidden">Edit bookpage</span>
+          </a>
+          <a
+            class="bi bi-trash btn btn-danger btn-sm mx-3"
+            (click)="deleteBookpage(item)"
+          >
+            <span class="visually-hidden">Remove bookpage</span>
           </a>
         </td>
       </tr>

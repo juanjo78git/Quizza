@@ -8,7 +8,7 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { UserService } from 'src/app/common/services/user.service';
 import { Book, BookPage } from '../models/book.model';
@@ -33,6 +33,7 @@ export class BookEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private bookcase: BookcaseService,
     private notifier: NotificationService,
     private user: UserService,
@@ -205,5 +206,10 @@ export class BookEditComponent implements OnInit {
   onReset() {
     this.submitted = false;
     //this.bookForm.reset();
+  }
+
+  deleteBook(book: Book) {
+    this.bookcase.deleteBook(book.id);
+    this.router.navigate(['/book']);
   }
 }

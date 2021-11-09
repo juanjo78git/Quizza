@@ -282,7 +282,6 @@ export class BookpageEditComponent implements OnInit {
     this.getRedirectForm().controls.forEach((item) => {
       this.bookpage.redirect?.push(item.value);
     });
-    console.log(JSON.stringify(this.bookpage));
     this.bookcase.updatePagebook(
       this.bookpageForm.value.bookId,
       this.bookpageForm.value.bookpageId,
