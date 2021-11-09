@@ -46,7 +46,7 @@ export const BOOK: Book[] = [
       {
         id: 1,
         bookId: 1,
-        type: 'choose',
+        type: 'choice',
         title: 'Página 1',
         text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat ipsam at natus ad? Consequatur dolores deleniti quia, maiores dolore adipisci harum. Molestias itaque delectus deleniti officiis corporis quos amet deserunt.',
         question:
@@ -98,7 +98,7 @@ export const BOOK: Book[] = [
       {
         id: 2,
         bookId: 1,
-        type: 'choose',
+        type: 'choice',
         title: 'Página 2',
         text: 'Bla bla bla',
         question: 'Pregunta 2',
@@ -124,7 +124,7 @@ export const BOOK: Book[] = [
       {
         id: 3,
         bookId: 1,
-        type: 'choose',
+        type: 'choice',
         title: 'Página 3',
         text: 'Bla bla bla',
         question: 'Pregunta 3',
@@ -159,7 +159,7 @@ export const BOOK: Book[] = [
       {
         id: 4,
         bookId: 1,
-        type: 'choose',
+        type: 'choice',
         title: 'Página 4',
         text: 'Bla bla bla',
         question: 'Pregunta 4',
@@ -189,7 +189,7 @@ export const BOOK: Book[] = [
         id: 1,
         bookId: 2,
         title: 'Página 1',
-        type: 'choose',
+        type: 'choice',
         text: 'Lorem.',
         mediaType: 'video',
         mediaURL:

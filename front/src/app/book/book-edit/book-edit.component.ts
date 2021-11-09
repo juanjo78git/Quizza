@@ -138,7 +138,6 @@ export class BookEditComponent implements OnInit {
     }
       */
     );
-    console.log(JSON.stringify(this.book));
   }
 
   validateMedia(controlNameMedia: string, controlNameURL: string) {

@@ -136,6 +136,25 @@
           </div>
         </div>
       </div>
+      <div class="form-group m-2 form-floating">
+        <select
+          class="form-select form-control"
+          formControlName="type"
+          name="type"
+          minlength="1"
+          maxlength="50"
+          required
+          [ngClass]="{ 'is-invalid': getForm().type?.errors }"
+        >
+          <option [selected] disabled [ngValue]="null">Select one...</option>
+          <option *ngFor="let type of pagebookTypes" [ngValue]="type.value">
+            {{ type.name }}
+          </option></select
+        ><label for="type">Type</label>
+        <div class="invalid-feedback" *ngIf="getForm().type.errors">
+          <div *ngIf="getForm().type.errors?.required">Type is required</div>
+        </div>
+      </div>
 
       <div class="form-group m-2 form-floating">
         <textarea

@@ -34,6 +34,10 @@ export class BookpageEditComponent implements OnInit {
     { name: 'Image', value: 'img' },
     { name: 'Video', value: 'video' },
   ];
+  pagebookTypes = [
+    { name: 'Choice', value: 'choice' },
+    { name: 'End', value: 'end' },
+  ];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -56,7 +60,7 @@ export class BookpageEditComponent implements OnInit {
         id: 0,
         bookId: this.route.snapshot.params.bookId,
         title: '',
-        type: 'choose',
+        type: 'choice',
         text: '',
         answers: [],
       };
@@ -80,7 +84,7 @@ export class BookpageEditComponent implements OnInit {
         id: 0,
         bookId: this.route.snapshot.params.bookId,
         title: '',
-        type: 'choose',
+        type: 'choice',
         text: '',
         answers: [],
       };
@@ -268,6 +272,8 @@ export class BookpageEditComponent implements OnInit {
       this.bookpage.mediaType = this.bookpageForm.value?.mediaType;
       this.bookpage.mediaURL = this.bookpageForm.value?.mediaURL;
     }
+
+    //TODO: Validate Type (end -> 1 answer only and go to book list?)
 
     if (this.getAnswersForm().controls.length == 0) {
       this.errorMessage = 'ERROR: At least one answer is required';
