@@ -10,6 +10,8 @@ export const BOOK: Book[] = [
     author: 'Nomen Nescio',
     mediaType: 'img',
     mediaURL: 'assets/book.svg',
+    authorization: 'me',
+    published: true,
     pages: [
       {
         id: 1,
@@ -38,6 +40,8 @@ export const BOOK: Book[] = [
     version: '0.0.1',
     description: 'Descripción del libro',
     author: 'Nadie',
+    authorization: 'public',
+    published: true,
     pages: [
       {
         id: 1,
@@ -178,6 +182,8 @@ export const BOOK: Book[] = [
     version: '0.2.1',
     description: 'Descripción del libro 2',
     author: 'Nadie2',
+    authorization: 'public',
+    published: false,
     pages: [
       {
         id: 1,

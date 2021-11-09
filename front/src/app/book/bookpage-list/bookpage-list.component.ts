@@ -31,6 +31,8 @@ export class BookpageListComponent implements OnInit {
     return this.book.pages;
   }
   deleteBookpage(bookpage: BookPage) {
-    this.bookcase.deletePagebook(bookpage.bookId, bookpage.id);
+    if (confirm('You will delete bookpage. Continue?')) {
+      this.bookcase.deletePagebook(bookpage.bookId, bookpage.id);
+    }
   }
 }

@@ -68,6 +68,9 @@ export class UserService {
   getUser(): Observable<User> {
     return this.user$.asObservable();
   }
+  getUsername(): string {
+    return this.user.username;
+  }
   setUser(user: User) {
     this.user = user;
     this.user$.next(this.user);

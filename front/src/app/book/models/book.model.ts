@@ -36,6 +36,8 @@ export interface Book {
   author: string;
   mediaType?: string;
   mediaURL?: string;
+  published: boolean;
+  authorization: string;
   pages: BookPage[];
 }
 

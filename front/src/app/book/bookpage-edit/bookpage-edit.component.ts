@@ -11,7 +11,7 @@ import {
   FormArray,
   Form,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { UserService } from 'src/app/common/services/user.service';
 import { Answer, Book, BookPage } from '../models/book.model';
@@ -36,6 +36,7 @@ export class BookpageEditComponent implements OnInit {
   ];
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private bookcase: BookcaseService,
     private notifier: NotificationService,
     private user: UserService,
@@ -293,6 +294,13 @@ export class BookpageEditComponent implements OnInit {
   onReset() {
     this.submitted = false;
     this.getAnswersForm().clear();
+    this.getRedirectForm().clear();
     //this.bookpageForm.reset();
+  }
+
+  back() {
+    if (confirm('You will lose unsaved changes. Continue?')) {
+      this.router.navigate(['/', 'book', this.book.id, 'edit']);
+    }
   }
 }

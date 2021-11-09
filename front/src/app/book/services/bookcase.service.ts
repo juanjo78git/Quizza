@@ -20,6 +20,15 @@ export class BookcaseService {
     return this.bookcase;
   }
 
+  getMyBookcase(auth: string): Book[] {
+    let myBookcase: Book[] = [];
+    this.bookcase.forEach((element, index) => {
+      if (element.published == true || element.authorization == auth) {
+        myBookcase.push(element);
+      }
+    });
+    return myBookcase;
+  }
   getBook(bookId: number): Book {
     let bookSelected = this.bookcase.find((element) => element.id == bookId);
     if (bookSelected == undefined) {

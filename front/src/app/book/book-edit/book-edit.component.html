@@ -114,6 +114,43 @@
           </div>
         </div>
       </div>
+      <div class="form-group m-2 form-floating">
+        <input
+          type="text"
+          formControlName="authorization"
+          class="form-control"
+          name="authorization"
+          [ngClass]="{ 'is-invalid': getForm().authorization.errors }"
+          required
+          minlength="1"
+          maxlength="50"
+        /><label for="authorization">Authorization</label>
+        <div class="invalid-feedback" *ngIf="getForm().authorization.errors">
+          <div *ngIf="getForm().authorization.errors?.required">
+            Authorization is required
+          </div>
+          <div *ngIf="getForm().authorization.errors?.minlength">
+            Authorization must be at least 1 characters
+          </div>
+          <div *ngIf="getForm().authorization.errors?.maxlength">
+            Authorization must be at most 50 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group m-2">
+        <input
+          type="checkbox"
+          formControlName="published"
+          class="form-check-input"
+          name="published"
+          [ngClass]="{ 'is-invalid': getForm().published.errors }"
+        /><label class="form-check-label" for="published">Published</label>
+        <div class="invalid-feedback" *ngIf="getForm().published.errors">
+          <div *ngIf="getForm().published.errors?.required">
+            Published is required
+          </div>
+        </div>
+      </div>
       <div class="row g-2">
         <div class="col-md-2">
           <div class="form-group m-2 form-floating">
@@ -170,12 +207,7 @@
 
       <div class="form-group d-flex justify-content-around m-4">
         <button class="btn btn-primary btn-block">Save</button>
-        <a
-          href="/book"
-          class="btn btn-outline-primary btn-block"
-          routerLink="/book"
-          >Back</a
-        >
+        <a class="btn btn-outline-primary btn-block" (click)="back()">Back</a>
       </div>
 
       <div

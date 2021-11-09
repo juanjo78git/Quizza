@@ -4,10 +4,23 @@
     <div class="card" *ngFor="let item of getBooks()">
       <div class="card-header">
         <a
+          *ngIf="isEditable(item)"
           href="#"
           class="bi bi-pencil btn btn-warning btn-sm sticky-top float-end"
           [routerLink]="['/', 'book', item.id, 'edit']"
           ><span class="visually-hidden">Edit book</span></a
+        >
+        <a
+          *ngIf="!isEditable(item)"
+          href="#"
+          class="
+            bi bi-pencil
+            btn btn-outline-secondary btn-sm
+            sticky-top
+            float-end
+            disabled
+          "
+          ><span class="visually-hidden">No editable</span></a
         >
         <img
           src="{{ item.mediaURL }}"

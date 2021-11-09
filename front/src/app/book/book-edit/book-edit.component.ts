@@ -52,6 +52,8 @@ export class BookEditComponent implements OnInit {
         description: '',
         author: '',
         pages: [],
+        published: false,
+        authorization: this.user.getUsername(),
       };
     }
     this.bookForm = this.formBuilder.group({}); // TODO: Quitar
@@ -72,6 +74,8 @@ export class BookEditComponent implements OnInit {
         description: '',
         author: '',
         pages: [],
+        published: false,
+        authorization: this.user.getUsername(),
       };
     }
     this.bookForm = this.formBuilder.group(
@@ -110,12 +114,22 @@ export class BookEditComponent implements OnInit {
             Validators.maxLength(500),
           ],
         ],
+        authorization: [
+          this.book.authorization,
+          [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(50),
+          ],
+        ],
+        published: [this.book.published, []],
         //      mediaValidation: this.formBuilder.group ( {
         mediaType: [this.book?.mediaType, [Validators.maxLength(50)]],
         mediaURL: [
           this.book?.mediaURL,
           [Validators.maxLength(500), Validators.pattern('http[s]?://.+')],
         ],
+
         //      }),
       }
       /*    //TODO Add Form Validations Directives
@@ -124,6 +138,7 @@ export class BookEditComponent implements OnInit {
     }
       */
     );
+    console.log(JSON.stringify(this.book));
   }
 
   validateMedia(controlNameMedia: string, controlNameURL: string) {
@@ -192,6 +207,8 @@ export class BookEditComponent implements OnInit {
     this.book.version = this.bookForm.value.version;
     this.book.description = this.bookForm.value.description;
     this.book.author = this.bookForm.value.author;
+    this.book.published = this.bookForm.value.published;
+    this.book.authorization = this.bookForm.value.authorization;
     if (
       this.bookForm.value?.mediaType != undefined &&
       this.bookForm.value?.mediaURL != undefined
@@ -209,7 +226,15 @@ export class BookEditComponent implements OnInit {
   }
 
   deleteBook(book: Book) {
-    this.bookcase.deleteBook(book.id);
-    this.router.navigate(['/book']);
+    if (confirm('You will delete book. Continue?')) {
+      this.bookcase.deleteBook(book.id);
+      this.router.navigate(['/book']);
+    }
+  }
+
+  back() {
+    if (confirm('You will lose unsaved changes. Continue?')) {
+      this.router.navigate(['/book']);
+    }
   }
 }
