@@ -97,16 +97,20 @@ export class BookmarkHistoryService {
     });
     return exists;
   }
-  existsOption(bookId: number, bookPageId: number, answerId?: number): boolean {
+  existsOption(
+    bookId: number,
+    bookPageIdVisited: number,
+    answerIdVisited?: number
+  ): boolean {
     let exists: boolean = false;
     this.bookmarkHistory.forEach((data) => {
       if (
         (data.userId == this.user.getId() || 0 == +data.userId) &&
         data.bookId == bookId &&
-        data.bookPageId == bookPageId &&
+        data.bookPageId == bookPageIdVisited &&
         (data.AnswerId == undefined ||
-          answerId == undefined ||
-          data.AnswerId == answerId)
+          answerIdVisited == undefined ||
+          data.AnswerId == answerIdVisited)
       ) {
         exists = true;
       }

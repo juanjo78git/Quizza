@@ -146,7 +146,8 @@ export class BookpageEditComponent implements OnInit {
           id: [item.id, [Validators.required]],
           bookId: item.bookId,
           bookPageId: [item.bookPageId, [Validators.required]],
-          answerId: [null],
+          bookPageIdVisited: [item.bookPageIdVisited, [Validators.required]],
+          answerIdVisited: [null],
           goPage: [item.goPage, [Validators.required]],
         });
         linesRedirects.push(redirectFormGroup);
@@ -154,7 +155,9 @@ export class BookpageEditComponent implements OnInit {
           id: item.id,
           bookId: item.bookId,
           bookPageId: item.bookPageId,
-          answerId: item.AnswerId == undefined ? null : item.AnswerId,
+          bookPageIdVisited: item.bookPageIdVisited,
+          answerIdVisited:
+            item.AnswerIdVisited == undefined ? null : item.AnswerIdVisited,
           goPage: item.goPage,
         });
         //linesRedirects.at(index).setValue(item);
@@ -190,8 +193,9 @@ export class BookpageEditComponent implements OnInit {
     let redirectFormGroup = this.formBuilder.group({
       id: [this.getRedirectForm().length + 1, [Validators.required]],
       bookId: this.bookpage.bookId,
-      bookPageId: [null, [Validators.required]],
-      answerId: [null],
+      bookPageId: [this.bookpage.id, [Validators.required]],
+      bookPageIdVisited: [null, [Validators.required]],
+      answerIdVisited: [null],
       goPage: [null, [Validators.required]],
     });
     this.getRedirectForm().push(redirectFormGroup);

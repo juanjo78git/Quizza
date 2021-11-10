@@ -11,7 +11,8 @@ export interface BookPageRedirect {
   id: number;
   bookId: number;
   bookPageId: number;
-  AnswerId?: number;
+  bookPageIdVisited: number;
+  AnswerIdVisited?: number;
   goPage: number;
 }
 

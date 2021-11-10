@@ -42,9 +42,11 @@
                 class="list-group-item"
                 *ngFor="let itemRedirect of item.redirect"
               >
-                {{ itemRedirect.id }}. Bookpage:{{ itemRedirect.bookPageId }}
-                <p *ngIf="itemRedirect.AnswerId != undefined">
-                  - Answer: {{ itemRedirect.AnswerId }}
+                {{ itemRedirect.id }}. Bookpage:{{
+                  itemRedirect.bookPageIdVisited
+                }}
+                <p *ngIf="itemRedirect.AnswerIdVisited != undefined">
+                  - Answer: {{ itemRedirect.AnswerIdVisited }}
                 </p>
                 --(then go to page)-->
                 {{ itemRedirect.goPage }}

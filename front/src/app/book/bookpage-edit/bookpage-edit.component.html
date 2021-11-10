@@ -288,10 +288,11 @@
                 <div class="form-group m-2 form-floating">
                   <select
                     class="form-select form-control"
-                    [attr.id]="'bookPageId' + i"
-                    formControlName="bookPageId"
+                    [attr.id]="'bookPageIdVisited' + i"
+                    formControlName="bookPageIdVisited"
                     [ngClass]="{
-                      'is-invalid': itemRedirect.get('bookPageId')?.errors
+                      'is-invalid':
+                        itemRedirect.get('bookPageIdVisited')?.errors
                     }"
                     required
                   >
@@ -305,13 +306,17 @@
                       {{ item.id + " - " + item.title }}
                     </option>
                   </select>
-                  <label [attr.for]="'bookPageId' + i">Bookpage selected</label>
+                  <label [attr.for]="'bookPageIdVisited' + i"
+                    >Bookpage selected</label
+                  >
                   <div
                     class="invalid-feedback"
-                    *ngIf="itemRedirect.get('bookPageId')?.errors"
+                    *ngIf="itemRedirect.get('bookPageIdVisited')?.errors"
                   >
                     <div
-                      *ngIf="itemRedirect.get('bookPageId')?.errors?.required"
+                      *ngIf="
+                        itemRedirect.get('bookPageIdVisited')?.errors?.required
+                      "
                     >
                       Bookpage selected is required
                     </div>
@@ -322,21 +327,21 @@
                 <div class="form-group m-2 form-floating">
                   <select
                     class="form-select form-control"
-                    [attr.id]="'answerId' + i"
-                    formControlName="answerId"
+                    [attr.id]="'answerIdVisited' + i"
+                    formControlName="answerIdVisited"
                     [ngClass]="{
-                      'is-invalid': itemRedirect.get('answerId')?.errors
+                      'is-invalid': itemRedirect.get('answerIdVisited')?.errors
                     }"
                     *ngIf="
-                      itemRedirect.get('bookPageId') != undefined &&
-                      itemRedirect.get('bookPageId') != null
+                      itemRedirect.get('bookPageIdVisited') != undefined &&
+                      itemRedirect.get('bookPageIdVisited') != null
                     "
                   >
                     <option [selected] [ngValue]="null">Any</option>
                     <option
                       *ngFor="
                         let item of getAnswersPage(
-                          itemRedirect.get('bookPageId')?.value
+                          itemRedirect.get('bookPageIdVisited')?.value
                         )
                       "
                       [ngValue]="item.id"
@@ -344,12 +349,18 @@
                       {{ item.id + " - " + item.answer }}
                     </option>
                   </select>
-                  <label [attr.for]="'answerId' + i">Answer selected</label>
+                  <label [attr.for]="'answerIdVisited' + i"
+                    >Answer selected</label
+                  >
                   <div
                     class="invalid-feedback"
-                    *ngIf="itemRedirect.get('answerId')?.errors"
+                    *ngIf="itemRedirect.get('answerIdVisited')?.errors"
                   >
-                    <div *ngIf="itemRedirect.get('answerId')?.errors?.required">
+                    <div
+                      *ngIf="
+                        itemRedirect.get('answerIdVisited')?.errors?.required
+                      "
+                    >
                       Answer selected is required
                     </div>
                   </div>

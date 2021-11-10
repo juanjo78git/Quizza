@@ -91,8 +91,8 @@ export class BookService {
         if (
           bookmarkHistory.existsOption(
             data.bookId,
-            data.bookPageId,
-            data.AnswerId
+            data.bookPageIdVisited,
+            data.AnswerIdVisited
           )
         ) {
           bookPageId = data.goPage;

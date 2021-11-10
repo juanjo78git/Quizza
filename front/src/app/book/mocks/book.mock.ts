@@ -2,7 +2,7 @@ import { Book } from '../models/book.model';
 
 export const BOOK: Book[] = [
   {
-    id: 0,
+    id: 3,
     title: 'Empty book',
     version: '0.0.0',
     description:
@@ -15,7 +15,7 @@ export const BOOK: Book[] = [
     pages: [
       {
         id: 1,
-        bookId: 0,
+        bookId: 3,
         type: 'end',
         title: 'Página 1',
         text: 'First Page',
@@ -25,7 +25,7 @@ export const BOOK: Book[] = [
           {
             id: 1,
             bookPageId: 1,
-            bookId: 0,
+            bookId: 3,
             answer: 'Ok',
             goPage: 1,
             stats: 100,
@@ -89,8 +89,9 @@ export const BOOK: Book[] = [
           {
             id: 1,
             bookId: 1,
-            bookPageId: 3,
-            AnswerId: 1,
+            bookPageId: 1,
+            bookPageIdVisited: 3,
+            AnswerIdVisited: 1,
             goPage: 2,
           },
         ],
