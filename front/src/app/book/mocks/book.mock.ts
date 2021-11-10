@@ -92,7 +92,7 @@ export const BOOK: Book[] = [
             bookPageId: 1,
             bookPageIdVisited: 3,
             AnswerIdVisited: 1,
-            goPage: 2,
+            goPage: 3,
           },
         ],
       },
@@ -135,7 +135,7 @@ export const BOOK: Book[] = [
             bookPageId: 3,
             bookId: 1,
             answer:
-              'Respuesta3 1_2 (Ya no pasarás por Pagina 1, te madará a la 2)',
+              'Respuesta3 1_2 (Ya no pasarás por Pagina 1, te madará a la 3)',
             goPage: 2,
             stats: 33,
           },
