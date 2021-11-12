@@ -1,3 +1,9 @@
 # Quizza
 
-Backend
+## Backend
+### quizza directory
+### Java Spring
+## Database
+### MySQL
+
+### database directory

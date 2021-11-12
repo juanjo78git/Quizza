@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-QuizzaApplication<quizza>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.quizza.quizza.QuizzaApplication",
+            "projectName": "quizza",
+            "args": ""
+        }
+    ]
+}
