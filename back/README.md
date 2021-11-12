@@ -1,9 +1,10 @@
 # Quizza
 
 ## Backend
-### quizza directory
-### Java Spring
-## Database
-### MySQL
+### Database
+- MySQL
+- SQL scripts in database directory
 
-### database directory
+### Aplication
+- Java Spring Boot
+- In quizza directory
