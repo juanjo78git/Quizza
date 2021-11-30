@@ -2,20 +2,25 @@
 
 ## Backend
 ### Database
-- [Docker MySQL](https://hub.docker.com/_/mysql)
+- [Docker PostgreSQL](https://hub.docker.com/_/postgres)
 #### Script
-@ECHO OFF
-ECHO Create Volumen
-docker volume create mysql-db-data
-ECHO create image and add volumen
-docker run -d -p 33060:3306 --name mysql-db  -e MYSQL_ROOT_PASSWORD=admin --mount src=mysql-db-data,dst=/var/lib/mysql mysql
-pause
-ECHO exec the database
-docker exec -it mysql-db mysql -padmin
-ECHO p: admin
+- Download Docker PostgreSQL
+docker pull postgres
+- Create Volume
+docker volume create pgdata
+- Run psql
+docker run -p 5432:5432 --name quizza-postgres -e POSTGRES_PASSWORD=mysecretpassword -v pgdata:/var/lib/postgresql/data -d postgres
+- Enter psql
+docker exec -it quizza-postgres psql -U postgres
 
-- SQL scripts in database directory
+- Host: localhost
+- Port: 5432
+- User: postgres
+- Password: mysecretpassword
+
+#### SQLs
+- In database directory
 
 ### Aplication
 - Java Spring Boot
-- In quizza directory
+- In api-quizza directory
