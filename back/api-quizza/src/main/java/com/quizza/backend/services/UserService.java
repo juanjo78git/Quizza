@@ -35,8 +35,8 @@ public class UserService implements UserDetailsService{
 		UserQuizza user = this.userDao.findByUsername(username);
 		
 		if(user == null) {
-			log.error("Error, el usuario no existe");
-			throw new UsernameNotFoundException("Error, el usuario " + username + " no existe");
+			log.error("User not exist");
+			throw new UsernameNotFoundException("Error: User " + username + " not exist");
 		}
 		
 		List<GrantedAuthority> authorities = user.getRoles()
