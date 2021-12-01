@@ -18,7 +18,7 @@ docker exec -it quizza-postgres psql -U postgres
 - User: postgres
 - Password: mysecretpassword
 
-#### SQLs
+### SQL Scripts
 - In database directory
 
 ### Aplication
