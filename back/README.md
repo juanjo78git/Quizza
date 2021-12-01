@@ -4,15 +4,15 @@
 ### Database
 - [Docker PostgreSQL](https://hub.docker.com/_/postgres)
 #### Script
-- Download Docker PostgreSQL
+##### Download Docker PostgreSQL
 docker pull postgres
-- Create Volume
+##### Create Volume
 docker volume create pgdata
-- Run psql
+##### Run psql
 docker run -p 5432:5432 --name quizza-postgres -e POSTGRES_PASSWORD=mysecretpassword -v pgdata:/var/lib/postgresql/data -d postgres
-- Enter psql
+##### Enter psql
 docker exec -it quizza-postgres psql -U postgres
-
+##### DB connection
 - Host: localhost
 - Port: 5432
 - User: postgres
