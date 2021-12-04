@@ -1,7 +1,7 @@
 # Quizza
 
 ## Backend
-### Database
+### Database Local
 - [Docker PostgreSQL](https://hub.docker.com/_/postgres)
 #### Script
 ##### Download Docker PostgreSQL
@@ -24,3 +24,7 @@ docker exec -it quizza-postgres psql -U postgres
 ### Aplication
 - Java Spring Boot
 - In api-quizza directory
+#### AWS
+- [Server] (http://apiquizzaaws-env.eba-hfv7es2h.eu-west-1.elasticbeanstalk.com/)
+##### API Documentation
+- [Swagger](http://localhost:8080/swagger-ui.html)
