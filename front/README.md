@@ -31,3 +31,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 #### Access URL:
 
 [https://juanjo78git.github.io/Quizza-deploy/](https://juanjo78git.github.io/Quizza-deploy/)
+[AWS](http://front-quizza-aws.s3-website-eu-west-1.amazonaws.com/)
