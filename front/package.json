@@ -13,16 +13,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^12.2.11",
+    "@angular/animations": "^13.1.0",
     "@angular/cdk": "^12.2.11",
-    "@angular/common": "^12.2.11",
-    "@angular/compiler": "^12.2.11",
-    "@angular/core": "^12.2.11",
-    "@angular/forms": "^12.2.11",
+    "@angular/common": "^13.1.0",
+    "@angular/compiler": "^13.1.0",
+    "@angular/core": "^13.1.0",
+    "@angular/forms": "^13.1.0",
     "@angular/material": "^12.2.11",
-    "@angular/platform-browser": "^12.2.11",
-    "@angular/platform-browser-dynamic": "^12.2.11",
-    "@angular/router": "^12.2.11",
+    "@angular/platform-browser": "^13.1.0",
+    "@angular/platform-browser-dynamic": "^13.1.0",
+    "@angular/router": "^13.1.0",
     "@popperjs/core": "^2.10.2",
     "ajv-keywords": "^5.0.0",
     "angularx-social-login": "^4.0.1",
@@ -35,9 +35,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^12.2.11",
-    "@angular/cli": "^12.2.11",
-    "@angular/compiler-cli": "^12.2.11",
+    "@angular-devkit/build-angular": "^13.1.1",
+    "@angular/cli": "^13.1.1",
+    "@angular/compiler-cli": "^13.1.0",
     "@types/jasmine": "^3.10.1",
     "@types/node": "^16.7.13",
     "ajv": "^8.6.3",
@@ -48,6 +48,6 @@
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "~1.7.0",
     "prettier": "2.4.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.5.4"
   }
 }
