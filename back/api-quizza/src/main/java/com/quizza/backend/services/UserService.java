@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService{
 		
 		List<GrantedAuthority> authorities = user.getRoles()
 				.stream()
-				.map(role -> new SimpleGrantedAuthority(role.getNombre()))
+				.map(role -> new SimpleGrantedAuthority(role.getName()))
 				.peek(authority -> log.info("Role: " + authority.getAuthority()))
 				.collect(Collectors.toList());
 		

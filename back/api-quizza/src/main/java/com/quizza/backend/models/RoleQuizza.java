@@ -33,10 +33,10 @@ public class RoleQuizza implements Serializable {
 	
 
 	/**
-	 * Nombre
+	 * Name
 	 */
 	@Column(unique = true, length = 20)
-	private String nombre;
+	private String name;
 
 	/**
 	 * @return Id
@@ -55,18 +55,18 @@ public class RoleQuizza implements Serializable {
 
 
 	/**
-	 * @return Nombre
+	 * @return Name
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
 
 	/**
-	 * @param nombre Nombre
+	 * @param name Name
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
