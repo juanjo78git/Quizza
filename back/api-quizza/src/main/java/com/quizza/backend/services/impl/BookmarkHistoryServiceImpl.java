@@ -1,4 +1,4 @@
-package com.quizza.backend.services;
+package com.quizza.backend.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.quizza.backend.models.BookmarkHistory;
 import com.quizza.backend.models.dao.IBookmarkHistoryDao;
 import com.quizza.backend.responses.BookmarkHistoryResponseRest;
+import com.quizza.backend.services.IBookmarkHistoryService;
 
+/**
+ * @author juanjo78git
+ *
+ */
 @Service
 public class BookmarkHistoryServiceImpl implements IBookmarkHistoryService{
 

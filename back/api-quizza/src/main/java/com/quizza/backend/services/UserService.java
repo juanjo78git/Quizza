@@ -19,6 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.quizza.backend.models.UserQuizza;
 import com.quizza.backend.models.dao.IUserDao;
 
+/**
+ * User Service
+ * @author juanjo78git
+ *
+ */
 @Service
 public class UserService implements UserDetailsService{
 
@@ -28,6 +33,11 @@ public class UserService implements UserDetailsService{
 	@Autowired
 	private IUserDao userDao;
 	
+	/**
+	 *
+	 * @param username Username
+	 * @return UserDetails
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

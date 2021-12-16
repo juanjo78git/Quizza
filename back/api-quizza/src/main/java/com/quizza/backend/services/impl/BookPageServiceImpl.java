@@ -1,4 +1,4 @@
-package com.quizza.backend.services;
+package com.quizza.backend.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.quizza.backend.models.BookPage;
 import com.quizza.backend.models.dao.IBookPageDao;
 import com.quizza.backend.responses.BookPageResponseRest;
+import com.quizza.backend.services.IBookPageService;
 
+/**
+ * @author juanjo78git
+ *
+ */
 @Service
 public class BookPageServiceImpl implements IBookPageService{
 

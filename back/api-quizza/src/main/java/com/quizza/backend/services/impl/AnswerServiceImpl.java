@@ -1,4 +1,4 @@
-package com.quizza.backend.services;
+package com.quizza.backend.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.quizza.backend.models.Answer;
 import com.quizza.backend.models.dao.IAnswerDao;
 import com.quizza.backend.responses.AnswerResponseRest;
+import com.quizza.backend.services.IAnswerService;
 
+/**
+ * @author juanjo78git
+ *
+ */
 @Service
 public class AnswerServiceImpl implements IAnswerService{
 
@@ -166,6 +171,4 @@ public class AnswerServiceImpl implements IAnswerService{
 		return new ResponseEntity<AnswerResponseRest>(response, HttpStatus.OK); //200
 	}
 
-	
-	
 }

@@ -16,6 +16,11 @@ import com.quizza.backend.models.BookmarkHistory;
 import com.quizza.backend.responses.BookmarkHistoryResponseRest;
 import com.quizza.backend.services.IBookmarkHistoryService;
 
+/**
+ * BookmarkHistory API Rest Controller
+ * @author juanjo78git
+ *
+ */
 @CrossOrigin(origins = {"http://localhost:4200","https://localhost:4200"})
 @RestController
 @RequestMapping("/v1")
@@ -25,30 +30,55 @@ public class BookmarkHistoryRestController {
 	@Autowired
 	private IBookmarkHistoryService service;
 	
+	/**
+	 * List all BookmarkHistory
+	 * @return BookmarkHistoryResponseRest
+	 */
 	@GetMapping("/bookmarkhistory")
 	public ResponseEntity<BookmarkHistoryResponseRest> listAll() {
 		ResponseEntity<BookmarkHistoryResponseRest> response = service.listAll();
 		return response;
 	}
 	
+	/**
+	 * List BookmarkHistory find by id
+	 * @param id Id
+	 * @return BookmarkHistoryResponseRest
+	 */
 	@GetMapping("/bookmarkhistory/{id}")
 	public ResponseEntity<BookmarkHistoryResponseRest> findById(@PathVariable Long id) {
 		ResponseEntity<BookmarkHistoryResponseRest> response = service.findById(id);
 		return response;
 	}
 	
+	/**
+	 * New BookmarkHistory
+	 * @param request BookmarkHistory
+	 * @return BookmarkHistoryResponseRest
+	 */
 	@PostMapping("/bookmarkhistory")
 	public ResponseEntity<BookmarkHistoryResponseRest> create(@RequestBody BookmarkHistory request) {
 		ResponseEntity<BookmarkHistoryResponseRest> response = service.create(request);
 		return response;
 	}
 	
+	/**
+	 * Update BookmarkHistory
+	 * @param request BookmarkHistory
+	 * @param id Id
+	 * @return BookmarkHistoryResponseRest
+	 */
 	@PutMapping("/bookmarkhistory/{id}")
 	public ResponseEntity<BookmarkHistoryResponseRest> update(@RequestBody BookmarkHistory request, @PathVariable Long id) {
 		ResponseEntity<BookmarkHistoryResponseRest> response = service.update(request, id);
 		return response;
 	}
 	
+	/**
+	 * Delete BookmarkHistory
+	 * @param id Id
+	 * @return BookmarkHistoryResponseRest
+	 */
 	@DeleteMapping("/bookmarkhistory/{id}")
 	public ResponseEntity<BookmarkHistoryResponseRest> delete(@PathVariable Long id) {
 		ResponseEntity<BookmarkHistoryResponseRest> response = service.delete(id);

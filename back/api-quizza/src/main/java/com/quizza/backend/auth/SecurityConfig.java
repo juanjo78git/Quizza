@@ -13,29 +13,49 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * Authorization server security config
+ * 
+ * @author juanjo78git
+ *
+ */
 @Configuration
 public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	private UserDetailsService userService;
 
+	/**
+	 * @return BCryptPasswordEncoder
+	 */
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
+	/**
+	 *
+	 */
 	@Bean("authenticationManager")
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
 
+	/**
+	 * Password encoder
+	 * @param auth AuthenticationManagerBuilder
+	 */
 	@Override
 	@Autowired
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(this.userService).passwordEncoder(passwordEncoder());
 	}
 	
+	/**
+	 * APIs Secutiry
+	 * @param http HttpSecurity
+	 */
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/v1/bookcase").permitAll()
@@ -45,6 +65,10 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
+	/**
+	 * Public swagger doc
+	 * @param web WebSecurity
+	 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/v2/api-docs", "/configuration/**", "/swagger-resources/**",

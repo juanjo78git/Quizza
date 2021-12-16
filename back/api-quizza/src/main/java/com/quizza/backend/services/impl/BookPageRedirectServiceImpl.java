@@ -1,4 +1,4 @@
-package com.quizza.backend.services;
+package com.quizza.backend.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.quizza.backend.models.BookPageRedirect;
 import com.quizza.backend.models.dao.IBookPageRedirectDao;
 import com.quizza.backend.responses.BookPageRedirectResponseRest;
+import com.quizza.backend.services.IBookPageRedirectService;
 
+/**
+ * @author juanjo78git
+ *
+ */
 @Service
 public class BookPageRedirectServiceImpl implements IBookPageRedirectService{
 

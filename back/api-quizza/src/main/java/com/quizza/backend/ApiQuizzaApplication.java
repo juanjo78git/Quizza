@@ -6,6 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * 
+ * @author juanjo78git
+ *
+ */
 @SpringBootApplication
 public class ApiQuizzaApplication implements CommandLineRunner{
 
@@ -13,10 +18,18 @@ public class ApiQuizzaApplication implements CommandLineRunner{
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
+	/**
+	 * Run app
+	 * @param args None
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(ApiQuizzaApplication.class, args);
 	}
 
+	/**
+	 * Show 3 valid user password
+	 * @param args None
+	 */
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("Run...");

@@ -14,6 +14,12 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+/**
+ * Authorization server
+ * 
+ * @author juanjo78git
+ *
+ */
 @Configuration
 @EnableAuthorizationServer
 public class AuthServer extends AuthorizationServerConfigurerAdapter {
@@ -27,6 +33,9 @@ public class AuthServer extends AuthorizationServerConfigurerAdapter {
 	private AuthenticationManager authenticationManager;
 
 
+	/**
+	 * @param security AuthorizationServerSecurityConfigurer
+	 */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.tokenKeyAccess("permitAll()")
@@ -34,6 +43,10 @@ public class AuthServer extends AuthorizationServerConfigurerAdapter {
 	}
 
 
+	/**
+	 * Configure time tokens and authorization server user
+	 * @param clients ClientDetailsServiceConfigurer
+	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory().withClient("restclient")
@@ -45,6 +58,9 @@ public class AuthServer extends AuthorizationServerConfigurerAdapter {
 	}
 
 
+	/**
+	 * @param endpoints AuthorizationServerEndpointsConfigurer
+	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
@@ -53,11 +69,17 @@ public class AuthServer extends AuthorizationServerConfigurerAdapter {
 		.accessTokenConverter(accessTokenConverter());
 	}
 
+	/**
+	 * @return JwtTokenStore
+	 */
 	@Bean
 	public JwtTokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
 	}
 
+	/**
+	 * @return JwtAccessTokenConverter
+	 */
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
