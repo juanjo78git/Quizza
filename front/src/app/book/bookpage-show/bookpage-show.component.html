@@ -44,12 +44,7 @@
     <div class="btn-group-vertical w-100 m-0 p-0" *ngIf="!getStats()">
       <button
         type="button"
-        class="
-          btn btn-outline-primary btn-block
-          text-left
-          d-flex
-          justify-content-start
-        "
+        class="btn btn-outline-primary btn-block text-left d-flex justify-content-start"
         (click)="onSelectAnswer(item)"
         *ngFor="let item of getAnwers()"
       >

@@ -234,6 +234,9 @@
                     <option [selected] disabled [ngValue]="null">
                       Select one...
                     </option>
+                    <option [ngValue]="0" *ngIf="this.book.pages.length == 0">
+                      None
+                    </option>
                     <option
                       *ngFor="let item of this.book.pages"
                       [ngValue]="item.id"
